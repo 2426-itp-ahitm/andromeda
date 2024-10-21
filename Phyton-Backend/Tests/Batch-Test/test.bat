@@ -1,0 +1,2 @@
+shutdown /l
+pause
