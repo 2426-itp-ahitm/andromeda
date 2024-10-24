@@ -2,10 +2,11 @@ import os
 import json
 import queue
 import sounddevice as sd
+import timer as t
+
 from vosk import Model, KaldiRecognizer
-import config
-import helpers
 from helpers.txtWriter import txtWriter
+from helpers.config import keyword, selected_module
 
 # Initialize audio queue for real-time streaming
 audio_queue = queue.Queue()
@@ -18,16 +19,15 @@ def callback(indata, frames, time, status):
 
 def recognize_speech():
     # Load the English model by default
-    model = Model(config.selected_module)
+    model = Model(selected_module)
     recognizer = KaldiRecognizer(model, 16000)
     current_language = "de"  # Start with English
     keyword_detected = False
-    writer = txtWriter("log.txt")
-
+    writer = txtWriter("test.txt")
     # Start the microphone stream with a smaller blocksize for faster recognition
     with sd.RawInputStream(samplerate=16000, blocksize=4000, dtype='int16', channels=1, callback=callback):
-        print("Listening for the keyword 'Andromeda'...")
-        writer.openTextEditor()
+        print("Listening for the keyword "+keyword+"...")
+    
         while True:
             data = audio_queue.get()
             
@@ -37,23 +37,22 @@ def recognize_speech():
                 text = result_dict.get("text", "").lower()
 
                 if not keyword_detected:
-                    if config.keyword in text:
-                        print("Keyword "+config.keyword+" detected! Now actively listening...")
+                    if keyword in text:
+                        print("Keyword "+keyword+" detected! Now actively listening...")
                         keyword_detected = True
                 else:
                     print(f"You said ({'German' if current_language == 'de' else 'English'}): {text}")
-                    
                     writer.writeInFile(text)
-                       
             else:
                 # Partial result allows for faster response to shorter utterances
                 partial_result = recognizer.PartialResult()
                 partial_dict = json.loads(partial_result)
                 partial_text = partial_dict.get("partial", "").lower()
 
-                if not keyword_detected and config.keyword in partial_text:
-                    print("Keyword "+config.keyword+" detected in partial result! Now actively listening...")
+                if not keyword_detected and keyword in partial_text:
+                    print("Keyword "+keyword+" detected in partial result! Now actively listening...")
                     keyword_detected = True
+                    writer.openTextEditor()
 
 if __name__ == "__main__":
     recognize_speech()
