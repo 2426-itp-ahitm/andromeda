@@ -23,19 +23,20 @@ def recognize_speech():
     writer = txtWriter("test.txt")
     formatter = TextFormatter(keyword)
     with sd.RawInputStream(samplerate=16000, blocksize=4000, dtype='int16', channels=1, callback=callback):
-        
+        print("Listening for the keyword "+keyword+"...")
     
         while True:
             data = audio_queue.get()
-            if recognizer.AcceptWaveform(data) and keyword_detected:
+            if recognizer.AcceptWaveform(data):
                 result = recognizer.Result()
                 result_dict = json.loads(result)
                 text = result_dict.get("text", "").lower()
-                text = formatter(text)
-                print(f"You said {text}")
-                writer.writeInFile(text)
-                keyword_detected = False
-                print("Listening for the keyword "+keyword+"...")
+                text = formatter.clearTextBeforeKeyword(text)
+                if keyword_detected:
+                    print(f"You said {text}")
+                    writer.writeInFile(text)
+                    keyword_detected = False
+                    print("Listening for the keyword "+keyword+"...")
             else:
                 partial_result = recognizer.PartialResult()
                 partial_dict = json.loads(partial_result)
