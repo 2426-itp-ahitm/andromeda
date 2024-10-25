@@ -1,5 +1,0 @@
-{
-    "python.analysis.extraPaths": [
-        "./Speach-Client/vosk/helpers"
-    ]
-}
