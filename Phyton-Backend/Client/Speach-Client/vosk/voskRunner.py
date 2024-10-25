@@ -2,13 +2,12 @@ import os
 import json
 import queue
 import sounddevice as sd
-import timer as t
 
 from vosk import Model, KaldiRecognizer
 from helpers.txtWriter import txtWriter
+from helpers.textFormatter import TextFormatter
 from helpers.config import keyword, selected_module
 
-# Initialize audio queue for real-time streaming
 audio_queue = queue.Queue()
 
 def callback(indata, frames, time, status):
@@ -18,33 +17,26 @@ def callback(indata, frames, time, status):
     audio_queue.put(bytes(indata))
 
 def recognize_speech():
-    # Load the English model by default
     model = Model(selected_module)
     recognizer = KaldiRecognizer(model, 16000)
-    current_language = "de"  # Start with English
     keyword_detected = False
     writer = txtWriter("test.txt")
-    # Start the microphone stream with a smaller blocksize for faster recognition
+    formatter = TextFormatter(keyword)
     with sd.RawInputStream(samplerate=16000, blocksize=4000, dtype='int16', channels=1, callback=callback):
-        print("Listening for the keyword "+keyword+"...")
+        
     
         while True:
             data = audio_queue.get()
-            
-            if recognizer.AcceptWaveform(data):
+            if recognizer.AcceptWaveform(data) and keyword_detected:
                 result = recognizer.Result()
                 result_dict = json.loads(result)
                 text = result_dict.get("text", "").lower()
-
-                if not keyword_detected:
-                    if keyword in text:
-                        print("Keyword "+keyword+" detected! Now actively listening...")
-                        keyword_detected = True
-                else:
-                    print(f"You said ({'German' if current_language == 'de' else 'English'}): {text}")
-                    writer.writeInFile(text)
+                text = formatter(text)
+                print(f"You said {text}")
+                writer.writeInFile(text)
+                keyword_detected = False
+                print("Listening for the keyword "+keyword+"...")
             else:
-                # Partial result allows for faster response to shorter utterances
                 partial_result = recognizer.PartialResult()
                 partial_dict = json.loads(partial_result)
                 partial_text = partial_dict.get("partial", "").lower()
