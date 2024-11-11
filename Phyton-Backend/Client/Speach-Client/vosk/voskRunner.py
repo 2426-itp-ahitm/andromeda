@@ -17,11 +17,14 @@ def callback(indata, frames, time, status):
     audio_queue.put(bytes(indata))
 
 def recognize_speech():
+    with open("customWords.json", "r") as file:
+        custom_vocabulary = json.load(file)
     model = Model(selected_module)
-    recognizer = KaldiRecognizer(model, 16000)
+    recognizer = KaldiRecognizer(model, 16000,json.dumps(custom_vocabulary) )
     keyword_detected = False
     writer = txtWriter("test.txt")
     formatter = TextFormatter(keyword)
+  
     with sd.RawInputStream(samplerate=16000, blocksize=4000, dtype='int16', channels=1, callback=callback):
         print("Listening for the keyword "+keyword+"...")
     
