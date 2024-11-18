@@ -24,12 +24,13 @@ def recognize_speech():
     keyword_detected = False
     writer = txtWriter("test.txt")
     formatter = TextFormatter(keyword)
-  
     with sd.RawInputStream(samplerate=16000, blocksize=4000, dtype='int16', channels=1, callback=callback):
         print("Listening for the keyword "+keyword+"...")
     
         while True:
             data = audio_queue.get()
+            if data is None:
+                keyword_detected = False
             if recognizer.AcceptWaveform(data):
                 result = recognizer.Result()
                 result_dict = json.loads(result)
