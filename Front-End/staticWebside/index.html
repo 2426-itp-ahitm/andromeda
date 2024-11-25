@@ -3,21 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
-    <script src="library/fullpage.min.js" ></script>
-    <link rel="stylesheet" href="library/fullpage.min.css">
-
-    <script src="library/JS-Libraries_Example_Fullpage.js" defer></script>
-    <link rel="stylesheet" href="library/JS-Libraries_Example_Fullpage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andromeda</title>
+    <link rel="stylesheet" href="library/fullpage.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="library/fullpage.min.js" defer></script>
+    <script defer src="script.js"></script> 
+
 </head>
 
 <body>
 
-
-    <!--sticky nav-->
+    <!-- Sticky nav -->
     <nav>
         <a href="index.html">
             <logo>
@@ -27,22 +24,23 @@
         </a>
         <div>
             <a href="">
-                <h1>Aboutus</h1>
+                <h1>About us</h1>
             </a>
         </div>
         <div>
-            <!--Popup mit close button-->
+            <!-- Popup mit close button -->
             <a href="">
                 <h1>Login</h1>
             </a>
         </div>
     </nav>
-    <main class="fullpage">
+
+    <!-- Fullpage Sections -->
+    <main id="fullpage">
         <!--Logo mit Schrift-->
-        <section class=" section active" id="section0">
+        <section class="section active" id="section0">
             <img src="" alt="Logo">
         </section>
-
 
         <!--Einzigartigkeit-->
         <section class="section" id="section1">
@@ -52,17 +50,13 @@
             </div>
         </section>
 
-        <!--Individualisierung-->
-        <section class= "section" id="section2">
-        </section>
+        <!-- Individualisierung -->
+        <section class="section" id="section2"></section>
 
-        <!--Wir sind cool-->
-        <section class=" section" id="section3">
+        <!-- Wir sind cool -->
+        <section class="section" id="section3"></section>
 
-        </section>
-
-
-        <section>
+        <section class="section" id="section4">
             <footer>
                 <div>
                     <h1>Account</h1>
@@ -98,9 +92,23 @@
                     </logo>
                 </div>
             </footer>
-        <!--</section>-->
+        </section>
     </main>
 
+    <!-- Fullpage.js -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new fullpage('#fullpage', {
+                autoScrolling: true,
+                scrollBar: true,
+                fitToSection: true,
+                navigation: true,
+                loopBottom: false,
+                loopTop: false,
+                scrollOverflow: false,
+                keyboardScrolling: true,
+            });
+        });
+    </script>
 </body>
-
 </html>
