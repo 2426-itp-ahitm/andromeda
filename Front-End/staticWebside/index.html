@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
+    <script src="library/fullpage.min.js" ></script>
+    <link rel="stylesheet" href="library/fullpage.min.css">
+
+    <script src="library/JS-Libraries_Example_Fullpage.js" defer></script>
+    <link rel="stylesheet" href="library/JS-Libraries_Example_Fullpage.css">
     <title>Andromeda</title>
 </head>
 
 <body>
 
-    <div>
-
-    </div>
 
     <!--sticky nav-->
     <nav>
@@ -35,64 +37,70 @@
             </a>
         </div>
     </nav>
-    <main>
+    <main class="fullpage">
         <!--Logo mit Schrift-->
-        <section id="centerSection">
+        <section class=" section active" id="section0">
             <img src="" alt="Logo">
         </section>
 
 
         <!--Einzigartigkeit-->
-        <section id="rigthSection">
+        <section class="section" id="section1">
             <div></div>
-            <div>
-                <div class="slideText">
-                    <h2>Einzigartigkeit</h2>
-                </div>
+            <div class="slideText">
+                <h2>Einzigartigkeit</h2>
             </div>
         </section>
 
         <!--Individualisierung-->
-        <section id="leftSection"></section>
+        <section class= "section" id="section2">
+        </section>
 
         <!--Wir sind cool-->
-        <section id="rigthSection"></section>
+        <section class=" section" id="section3">
+
+        </section>
+
+
+        <section>
+            <footer>
+                <div>
+                    <h1>Account</h1>
+                    <a href="">
+                        <h3>Login</h3>
+                    </a>
+                </div>
+                <div>
+                    <h1>Kontakt</h1>
+                    <h3>Telefonnummer</h3>
+                    <p>+43 660 3210701</p>
+                    <h3>Adresse</h3>
+                    <p>Limesstraße 12-14, 4060 Leonding</p>
+                    <h3>E-Mail Adresse</h3>
+                    <p>andromeda@gmail.com</p>
+                </div>
+                <div>
+                    <h1>Navigation</h1>
+                    <a href="">
+                        <h3>About us</h3>
+                    </a>
+                    <a href="impressum.html">
+                        <h3>Impressum</h3>
+                    </a>
+                    <a href="datenschutz.html">
+                        <h3>Datenschutz</h3>
+                    </a>
+                </div>
+                <div>
+                    <logo>
+                        <!--Logo groß-->
+                        <img id="BigLogo" alt="Logo" src="20241111_222824.jpg">
+                    </logo>
+                </div>
+            </footer>
+        <!--</section>-->
     </main>
-    <footer>
-        <div>
-            <h1>Account</h1>
-            <a href="">
-                <h3>Login</h3>
-            </a>
-        </div>
-        <div>
-            <h1>Kontakt</h1>
-            <h3>Telefonnummer</h3>
-            <p>+43 660 3210701</p>
-            <h3>Adresse</h3>
-            <p>Limesstraße 12-14, 4060 Leonding</p>
-            <h3>E-Mail Adresse</h3>
-            <p>andromeda@gmail.com</p>
-        </div>
-        <div>
-            <h1>Navigation</h1>
-            <a href="">
-                <h3>About us</h3>
-            </a>
-            <a href="impressum.html">
-                <h3>Impressum</h3>
-            </a>
-            <a href="datenschutz.html">
-                <h3>Datenschutz</h3>
-            </a>
-        </div>
-        <div>
-            <logo>
-                <!--Logo groß-->
-                <img id="BigLogo" alt="Logo" src="20241111_222824.jpg">
-            </logo>
-        </div>
-    </footer>
+
 </body>
 
 </html>
