@@ -12,7 +12,7 @@ body {
     padding: 0;
     height: 100%;
     position: relative;
-
+    overflow: hidden; 
 }
 
 /* Typography */
@@ -166,22 +166,22 @@ section {
     border-radius: 100%;
     margin: auto;
 }
-/*
-#section1 {
+
+#section0 {
     color: #242038;
 }
 
-#section2 {
-    background-image: url(img/backround.png);
+#section1 {
+    background-image: url(img/backround1.png);
     background-size: cover;
 }
 
-#section3 {
+#section2 {
     background-image: url(img/backround2.png);
     background-size: cover;
 }
 
-#section4 {
+#section3 {
     background-image: url(img/backround3.png);
     background-size: cover;
 }*/
