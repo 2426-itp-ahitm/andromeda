@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,12 @@
     <link rel="stylesheet" href="library/fullpage.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="library/fullpage.min.js" defer></script>
-    <script defer src="script.js"></script> 
+    <script defer src="script.js"></script>
+
 </head>
+
 <body>
+
     <!-- Sticky nav -->
     <nav>
         <a href="index.html">
@@ -25,7 +29,7 @@
         </div>
         <div>
             <!-- Popup mit close button -->
-            <a href="">
+            <a onclick="showLogin()">
                 <h1>Login</h1>
             </a>
         </div>
@@ -35,22 +39,43 @@
     <main id="fullpage">
         <!--Logo mit Schrift-->
         <section class="section active" id="section0">
-            <img src="img/logoPlatzhalter.png" alt="Logo">
+            <img id="BigLogo" alt="Logo" src="img/logoPlatzhalter.png">
         </section>
 
         <!--Einzigartigkeit-->
-        <section class="section" id="section1">
-            <div></div>
-            <div class="slideText">
+        <section class="section leftSection" id="section1">
+            <div class="slideHeadline">
                 <h2>Einzigartigkeit</h2>
             </div>
+            <div class="sildeText">
+                <p>Wir bieten den ersten sprachgesteuerten Assistenten, der speziell für die CMD-Konsole von Windows
+                    entwickelt wurde – perfekt für Interessierte</p>
+            </div>
+            
         </section>
 
         <!-- Individualisierung -->
-        <section class="section" id="section2"></section>
+        <section class="section rightSection" id="section2">
+            <div class="sildeText">
+                <p>Wir bringen Individualisierung auf das nächste Level:<br> Passe deinen sprachgesteuerten Assistenten
+                    genau an deine Bedürfnisse an und automatisiere CMD-Befehle, wie du sie brauchst! </p>
+            </div>
+            <div class="slideHeadline">
+                <h2>Individualisierung</h2>
+            </div>
+            
+        </section>
 
         <!-- Wir sind cool -->
-        <section class="section" id="section3"></section>
+        <section class="section leftSection" id="section3">
+            <div class="slideHeadline">
+                <h2>Wir sind cool</h2>
+            </div>
+            <div class="sildeText">
+                <p>weil wir Sprachsteuerung für die CMD-Konsole revolutionieren – Laptop-Optimierung und Individualisierung in einem!</p>
+            </div>
+            
+        </section>
 
         <section class="section" id="section4">
             <footer>
@@ -107,4 +132,5 @@
         });
     </script>
 </body>
+
 </html>
