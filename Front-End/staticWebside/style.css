@@ -109,10 +109,16 @@ nav {
     grid-template-columns: 50% 25% 25%;
     color: var(--background-color);
     height: 2.5vw;
-    position: sticky;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 0 0 0.5vh 0;
 
 }
-
+a{
+    text-decoration: none;
+}
 a h1 {
     text-align: center;
     font-size: 1rem;
@@ -161,8 +167,8 @@ section {
 
     width: 30vw;
     height: 30vw;
-    border: solid rgba(0, 0, 0, 0) 1px;
-    background-color: #f9f6f47e;
+    border: solid  1px;
+    background-color: #8D86C9;
     border-radius: 100%;
     margin: auto;
 }
