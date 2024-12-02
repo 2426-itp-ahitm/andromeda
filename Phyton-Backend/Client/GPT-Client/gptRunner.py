@@ -25,10 +25,7 @@ standartPromt = [
     }
 ]
 while True:
-    user_input = input("Bitte gib deinen Satz ein (oder 'exit', um zu beenden): ")
-    if user_input.lower() == 'exit':
-        print("Programm beendet.")
-        break
+    user_input = input("Bitte gib deinen Satz ein: ")
     originalUserInput = user_input
     response = ollama.chat(
         model='gemma2:27b', 
