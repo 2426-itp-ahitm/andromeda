@@ -55,6 +55,3 @@ Schalte dich selbst aus
 
 ###
 GET http://localhost:8080/api/andromeda/list
-
-###
-GET http://localhost:8080/api/andromeda/list
