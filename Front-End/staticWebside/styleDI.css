@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Comfortaa:wght@300;400&display=swap');
 
 body {
@@ -41,13 +40,25 @@ p {
     line-height: 1.8;
 }
 
-a {
-    color: #0056b3;
+button {
+    background-color: #8D86C9;
+    border: solid 1px rgba(255, 0, 0, 0);
+    border-radius: 15px;
+    width: 10vw;
+    bottom: 2%;
+    right: 2%;
+    position: fixed;
+    color: white;
+}
+a{
+
+    font-family: 'Comfortaa', sans-serif;
     text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+    background-color: #242038;
+
 }
 
 strong {
