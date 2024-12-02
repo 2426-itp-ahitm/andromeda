@@ -1,3 +1,60 @@
 POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Verschiebe Datei (A) nach (B)
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Schalte den Rechner aus
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Öffne Programm (A)
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Schließe Programm (A)
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Führe ein git commit aus
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Spiel die Wiedergabe
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Pausiere die Wiedergabe
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Komprimiere Datei (A)
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Suche Datei (A)
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Geh in Verzeichnis (A)
+###
+POST http://localhost:8080/api/andromeda/add
+Content-Type: text/plain
+
+Schalte dich selbst aus
+
+###
+GET http://localhost:8080/api/andromeda/list
+
 ###
 GET http://localhost:8080/api/andromeda/list
