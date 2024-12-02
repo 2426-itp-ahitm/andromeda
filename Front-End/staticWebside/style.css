@@ -166,17 +166,30 @@ footer div p {
 
 
 .rocket {
-    width: 80px;
-    height: 80px;
-    background: url('img/img.png') no-repeat center/contain; /* Verwende ein Raketen-Bild */
+    width: 100px;
+    height: 100px;
+    background: url('img/img.png') no-repeat center/contain; 
     position: absolute;
-    top: 100%;
-    left: -10%;
-    transform: rotate(45deg);  /* Startwinkel der Rakete */
-    transition: all 2s ease-in-out; /* Sanfte Animation */
+    top: -20%;  
+    left: -20%; 
+    animation: flyAndRotate 3s ease-in-out forwards;  
 }
 
-.rocket.fly {
-    top: 0;     
-    left: 100%; 
+
+@keyframes flyAndRotate {
+    0% {
+        top: -20%;
+        left: -20%;
+        transform: rotate(-45deg);  
+    }
+    50% {
+        top: 40%;  
+        left: 50%;
+        transform: rotate(0deg);  
+    }
+    100% {
+        top: 90%;  
+        left: 50%;
+        transform: rotate(180deg);  
+    }
 }
