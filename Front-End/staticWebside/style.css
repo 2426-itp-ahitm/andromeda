@@ -13,10 +13,15 @@ body {
     height: 100%;
     position: relative;
     overflow: hidden; 
+    background-image: url(img/backround3.png);
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
 
 /* Typography */
-
+body::-webkit-scrollbar {
+    display: none;  /* Versteckt Scrollleisten für Webkit-Browser */
+}
 h1,
 .title {
     /*font-family: 'Major Mono Display', monospace;*/
@@ -51,55 +56,6 @@ p {
     --accent-color: #242038;
 }
 
-/* Buttons */
-button {
-    font-family: 'Comfortaa', sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    color: var(--background-color);
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: var(--accent-color);
-    box-shadow: 2px 2px 4px #ffffff;
-}
-
-button.large {
-    width: 100%;
-    max-width: 300px;
-    background-color: var(--accent-color);
-}
-
-button.large:hover {
-    background-color: var(--primary-color);
-}
-
-
-
-
-
-
-/* Dashboard and Samples */
-
-
-/* Utility */
-.text-center {
-    text-align: center;
-}
-
-.mt-4 {
-    margin-top: 16px;
-}
-
-.mb-4 {
-    margin-bottom: 16px;
-}
 
 
 /*nav*/
@@ -134,22 +90,7 @@ a h1 {
 }
 
 
-/*Section
-.container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-}
-
-section {
-    height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    padding: 0%;
-}*/
+/*Section*/
 
 
 
@@ -180,6 +121,8 @@ section {
     background-color: #f9f6f4a6;
     border-radius: 100%;
     margin: auto;
+    font-weight: bold;
+    text-shadow: 0 1px 3px var(--primary-color) ;
 }
 .slideHeadline h2{
     font-size: 200%;
@@ -188,20 +131,7 @@ section {
     color: #242038;
 }
 
-#section1 {
-    background-image: url(img/backround1.png);
-    background-size: cover;
-}
 
-#section2 {
-    background-image: url(img/backround2.png);
-    background-size: cover;
-}
-
-#section3 {
-    background-image: url(img/backround3.png);
-    background-size: cover;
-}*/
 
 /*Standard tags*/
 a {
@@ -232,4 +162,21 @@ footer div h3 {
 
 footer div p {
     color: var(--background-color)
+}
+
+
+.rocket {
+    width: 80px;
+    height: 80px;
+    background: url('img/img.png') no-repeat center/contain; /* Verwende ein Raketen-Bild */
+    position: absolute;
+    top: 100%;
+    left: -10%;
+    transform: rotate(45deg);  /* Startwinkel der Rakete */
+    transition: all 2s ease-in-out; /* Sanfte Animation */
+}
+
+.rocket.fly {
+    top: 0;     
+    left: 100%; 
 }
