@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name=Prompt.QUERY_FIND_ALL, query="select p from Prompt p")
+        @NamedQuery(name=Prompt.QUERY_FIND_ALL, query="select p from Prompt p"),
+        @NamedQuery(name=Prompt.QUERY_FIND_ALL_BY_USER_ID, query="select p from Prompt p where p.user.id = :id ")
 })
 public class Prompt {
 
     public static final String QUERY_FIND_ALL = "Prompt.findAll";
+    public static final String QUERY_FIND_ALL_BY_USER_ID = "Prompt.findAllByUserId";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,10 +18,15 @@ public class Prompt {
 
     public String content;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     public Prompt() {
     }
 
-    public Prompt(String content) {
+    public Prompt(User user, String content) {
+        this.user = user;
         this.content = content;
     }
 
@@ -38,4 +45,14 @@ public class Prompt {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
+
+

@@ -1,6 +1,8 @@
 package at.ac.htlleonding;
 
 import at.ac.htlleonding.model.Prompt;
+import at.ac.htlleonding.model.dtos.PromptDTO;
+import at.ac.htlleonding.model.dtos.UserDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -12,17 +14,19 @@ import java.util.List;
 public class AndromedaResource {
 
     @Inject
-    PromptRepository promptRepository;
+    AndromedaRepository andromedaRepository;
 
     @POST
-    @Path("/add")
-    @Consumes(MediaType.TEXT_PLAIN)
-    public Response addPrompt(String content) {
+    @Path("/addPrompt")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addPrompt(PromptDTO promptDTO) {
         try {
-            Prompt prompt = new Prompt(content);
-            promptRepository.addPrompt(prompt);
+
+            Long userId = promptDTO.userId();
+            String content = promptDTO.content();
+
+            andromedaRepository.addPrompt(userId, content);
             return Response.status(Response.Status.CREATED)
-                    .entity(prompt)
                     .build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -32,10 +36,10 @@ public class AndromedaResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/list")
+    @Path("/prompts/listAll")
     public Response getAllPrompts() {
         try {
-            List<Prompt> prompts = this.promptRepository.getAllPrompts();
+            List<Prompt> prompts = this.andromedaRepository.getAllPrompts();
             return Response.status(Response.Status.OK)
                     .entity(prompts)
                     .build();
@@ -45,6 +49,29 @@ public class AndromedaResource {
         }
     }
 
+    @POST
+    @Path("/addUser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addUser(UserDTO userDTO) {
+        Response.Status status = Response.Status.CREATED;
+        try {
+            String username = userDTO.username();
+            andromedaRepository.addUser(username);
+
+        }catch (Exception e) {
+            status = Response.Status.BAD_REQUEST;
+        }
+        return Response.status(status)
+                    .build();
+
+    }
+
+    @GET
+    @Path("/user/{userId}/prompts")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Prompt> getUserPrompts(@PathParam("userId") Long userId) {
+        return andromedaRepository.getPromptsOfUser(userId);
+    }
 
 
 }
