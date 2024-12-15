@@ -1,11 +1,13 @@
 package at.ac.htlleonding.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name=Prompt.QUERY_FIND_ALL, query="select p from Prompt p"),
-        @NamedQuery(name=Prompt.QUERY_FIND_ALL_BY_USER_ID, query="select p from Prompt p where p.user.id = :id ")
+        @NamedQuery(name=Prompt.QUERY_FIND_ALL_BY_USER_ID, query="select p from Prompt p where p.user.id = :userId ")
 })
 public class Prompt {
 
