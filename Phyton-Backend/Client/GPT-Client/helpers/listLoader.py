@@ -5,8 +5,8 @@ class listLoader:
         data = r.json()
         return data
     def getUserPrompts(self, selectedURL, userID):
-        PARAMS = {'userID':userID}
-        r = requests.get(url = selectedURL, params = PARAMS)
+        url_with_user_id = selectedURL.replace("${userId}", str(userID))
+        r = requests.get(url=url_with_user_id)
         data = r.json()
         return data
 
