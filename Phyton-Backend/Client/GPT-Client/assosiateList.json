@@ -1,13 +1,46 @@
 [
-    "Verschiebe Datei (A) nach (B)",
-    "Schalte den Rechner aus",
-    "Öffne Programm (A)",
-    "Schließe Programm (A)",
-    "Führe ein git commit aus",
-    "Spiel die Wiedergabe",
-    "Pausiere die Wiedergabe",
-    "Komprimiere Datei (A)",
-    "Suche Datei (A)",
-    "Geh in Verzeichnis (A)",
-    "Schalte dich selbst aus"
+    {
+        "id": 1,
+        "content": "Verschiebe Datei (A) nach (B)"
+    },
+    {
+        "id": 2,
+        "content": "Schalte den Rechner aus"
+    },
+    {
+        "id": 3,
+        "content": "Öffne Programm (A)"
+    },
+    {
+        "id": 4,
+        "content": "Schließe Programm (A)"
+    },
+    {
+        "id": 5,
+        "content": "Führe ein git commit aus"
+    },
+    {
+        "id": 6,
+        "content": "Spiel die Wiedergabe"
+    },
+    {
+        "id": 7,
+        "content": "Pausiere die Wiedergabe"
+    },
+    {
+        "id": 8,
+        "content": "Komprimiere Datei (A)"
+    },
+    {
+        "id": 9,
+        "content": "Suche Datei (A)"
+    },
+    {
+        "id": 10,
+        "content": "Geh in Verzeichnis (A)"
+    },
+    {
+        "id": 11,
+        "content": "Schalte dich selbst aus"
+    }
 ]

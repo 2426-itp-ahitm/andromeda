@@ -1,60 +1,138 @@
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Verschiebe Datei (A) nach (B)
 ###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
 
-Schalte den Rechner aus
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Öffne Programm (A)
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Schließe Programm (A)
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Führe ein git commit aus
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Spiel die Wiedergabe
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Pausiere die Wiedergabe
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Komprimiere Datei (A)
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Suche Datei (A)
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Geh in Verzeichnis (A)
-###
-POST http://localhost:8080/api/andromeda/add
-Content-Type: text/plain
-
-Schalte dich selbst aus
+{
+  "username": "Peter"
+}
 
 ###
-GET http://localhost:8080/api/andromeda/list
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+
+{
+  "username": "Brionka"
+}
 
 ###
-GET http://localhost:8080/api/andromeda/list
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+
+{
+  "username": "Friedolin"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+
+{
+  "username": "Ursula"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Verschiebe Datei (A) nach (B)"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Schalte den Rechner aus"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Öffne Programm (A)"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Schließe Programm (A)"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Führe ein git commit aus"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Spiel die Wiedergabe"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Pausiere die Wiedergabe"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Komprimiere Datei (A)"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Suche Datei (A)"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Geh in Verzeichnis (A)"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Schalte dich selbst aus"
+}
+
+###
+GET http://localhost:8080/api/andromeda/prompts/listAll
+Content-Type: */*
+
+###
+GET http://localhost:8080/api/andromeda/user/1/prompts
+Content-Type: */*
