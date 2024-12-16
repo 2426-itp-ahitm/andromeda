@@ -15,11 +15,11 @@ export class CreatePromptFormComponent {
 
   newPrompt = {
     content: '',
-    username: '',  // Der Name des Benutzers
-    userId: 0,     // Die userId, die basierend auf dem Namen gesetzt wird
+    username: '',
+    userId: 0,
   };
 
-  url: string = 'http://localhost:8080/api/andromeda/addPrompt';  // Kann später je nach Bedarf festgelegt werden
+  url: string = 'http://localhost:8080/api/andromeda/addPrompt';
 
   constructor(public promptservice: PromptService, private router: Router) {}
 
@@ -27,7 +27,7 @@ export class CreatePromptFormComponent {
     this.router.navigate(['']);
   }
 
-  // Diese Methode setzt die userId basierend auf dem ausgewählten Benutzernamen
+
   setUserId(username: string) {
     switch (username) {
       case 'Brionka':
@@ -40,7 +40,7 @@ export class CreatePromptFormComponent {
         this.newPrompt.userId = 4;
         break;
       default:
-        this.newPrompt.userId = 0; // Standardwert, falls kein Name ausgewählt wurde
+        this.newPrompt.userId = 0;
     }
   }
 
