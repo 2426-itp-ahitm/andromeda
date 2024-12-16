@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
     const rocket = document.getElementById('rocket');
     const section1 = document.getElementById('section1');
 
@@ -10,4 +10,4 @@ document.addEventListener('DOMContentLoaded', () => {
             rocket.classList.add('fly');
         }
     });
-});
+});*/
