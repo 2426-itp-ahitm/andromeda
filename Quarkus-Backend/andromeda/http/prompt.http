@@ -7,6 +7,30 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+
+{
+  "username": "Brionka"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+
+{
+  "username": "Friedolin"
+}
+
+###
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+
+{
+  "username": "Ursula"
+}
+
+###
 POST http://localhost:8080/api/andromeda/addPrompt
 Content-Type: application/json
 

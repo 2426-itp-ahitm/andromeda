@@ -1,0 +1,37 @@
+<h1> Andromeda </h1>
+<h2>Create a New Prompt</h2>
+
+<!-- Form Container -->
+<div class="form-container">
+  <form (ngSubmit)="submitPrompt()">
+    <!-- Prompt Content -->
+    <label for="content">Prompt Content:</label>
+    <textarea
+      id="content"
+      name="content"
+      [(ngModel)]="newPrompt.content"
+      placeholder="Enter the prompt content here..."
+      required>
+    </textarea>
+
+    <!-- User Details (Dropdown für Benutzername) -->
+    <label for="username">User Name:</label>
+    <select
+      id="username"
+      name="username"
+      [(ngModel)]="newPrompt.username">  <!-- Hier wird der Username gespeichert -->
+    (change)="setUserId(newPrompt.username)" <!-- Funktion, die userId setzt -->
+    required>
+    <option value="" disabled>Select a user</option>
+    <option value="Brionka">Brionka</option>
+    <option value="Friedolin">Friedolin</option>
+    <option value="Ursula">Ursula</option>
+    </select>
+
+    <!-- Submit Button -->
+    <button type="submit">Create Prompt</button>
+  </form>
+</div>
+
+<!-- Back Button -->
+<button (click)="goBack()">Back to Prompt List</button>
