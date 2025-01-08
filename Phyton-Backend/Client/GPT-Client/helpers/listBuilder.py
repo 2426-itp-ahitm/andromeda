@@ -5,7 +5,7 @@ class listBuilder:
         list_loader = listLoader()
         self.actions = list_loader.getUserPrompts(json_file_path,1) 
         #self.actions.append(list_loader.getUserPrompts("",""))
-        #self.actions = self._load_actions_from_file(json_file_path)
+        #self.actions = self._load_actions_from_file(json_file_path)e
         
     def _load_actions_from_file(self, file_path):
         try:
