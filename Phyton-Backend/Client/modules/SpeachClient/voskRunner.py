@@ -10,7 +10,6 @@ from vosk import Model, KaldiRecognizer
 from helpers.txtWriter import txtWriter
 from helpers.textFormatter import TextFormatter
 from helpers.config import keyword, selected_module
-
 audio_queue = queue.Queue()
 
 def callback(indata, frames, time, status):
@@ -22,6 +21,7 @@ def callback(indata, frames, time, status):
 def recognize_speech():
     with open("customWords.json", "r") as file:
         custom_vocabulary = json.load(file)
+    #print(selected_module)
     model = Model(selected_module)
     recognizer = KaldiRecognizer(model, 16000,json.dumps(custom_vocabulary) )
     keyword_detected = False

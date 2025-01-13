@@ -38,7 +38,7 @@ class SpeechRecognizer:
                     result = self.recognizer.Result()
                     result_dict = json.loads(result)
                     text = result_dict.get("text", "").lower()
-                    print(f"Text: {text}")
+                    #print(f"Text: {text}")
                     text = self.formatter.clearTextBeforeKeyword(text)
                     if self.keyword_detected:
                         print(f"You said {text}")
