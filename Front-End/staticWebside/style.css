@@ -91,7 +91,9 @@ a h1 {
 }
 
 #BigLogo {
-    width: 25vw;
+    width: 35vw;
+    text-align: center;
+    margin: auto;
 }
 
 
