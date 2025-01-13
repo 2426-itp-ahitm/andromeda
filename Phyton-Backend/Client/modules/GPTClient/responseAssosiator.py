@@ -1,8 +1,8 @@
 import ollama
 import json
-from GPTClient.helpers.listBuilder import listBuilder
-from GPTClient.helpers.errorListBuilder import errorListBuilder
-from GPTClient.helpers.config import system_promt, pathToPromtList, pathToErrorList
+from helpers.listBuilder import listBuilder
+from helpers.errorListBuilder import errorListBuilder
+from helpers.config import system_promt, pathToPromtList, pathToErrorList
 
 class responseAssosiator(): 
     assosListBuilder = None

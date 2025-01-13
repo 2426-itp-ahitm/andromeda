@@ -1,8 +1,8 @@
 from queue import Queue
-from SpeachClient.vosk.speachRecogniser import SpeechRecognizer
+from SpeachClient.speachRecogniser import SpeechRecognizer
 from GPTClient.responseAssosiator import responseAssosiator
-from SpeachClient.vosk.helpers.config import keyword, selected_module
-from SpeachClient.vosk.helpers.txtWriter import txtWriter
+from helpers.config import keyword, selected_module
+import threading
 
 class ClientRunner:
     def __init__(self):
@@ -12,6 +12,7 @@ class ClientRunner:
 
     def run(self):
         print("Starting ClientRunner...")
+  
         while True:
             if not self.data_queue.empty():
                 speech_text = self.data_queue.get()
@@ -21,5 +22,7 @@ class ClientRunner:
 
 if __name__ == "__main__":
     client_runner = ClientRunner()
-    client_runner.speech_recognizer.recognize_speech()
+    speech_thread = threading.Thread(target=client_runner.speech_recognizer.recognize_speech)
+    speech_thread.daemon = True
+    speech_thread.start()
     client_runner.run()

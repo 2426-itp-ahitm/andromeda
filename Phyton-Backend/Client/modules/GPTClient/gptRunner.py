@@ -1,9 +1,14 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import ollama
 import json
+from helpers.config import system_promt, pathToPromtList, pathToErrorList
 from helpers.listBuilder import listBuilder
 from responseAssosiator import responseAssosiator
 from helpers.errorListBuilder import errorListBuilder
-from helpers.config import system_promt, pathToPromtList, pathToErrorList
+
 errListBuilder = errorListBuilder(pathToErrorList)
 assosiator = responseAssosiator()
 originalUserInput = ""

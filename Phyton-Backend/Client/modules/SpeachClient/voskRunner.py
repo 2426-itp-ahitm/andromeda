@@ -1,4 +1,7 @@
+import sys
 import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import json
 import queue
 import sounddevice as sd
@@ -45,7 +48,9 @@ def recognize_speech():
                 partial_result = recognizer.PartialResult()
                 partial_dict = json.loads(partial_result)
                 partial_text = partial_dict.get("partial", "").lower()
-
+                # print(f"Audio chunk size: {len(data)}")
+                # print(f"First 10 bytes of data: {data[:10]}")
+                # print(f"Partial Text: {partial_result}")
                 if not keyword_detected and keyword in partial_text:
                     print("Keyword "+keyword+" detected in partial result! Now actively listening...")
                     keyword_detected = True

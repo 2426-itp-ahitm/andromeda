@@ -4,9 +4,9 @@ import queue
 import sounddevice as sd
 from queue import Queue
 from vosk import Model, KaldiRecognizer
-from SpeachClient.vosk.helpers.txtWriter import txtWriter
-from SpeachClient.vosk.helpers.textFormatter import TextFormatter
-from SpeachClient.vosk.helpers.config import keyword, selected_module
+from helpers.txtWriter import txtWriter
+from helpers.textFormatter import TextFormatter
+from helpers.config import keyword, selected_module
 
 
 class SpeechRecognizer:
@@ -19,14 +19,7 @@ class SpeechRecognizer:
         self.writer = txtWriter("test.txt")
         self.formatter = TextFormatter(keyword)
         self.model = Model(self.model_path)
-    #   Errors Accure here
-    #   self.recognizer = KaldiRecognizer(self.model, 16000, json.dumps(self.load_custom_vocabulary()))
         self.recognizer = KaldiRecognizer(self.model, 16000)
-
-    def load_custom_vocabulary(self):
-        with open("customWords.json", "r") as file:
-            return json.load(file)
-
     def callback(self, indata, frames, time, status):
         """Callback function to handle audio from the microphone."""
         if status:
@@ -45,6 +38,7 @@ class SpeechRecognizer:
                     result = self.recognizer.Result()
                     result_dict = json.loads(result)
                     text = result_dict.get("text", "").lower()
+                    print(f"Text: {text}")
                     text = self.formatter.clearTextBeforeKeyword(text)
                     if self.keyword_detected:
                         print(f"You said {text}")
@@ -54,11 +48,14 @@ class SpeechRecognizer:
                             self.data_queue.put(text)
                         else:
                             print("no data queue")
-                    else:
+                else:
+                        #print(f"Audio chunk size: {len(data)}")
+                        #print(f"First 10 bytes of data: {data[:10]}")
+
                         partial_result = self.recognizer.PartialResult()
                         partial_dict = json.loads(partial_result)
                         partial_text = partial_dict.get("partial", "").lower()
-
+                        #print(f"Partial Text: {partial_result}")
                         if not self.keyword_detected and self.keyword in partial_text:
                             print(f"Keyword '{self.keyword}' detected in partial result! Now actively listening...")
                             self.keyword_detected = True
