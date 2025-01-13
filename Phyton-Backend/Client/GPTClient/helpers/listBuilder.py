@@ -1,5 +1,5 @@
 import json
-from helpers.listLoader import listLoader
+from GPTClient.helpers.listLoader import listLoader
 class listBuilder: 
     def __init__(self, json_file_path):
         list_loader = listLoader()

@@ -9,4 +9,3 @@ class listLoader:
         r = requests.get(url=url_with_user_id)
         data = r.json()
         return data
-
