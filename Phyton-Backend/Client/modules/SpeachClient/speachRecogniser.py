@@ -16,7 +16,7 @@ class SpeechRecognizer:
         self.audio_queue = queue.Queue()
         self.data_queue = data_queue  # Shared queue for external use
         self.keyword_detected = False
-        self.writer = txtWriter("test.txt")
+        self.writer = txtWriter("log.txt")
         self.formatter = TextFormatter(keyword)
         self.model = Model(self.model_path)
         self.recognizer = KaldiRecognizer(self.model, 16000)
