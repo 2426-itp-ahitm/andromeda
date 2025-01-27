@@ -128,7 +128,6 @@ Content-Type: application/json
   "userId": 1,
   "content": "Schalte dich selbst aus"
 }
-
 ###
 GET http://localhost:8080/api/andromeda/prompts/listAll
 Content-Type: */*

@@ -1,4 +1,4 @@
 from ttsHandler import ttsHandler
 
 tts = ttsHandler()
-tts.say("Starting ClientRunner...")
+tts.say("Hello World!")
