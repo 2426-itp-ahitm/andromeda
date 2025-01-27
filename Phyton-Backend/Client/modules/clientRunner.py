@@ -1,6 +1,6 @@
 from queue import Queue
 from SpeachClient.speachRecogniser import SpeechRecognizer
-from GPTClient.responseAssosiator import responseAssosiator
+from WinkkClient.winkkAssosiator import winkkAssosiator
 from TTSClient.ttsHandler import ttsHandler
 from helpers.config import keyword, selected_module
 import threading
@@ -9,7 +9,7 @@ class ClientRunner:
     def __init__(self):
         self.data_queue = Queue()
         self.speech_recognizer = SpeechRecognizer(selected_module, keyword, self.data_queue)
-        self.response_associator = responseAssosiator()
+        self.response_associator = winkkAssosiator()
         self.tts = ttsHandler()
     def run(self):
         print("Starting ClientRunner...")
