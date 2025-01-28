@@ -2,7 +2,7 @@ system_promt = "Du bist ein Algorithmus, der Sätze einer Liste zuordnet. Analys
 error_promt = "Du machst oft Fehler bei folgenden zuordnungen die richtigen Zuordnungen sind in der Fehlerliste beachte diese besonders. Die richtige Antwort ist mit => zugeordnet"
 
 
-pathToPromtList = "http://localhost:8080/api/andromeda/user/${userId}/prompts"
+pathToPromtList = "http://localhost:8080/api/andromeda/user/userId/prompts"
 pathToErrorList = "C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\GPTClient\\errorList.json"
 
 MODEL_ENGLISH_PATH = "C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-en-us-0.42-gigaspeech\\vosk-model-en-us-0.42-gigaspeech"

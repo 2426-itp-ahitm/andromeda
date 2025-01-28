@@ -3,12 +3,9 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import json
-from helpers.config import system_promt, pathToPromtList, pathToErrorList
-from helpers.listBuilder import listBuilder
+from helpers.config import  pathToErrorList
 from responseAssosiator import responseAssosiator
-from helpers.errorListBuilder import errorListBuilder
 
-errListBuilder = errorListBuilder(pathToErrorList)
 assosiator = responseAssosiator()
 originalUserInput = ""
 
