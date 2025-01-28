@@ -5,7 +5,7 @@ from helpers.errorListBuilder import errorListBuilder
 from helpers.config import system_promt, pathToPromtList, pathToErrorList
 from helpers.key import key,realm
 
-class winkkAssosiator(): 
+class responseAssosiator(): 
     assosListBuilder = None
     errListBuilder = None
     standartPromt = None

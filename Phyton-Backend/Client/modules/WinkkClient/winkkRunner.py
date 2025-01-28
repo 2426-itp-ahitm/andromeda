@@ -5,11 +5,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import json
 from helpers.config import system_promt, pathToPromtList, pathToErrorList
 from helpers.listBuilder import listBuilder
-from winkkAssosiator import winkkAssosiator
+from responseAssosiator import responseAssosiator
 from helpers.errorListBuilder import errorListBuilder
 
 errListBuilder = errorListBuilder(pathToErrorList)
-assosiator = winkkAssosiator()
+assosiator = responseAssosiator()
 originalUserInput = ""
 
 while True:
