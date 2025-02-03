@@ -18,5 +18,9 @@
     {
         "prompt": "öffne epic games",
         "number": "3, epic games"
+    },
+    {
+        "prompt": "fahre den rechner herunter",
+        "number": "2"
     }
 ]
