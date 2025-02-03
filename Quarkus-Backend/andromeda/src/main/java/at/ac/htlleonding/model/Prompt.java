@@ -15,7 +15,7 @@ public class Prompt {
     public static final String QUERY_FIND_ALL_BY_USER_ID = "Prompt.findAllByUserId";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
     public String content;

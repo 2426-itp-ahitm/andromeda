@@ -30,9 +30,6 @@ export class CreatePromptFormComponent {
 
   setUserId(username: string) {
     switch (username) {
-      case 'Peter':
-        this.newPrompt.userId = 1;
-        break;
       case 'Brionka':
         this.newPrompt.userId = 2;
         break;
