@@ -26,11 +26,9 @@ public class AndromedaRepository {
         User user = em.find(User.class, userId);
 
         if (user == null) {
-            return;
         } else {
             Prompt prompt = new Prompt(user, content);
             this.em.persist(prompt);
-            return;
         }
     }
 
@@ -39,7 +37,6 @@ public class AndromedaRepository {
 
         User user = new User(username);
         this.em.persist(user);
-        return;
     }
 
     public User getUserById(Long id) {

@@ -58,11 +58,11 @@ public class AndromedaResource {
             String username = userDTO.username();
             andromedaRepository.addUser(username);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             status = Response.Status.BAD_REQUEST;
         }
         return Response.status(status)
-                    .build();
+                .build();
 
     }
 
@@ -71,7 +71,8 @@ public class AndromedaResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Prompt> getUserPrompts(@PathParam("userId") Long userId) {
         return andromedaRepository.getPromptsOfUser(userId);
-    }
 
+
+    }
 
 }

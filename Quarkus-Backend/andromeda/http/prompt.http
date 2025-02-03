@@ -132,6 +132,8 @@ Content-Type: application/json
 GET http://localhost:8080/api/andromeda/prompts/listAll
 Content-Type: */*
 
+
+
 ###
 GET http://localhost:8080/api/andromeda/user/1/prompts
 Content-Type: */*

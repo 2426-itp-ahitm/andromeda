@@ -14,7 +14,7 @@ public class User {
 
     public  static final String QUERY_FIND_USER_BY_ID = "User.find_user_by_id";
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private String username;
