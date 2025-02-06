@@ -8,20 +8,16 @@ from helpers.config import keyword, selected_module
 import threading
 
 class ClientRunner:
-    def __init__(self):
-        self.data_queue = Queue()
-        self.speech_recognizer = SpeechRecognizer(selected_module, keyword, self.data_queue)
+    def __init__(self): 
         self.response_associator = responseAssosiator()
         self.chat_responder = chatResponder()
         self.command_associator = commandAssosiator()
-
         self.tts = ttsHandler()
     def run(self):
         print("Starting ClientRunner...")
         self.tts.say("Starting ClientRunner...")
         while True:
-            if not self.data_queue.empty():
-                speech_text = self.data_queue.get()
+                speech_text = input("Enter a text for debugging: ")
                 print(f"Recognized Speech: {speech_text}")
                 response = self.response_associator.generateResponse(speech_text)
                 print(f"Analyzed Response: {response}")
@@ -39,7 +35,4 @@ class ClientRunner:
 
 if __name__ == "__main__":
     client_runner = ClientRunner()
-    speech_thread = threading.Thread(target=client_runner.speech_recognizer.recognize_speech)
-    speech_thread.daemon = True
-    speech_thread.start()
     client_runner.run()
