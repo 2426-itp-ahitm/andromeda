@@ -12,15 +12,24 @@
         "number": "3, spotify"
     },
     {
+        "prompt": "starte spotify",
+        "number": "3, spotify"
+    },
+    {
         "prompt": "öffne powerpoint",
+        "number": "3, powerpoint"
+    },
+    {
+        "prompt": "starte powerpoint",
         "number": "3, powerpoint"
     },
     {
         "prompt": "öffne epic games",
         "number": "3, epic games"
-    },
+    }
+    ,
     {
-        "prompt": "fahre den rechner herunter",
-        "number": "2"
+        "prompt": "starte epic games",
+        "number": "3, epic games"
     }
 ]
