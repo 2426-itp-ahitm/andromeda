@@ -13,5 +13,6 @@ def main():
         response = responder.generateResponse(user_input)
         print("Bot:", response)
 
+
 if __name__ == "__main__":
     main()

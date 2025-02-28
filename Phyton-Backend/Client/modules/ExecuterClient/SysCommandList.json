@@ -2,6 +2,19 @@
     "1": "testCommand.py",
     "2": "shutdown.py",
     "3": "openProgramm.py",
-    "4": "file4.py",
-    "5": "file5.py"
+    "4": "closeWindow.py",
+    "5": "file5.py",
+    "6": "startPlayback.py",
+    "7": "startPlayback.py",
+    "8": "",
+    "9": "",
+    "10": "",
+    "11": "",
+    "12": "openWindow.py",
+    "13": "closeWindow.py",
+    "14": "maxWindow.py",
+    "15": "minWindow.py",
+    "16": "setVolume.py",
+    "17": "toggleMute.py",
+    "18": "setLightning.py"
 }
