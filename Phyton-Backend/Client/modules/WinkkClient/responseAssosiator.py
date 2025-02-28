@@ -2,7 +2,7 @@ import requests
 import json
 from helpers.listBuilder import listBuilder
 from helpers.errorListBuilder import errorListBuilder
-from helpers.config import system_promt, pathToPromtList, pathToErrorList
+from helpers.config import system_promt, pathToPromtList, pathToErrorList, error_promt
 from helpers.key import key,realm
 
 class responseAssosiator(): 
@@ -16,8 +16,9 @@ class responseAssosiator():
         self.standartPromt = [
             ["system", system_promt],
             ["system", self.assosListBuilder.format_actions()],
-            ["system", self.errListBuilder.format_actions()]
+            ["system", error_promt + str(self.errListBuilder.format_actions())]
         ]
+        print(self.errListBuilder.format_actions())
     
     def generateResponse(self, user_input):
         url = "https://nexusdev.winkk.ai/streamChat"

@@ -22,4 +22,4 @@ class errorListBuilder:
             for action in self.actions
             if isinstance(action, dict) and "prompt" in action and "number" in action
         ]
-        return "Fehlerliste: ".join(formatted_list)
+        return formatted_list

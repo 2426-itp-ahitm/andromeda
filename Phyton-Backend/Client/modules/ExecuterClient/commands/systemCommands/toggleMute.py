@@ -3,7 +3,7 @@ from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
 
 class toggleMute:
-    def run(self):
+    def run(self,params):
         devices = AudioUtilities.GetSpeakers()
         interface = devices.Activate(
             IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
@@ -15,5 +15,5 @@ class toggleMute:
         print(f"Volume {status}")
 
 if __name__ == "__main__":
-    toggle_mute = ToggleMute()
+    toggle_mute = toggleMute()
     toggle_mute.run()
