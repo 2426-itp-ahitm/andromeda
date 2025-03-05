@@ -1,6 +1,7 @@
 import pygetwindow as gw
 import pyautogui
 import time
+
 class openWindow:
     def run(self, params):
         window_name = params[0]

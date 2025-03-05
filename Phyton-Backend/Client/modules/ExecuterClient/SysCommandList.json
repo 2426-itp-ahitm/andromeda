@@ -16,5 +16,10 @@
     "15": "minWindow.py",
     "16": "setVolume.py",
     "17": "toggleMute.py",
-    "18": "setLightning.py"
+    "18": "setLightning.py",
+    "19": "increaseLightning.py",
+    "20": "decreaseLightning.py",
+    "21": "increaseVolume.py",
+    "22": "decreaseVolume.py",
+    "23": "takeScreenshot.py"
 }

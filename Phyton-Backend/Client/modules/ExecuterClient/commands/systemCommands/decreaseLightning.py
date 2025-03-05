@@ -1,9 +1,11 @@
 import screen_brightness_control as sbc
 
-class setLightning: 
+class decreaseLightning: 
     def run(self, params):
+        print(sbc.get_brightness())
         if not params:
             print("No brightness level provided.")
+            sbc.set_brightness(sbc.get_brightness()[0]-20)
             return
         
         level = params[0]
@@ -18,14 +20,14 @@ class setLightning:
         try:
             level = int(level)
             if 0 <= level <= 100:
-                sbc.set_brightness(level)
-                print(f"Set brightness to {level}%")
+                sbc.set_brightness(sbc.get_brightness()[0]-level)
+                print(f"Decreased brightness with {level}%")
             else:
-                print("Please enter a brightness level between 0 and 100.")
+                sbc.set_brightness(sbc.get_brightness()[0]-20)
         except ValueError:
-            print("Invalid input. Enter a number between 0 and 100, or 'min'/'max'.")
+             sbc.set_brightness(sbc.get_brightness()[0]-20)
 
 if __name__ == "__main__":
     level = input("Enter brightness level (0-100) or 'min'/'max': ")
-    set_lightning = setLightning()
+    set_lightning = decreaseLightning()
     set_lightning.run([level])

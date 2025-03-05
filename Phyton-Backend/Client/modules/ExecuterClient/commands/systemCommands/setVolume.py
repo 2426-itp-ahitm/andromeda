@@ -9,7 +9,7 @@ class setVolume:
             return
         
         level = params[0]
-        
+        level = level.replace("%", "")  # Remove % sign if present
         if isinstance(level, str):
             level = level.lower()
             if level == "max":
@@ -33,5 +33,5 @@ class setVolume:
 
 if __name__ == "__main__":
     level = input("Enter volume level (0-100) or 'min'/'max': ")
-    set_volume = SetVolume()
+    set_volume = setVolume()
     set_volume.run([level])
