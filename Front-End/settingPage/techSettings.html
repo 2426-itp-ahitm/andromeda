@@ -1,181 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Comfortaa:wght@300;400&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #d3d3d3;
-            display: flex;
-            height: 100vh;
+            font-family: 'Comfortaa', sans-serif;
             margin: 0;
+            display: flex;
         }
+
         .sidebar {
-            width: 250px;
-            background: #2e2545;
+            width: 300px;
+            background-color: #1e1b33;
             color: white;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
         }
-        .sidebar button {
-            background: #4f3d77;
-            color: white;
-            border: none;
+
+        .sidebar h2 {
+            text-align: center;
+        }
+
+        .menu-item {
+            background-color: transparent;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+            background-color: #5c5470;
+        }
+
+        .content {
+            flex-grow: 1;
+            background-color: #d3d3d3;
+            padding-left: 20px;
+        }
+
+        .card {
+            background: white;
             padding: 10px;
-            border-radius: 8px;
-            text-align: left;
+            border-radius: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: 250px;
+            height: 60px;
+            position: relative;
+        }
+
+        .button {
+            background-color: #e0e0e0;
+            border: #1e1b3300;
+            border-radius: 10px;
+            padding: 10px 15px;
             cursor: pointer;
         }
-        .content {
-            flex: 1;
-            padding: 20px;
-            
+
+        .switch {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-        .dropdown {
-            margin-bottom: 20px;
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 90px;
+            height: 40px;
+            background: #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        .slider:before {
+            content: "OFF";
             width: 50%;
+            height: 100%;
+            background: white;
+            color: black;
+            text-align: center;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
         }
-        select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 100%;
+
+        
+
+        input:checked + .slider:before {
+            content: "ON";
+            transform: translateX(100%);
         }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .card {
+
+        .card-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 50%;
         }
-        .info {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-        .toggle {
-            background: #ccc;
-            width: 50px;
-            height: 25px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        .toggle.on {
-            background: #666;
-            color: white;
-        }
-        .button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            background: white;
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
+
+        select {
+            width: 90%;
+            padding: 10px;
+            font-size: 16px;
+            border: solid transparent;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
-        <button>Dashboard</button>
-        <button>Tech Settings</button>
-        <button>Custom Commands Option</button>
-        <button>Personal Commands</button>
+        <div style="text-align: center;">
+            <img width="100vw" height="100vw" src="img/logo2.png" alt="logo">
+        </div>
+        <div class="menu-item">Dashboard</div>
+        <div class="menu-item">Tech Settings</div>
+        <div class="menu-item">Custom Commands Option</div>
+        <div class="menu-item">Personal Commands</div>
     </div>
     <div class="content">
         <h2>Language</h2>
-        <div class="dropdown">
-            <select>
-                <option>German</option>
-                <option>English</option>
-            </select>
-        </div>
+        <select>
+            <option>German</option>
+            <option>Englisch</option>
+        </select>
         <h2>Install Models</h2>
-        <div class="dropdown">
-            <select>
-                <option>Select:</option>
-            </select>
-        </div>
-        <div class="container">
-            <div class="card">
-                <div class="info">
-                    <strong>Model1</strong>
-                    <span>18 GB</span>
-                    <span>80%</span>
-                </div>
-                <button class="button">Download</button>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <strong>Model2</strong>
-                    <span>25 GB</span>
-                    <span>40%</span>
-                </div>
-                <div class="toggle on">ON</div>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <strong>Model3</strong>
-                    <span>28 GB</span>
-                    <span>60%</span>
-                </div>
-                <div class="toggle">OFF</div>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <strong>Model4</strong>
-                    <span>32 GB</span>
-                    <span>25%</span>
-                </div>
-                <button class="button">Download</button>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <strong>Model5</strong>
-                    <span>14 GB</span>
-                    <span>10%</span>
-                </div>
-                <div class="toggle">OFF</div>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <strong>Model6</strong>
-                    <span>8 GB</span>
-                    <span>30%</span>
-                </div>
-                <div class="toggle on">ON</div>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <strong>Model7</strong>
-                    <span>56 GB</span>
-                    <span>85%</span>
-                </div>
-                <button class="button">Download</button>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <strong>Model8</strong>
-                    <span>39 GB</span>
-                    <span>90%</span>
-                </div>
-                <button class="button">Download</button>
-            </div>
-        </div>
+        <select>
+            <option>Select:</option>
+        </select>
+        <table>
+            <tr>
+                <td>
+                    <div class="card">Model1<br>18 GB<br>80%
+                        <div class="card-actions">
+                            <button class="button">Download</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model2<br>25 GB<br>40%
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="card">Model3<br>28 GB<br>60%
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model4<br>32 GB<br>25%
+                        <div class="card-actions">
+                            <button class="button">Download</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="card">Model5<br>14 GB<br>10%
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model6<br>8 GB<br>30%
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="card">Model7<br>56 GB<br>85%
+                        <div class="card-actions">
+                            <button class="button">Download</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model8<br>39 GB<br>90%
+                        <div class="card-actions">
+                            <button class="button">Download</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <button class="button">Load More</button>
     </div>
 </body>
+
 </html>
