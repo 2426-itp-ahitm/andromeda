@@ -3,19 +3,20 @@ from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
 import pycaw.pycaw as pycaw
 
-class increaseVolume:
+class decreaseVolume:
     def run(self, params):
+        increment = 0
         if not params:
             print("No volume level provided.")
-            return
-        
-        increment = params[0]
-        increment = increment.replace("%", "")  # Remove % sign if present
+            increment = 20
+        else:
+            increment = params[0]
+            increment = increment.replace("%", "")  # Remove % sign if present
         if isinstance(increment, str):
             increment = increment.lower()
-            if increment == "max":
+            if increment.__contains__("max"):
                 increment = 100
-            elif increment == "min":
+            elif increment.__contains__("min"):
                 increment = 0
         
         try:
@@ -43,5 +44,5 @@ class increaseVolume:
 
 if __name__ == "__main__":
     increment = input("Enter volume increment (0-100) or 'min'/'max': ")
-    increase_volume = increaseVolume()
+    increase_volume = decreaseVolume()
     increase_volume.run([increment])

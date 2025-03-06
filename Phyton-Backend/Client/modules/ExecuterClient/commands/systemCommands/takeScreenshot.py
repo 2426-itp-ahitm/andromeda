@@ -2,7 +2,7 @@ import pyautogui
 import datetime
 import os
 import sys
-import pygetwindow as gw
+import pygetwindow as gw, win32gui, win32con;
 import time
 from helpers.config import pathToScreenshotFolder
 import ctypes
@@ -22,11 +22,11 @@ class takeScreenshot:
                 print(f"No window found with title containing: {window_name}")
                 return
             window = windows[0]  # Take the first matching window
-            
             if window.isMinimized:
                 window.restore()
                 time.sleep(0.5)
                 window.activate()
+            hwnd = gw.getWindowsWithTitle(window)[0]._hWnd; win32gui.ShowWindow(hwnd, win32con.SW_RESTORE); win32gui.SetForegroundWindow(hwnd)
             ctypes.windll.user32.SetForegroundWindow(window._hWnd)
             time.sleep(0.5)  # Small delay to ensure proper focus
             bbox = (window.left, window.top, window.width, window.height)

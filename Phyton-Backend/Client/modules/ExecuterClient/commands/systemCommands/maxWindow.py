@@ -1,4 +1,4 @@
-import pygetwindow as gw
+import pygetwindow as gw, win32gui
 import time
 import ctypes
 

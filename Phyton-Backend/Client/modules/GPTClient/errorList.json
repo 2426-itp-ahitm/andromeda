@@ -90,5 +90,37 @@
     {
         "prompt": "mache einen screenshot ",
         "number": "23"
+    },
+    {
+        "prompt": "spotify auf fullscreen",
+        "number": "14, spotify"
+    },
+    {
+        "prompt": "nächstes lädt ",
+        "number": "24"
+    },
+    {
+        "prompt": "spiel den song ",
+        "number": "6"
+    },
+    {
+        "prompt": "pause ",
+        "number": "7"
+    },
+    {
+        "prompt": "play",
+        "number": "6"
+    },
+    {
+        "prompt": "weiter",
+        "number": "24"
+    },
+    {
+        "prompt": "zurück",
+        "number": "25"
+    },
+    {
+        "prompt": "Finde Schule",
+        "number": "10, Schule"
     }
 ]

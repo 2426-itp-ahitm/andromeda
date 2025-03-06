@@ -5,17 +5,18 @@ import pycaw.pycaw as pycaw
 
 class increaseVolume:
     def run(self, params):
+        increment = 0
         if not params:
             print("No volume level provided.")
-            return
-        
-        increment = params[0]
-        increment = increment.replace("%", "")  # Remove % sign if present
+            increment = 20
+        else:
+            increment = params[0]
+            increment = increment.replace("%", "")  # Remove % sign if present
         if isinstance(increment, str):
             increment = increment.lower()
-            if increment == "max":
+            if increment.__contains__("max"):
                 increment = 100
-            elif increment == "min":
+            elif increment.__contains__("min"):
                 increment = 0
         
         try:

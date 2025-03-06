@@ -21,7 +21,6 @@ class ClientRunner:
                 print(f"Recognized Speech: {speech_text}")
                 response = self.response_associator.generateResponse(speech_text)
                 print(f"Analyzed Response: {response}")
-                self.tts.say("Analyzed Response: " + response)
                 if response == 0 or response == "0":
                     chatresponse = self.chat_responder.generateResponse(speech_text)
                     self.tts.say(chatresponse)

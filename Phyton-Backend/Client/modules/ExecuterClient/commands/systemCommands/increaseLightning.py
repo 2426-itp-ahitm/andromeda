@@ -12,9 +12,9 @@ class increaseLightning:
         level = level.replace("%", "")  # Remove % sign if present
         if isinstance(level, str):
             level = level.lower()
-            if level == "max":
+            if level.__contains__("max"):
                 level = 100
-            elif level == "min":
+            elif level.__contains__("min"):
                 level = 0
             
         try:

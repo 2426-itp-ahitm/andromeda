@@ -18,8 +18,6 @@ class responseAssosiator():
             ["system", self.assosListBuilder.format_actions()],
             ["system", error_promt + str(self.errListBuilder.format_actions())]
         ]
-        print(self.errListBuilder.format_actions())
-    
     def generateResponse(self, user_input):
         url = "https://nexusdev.winkk.ai/streamChat"
         headers = {

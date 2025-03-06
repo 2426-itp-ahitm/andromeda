@@ -5,16 +5,16 @@ from pathlib import Path
 
 CACHE_FILE = "file_cache.json"
 SPECIAL_FOLDERS = {
-    "Desktop": str(Path.home() / "Desktop"),
-    "Downloads": str(Path.home() / "Downloads"),
-    "Dokumente": str(Path.home() / "Documents"),
-    "Bilder": str(Path.home() / "Pictures"),
-    "Musik": str(Path.home() / "Music"),
-    "Videos": str(Path.home() / "Videos"),
-    "Papierkorb": "shell:RecycleBinFolder"
+    "desktop": str(Path.home() / "Desktop"),
+    "downloads": str(Path.home() / "Downloads"),
+    "dokumente": str(Path.home() / "Documents"),
+    "bilder": str(Path.home() / "Pictures"),
+    "musik": str(Path.home() / "Music"),
+    "videos": str(Path.home() / "Videos"),
+    "papierkorb": "shell:RecycleBinFolder"
 }
 
-class openFileOrFolder:
+class findFileOrFolder:
     def __init__(self):
         self.cache = self.load_cache()
     
@@ -28,7 +28,8 @@ class openFileOrFolder:
         with open(CACHE_FILE, "w") as f:
             json.dump(self.cache, f)
     
-    def search_and_open(self, name):
+    def run(self, params):
+        name = params[0]
         if name in self.cache:
             path = self.cache[name]
             if os.path.exists(path) or path.startswith("shell:"):
@@ -40,7 +41,7 @@ class openFileOrFolder:
                 self.save_cache()
         
         # Check special folders
-        if name in SPECIAL_FOLDERS:
+        if name.lower() in SPECIAL_FOLDERS:
             path = SPECIAL_FOLDERS[name]
             subprocess.run(["explorer", path])
             print(f"Opened special folder: {path}")
@@ -50,6 +51,10 @@ class openFileOrFolder:
         
         # Iterate over all folders and files in the directory
         for root, dirs, files in os.walk(search_path):
+            # Skip the "Recent" folder
+            if "Recent" in root:
+                continue
+            
             # Check if the name matches exactly or partially (extension omitted)
             if name in dirs:
                 folder_path = os.path.join(root, name)
@@ -71,5 +76,5 @@ class openFileOrFolder:
 
 if __name__ == "__main__":
     name = input("Enter the file or folder name to search: ")
-    opener = openFileOrFolder()
-    opener.search_and_open(name)
+    opener = findFileOrFolder()
+    opener.run([name])
