@@ -1,11 +1,11 @@
 import pyautogui
 import datetime
 import os
+import sys
 import pygetwindow as gw
 import time
-
-pathToScreenshotFolder = "C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\screenshots"
-
+from helpers.config import pathToScreenshotFolder
+import ctypes
 class takeScreenshot: 
     def run(self, params):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -27,7 +27,7 @@ class takeScreenshot:
                 window.restore()
                 time.sleep(0.5)
                 window.activate()
-            
+            ctypes.windll.user32.SetForegroundWindow(window._hWnd)
             time.sleep(0.5)  # Small delay to ensure proper focus
             bbox = (window.left, window.top, window.width, window.height)
             screenshot = pyautogui.screenshot(region=bbox)

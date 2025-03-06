@@ -3,12 +3,12 @@
     "2": "shutdown.py",
     "3": "openProgramm.py",
     "4": "closeWindow.py",
-    "5": "file5.py",
+    "5": "",
     "6": "startPlayback.py",
     "7": "startPlayback.py",
     "8": "",
-    "9": "",
-    "10": "",
+    "9": "findFileOrFolder.py",
+    "10": "findFileOrFolder.py",
     "11": "",
     "12": "openWindow.py",
     "13": "closeWindow.py",
@@ -21,5 +21,7 @@
     "20": "decreaseLightning.py",
     "21": "increaseVolume.py",
     "22": "decreaseVolume.py",
-    "23": "takeScreenshot.py"
+    "23": "takeScreenshot.py",
+    "24": "skipForward.py",
+    "25": "skipBackward.py"
 }

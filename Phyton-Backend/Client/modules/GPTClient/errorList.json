@@ -86,5 +86,9 @@
     {
         "prompt": "mach spotify fullscreen",
         "number": "14, spotify"
+    },
+    {
+        "prompt": "mache einen screenshot ",
+        "number": "23"
     }
 ]

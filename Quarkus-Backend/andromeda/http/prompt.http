@@ -226,6 +226,23 @@ Content-Type: application/json
   "content": "Mache einen Screenshot von (A)"
 }
 ###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Nächstes Lied"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Lied zurück"
+}
+
+###
 GET http://localhost:8080/api/andromeda/prompts/listAll
 Content-Type: */*
 
