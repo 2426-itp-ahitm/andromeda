@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background: #d3d3d3;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 260px;
+            background: #2c2a44;
+            color: white;
+            height: 100vh;
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        .sidebar img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 12px;
+            background: #44405a;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            font-size: 18px;
+        }
+        .sidebar a:hover {
+            background: #57536d;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-left: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            height: 100vh;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+        .card h2, .card p {
+            margin: 10px 0;
+        }
+        .card p {
+            line-height: 1.6;
+        }
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 400px;
+            font-size: 16px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            min-width: 100%;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+            top: 100%;
+            left: 0;
+            z-index: 10;
+            flex-direction: column;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: black;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="logo.png" alt="Logo">
+        <a href="Dashboard.html" style="background:#6c65ad;">Dashboard</a>
+        <a href="TechSettings.html">Tech Settings</a>
+        <a href="CostumCommands.html">Custom Commands option</a>
+        <a href="Personalpage.html">Personal Commands</a>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to Andromeda!</h1>
+
+        <div class="card">
+            <h2>Latest Used</h2>
+            <p><strong>Today</strong></p>
+            <p>Delete the folder 'Documents/Old Files'</p>
+            <p>Create a new folder named 'Projects' on the desktop</p>
+            <p><strong>Yesterday</strong></p>
+            <p>Start Google Chrome</p>
+            <p><strong>The previous 7 days</strong></p>
+            <p>Terminate the process named 'Spotify'</p>
+            <p>Shut down the PC</p>
+            <p>Increase the volume to 80%</p>
+            <p><strong>The previous 30 days</strong></p>
+            <p>Show my current IP address</p>
+        </div>
+
+        <div class="card">
+            <h2>Microphone status</h2>
+            <div class="dropdown" onclick="toggleDropdown()">
+                <span>Microphone</span>
+                <span>THC-GamingSensoricMicro</span>
+                <span class="icon">&#9660;</span>
+                <div class="dropdown-content">
+                    <a href="#">THC-GamingSensoricMicro</a>
+                    <a href="#">USB-Microphone</a>
+                    <a href="#">Bluetooth-Microphone</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Contact us by Problems</h2>
+            <p><strong>E-Mail:</strong> andromeda@gmail.com</p>
+            <p><strong>Telephone:</strong> +43 6603 210701</p>
+            <p>Our Team member Gabriel Pabst is amused to help you!</p>
+        </div><br><br>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            let dropdown = document.querySelector(".dropdown-content");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        document.addEventListener("click", function(event) {
+            let dropdown = document.querySelector(".dropdown");
+            let content = document.querySelector(".dropdown-content");
+            if (!dropdown.contains(event.target)) {
+                content.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
