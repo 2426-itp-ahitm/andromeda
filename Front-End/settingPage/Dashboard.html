@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-                @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Comfortaa:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Comfortaa:wght@300;400&display=swap');
 
         body {
             font-family: 'Comfortaa', sans-serif;
@@ -24,7 +24,6 @@
             overflow: hidden;
             padding: 20px;
             position: fixed;
-            /* Fixiert die Sidebar beim Scrollen */
             top: 0;
             left: 0;
             overflow-y: auto;
@@ -48,17 +47,18 @@
         .sidebar a:hover {
             background: #57536d;
         }
+        #currPage {
+            background-color: #5c5470;
+        }
         .content {
             flex-grow: 1;
             padding: 20px;
-            margin-left: 100px;
+            margin-left: 30%;
             display: flex;
             flex-direction: column;
             gap: 20px;
             overflow-y: auto;
             height: 100vh;
-            padding-left: 25%;
-
         }
         .card {
             background: white;
@@ -116,9 +116,8 @@
         <div style="text-align: center;">
             <img width="100vw" height="100vw" src="img/logo2.png" alt="logo">
         </div>
-        <div id="currPage"  class="menu-item"><a href="Dashboard.html">Dashboard</a></div>
-        <div class="menu-item"><a href="techSettings.html">Tech Settings</a>
-        </div>
+        <div id="currPage" class="menu-item"><a href="Dashboard.html">Dashboard</a></div>
+        <div class="menu-item"><a href="techSettings.html">Tech Settings</a></div>
         <div class="menu-item"><a href="customCommands.html">Custom Commands</a></div>
         <div class="menu-item"><a href="PersonalCommands.html">Personal Commands</a></div>
     </div>

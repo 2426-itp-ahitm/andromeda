@@ -17,6 +17,7 @@
             overflow: hidden;
         }
 
+       
         .sidebar {
             width: 300px;
             background-color: #1e1b33;
@@ -44,29 +45,14 @@
             transition: background 0.3s;
         }
 
-        .sidebar img {
-            width: 80px;
-            margin-bottom: 20px;
+        #currPage {
+            background-color: #5c5470;
         }
 
-        .sidebar a {
+        a {
             text-decoration: none;
             color: white;
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            width: 80%;
-            font-size: 18px;
         }
-
-        .sidebar a.active {
-            background: #6c65ad;
-        }
-
-        .sidebar a:hover {
-            background: #57536d;
-        }
-
         .content {
             flex-grow: 1;
             padding: 20px 0 20px 20px;
@@ -157,9 +143,8 @@
             <img width="100vw" height="100vw" src="img/logo2.png" alt="logo">
         </div>
         <div class="menu-item"><a href="Dashboard.html">Dashboard</a></div>
-        <div class="menu-item"><a href="techSettings.html">Tech Settings</a>
-        </div>
-        <div class="menu-item"><a href="customCommands.html">Custom Commands </a></div>
+        <div class="menu-item"><a href="techSettings.html">Tech Settings</a></div>
+        <div class="menu-item"><a href="customCommands.html">Custom Commands</a></div>
         <div id="currPage" class="menu-item"><a href="PersonalCommands.html">Personal Commands</a></div>
     </div>
 
