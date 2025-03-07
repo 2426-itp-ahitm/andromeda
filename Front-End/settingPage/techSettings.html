@@ -12,16 +12,27 @@
             font-family: 'Comfortaa', sans-serif;
             margin: 0;
             display: flex;
+            background-color: #d3d3d3;
+
         }
-        table{
+
+        table {
             width: 100%;
             padding: auto;
         }
+
         .sidebar {
             width: 300px;
             background-color: #1e1b33;
             color: white;
+            height: 200vw;
+            overflow: hidden;
             padding: 20px;
+            position: fixed;
+            /* Fixiert die Sidebar beim Scrollen */
+            top: 0;
+            left: 0;
+            overflow-y: auto;
         }
 
         .sidebar h2 {
@@ -37,35 +48,41 @@
             transition: background 0.3s;
         }
 
-        .menu-item:hover {
+        #currPage {
             background-color: #5c5470;
         }
 
         .content {
+            margin-left: 30%;
+            /* Verhindert Überlappung mit der Sidebar */
+            padding: 20px;
             flex-grow: 1;
-            background-color: #d3d3d3;
             padding-left: 20px;
         }
 
         .card {
             background: white;
-            padding: 10px;
+            padding: 5px 5px 0px 5px;
             border-radius: 10px;
-            margin: 10px;
+            margin: 5px 10px 5px 10px;
             display: inline-block;
             width: 300px;
-            height: 60px;
+            height: 100%;
             position: relative;
+            text-align: left;
         }
 
         .button {
-            background-color: #e0e0e0;
+            background-color: #ffffff;
+            width: 100px;
             border: #1e1b3300;
             border-radius: 10px;
             padding: 10px 15px;
             cursor: pointer;
+            margin: auto;
         }
-        .download_button{
+
+        .download_button {
             background-color: #e0e0e0;
             border: #1e1b3300;
             border-radius: 10px;
@@ -79,6 +96,7 @@
             align-items: center;
             gap: 5px;
         }
+
         .switch {
             position: absolute;
             top: 50%;
@@ -120,9 +138,9 @@
             transition: 0.3s;
         }
 
-        
 
-        input:checked + .slider:before {
+
+        input:checked+.slider:before {
             content: "ON";
             transform: translateX(100%);
         }
@@ -139,7 +157,28 @@
             font-size: 16px;
             border: solid transparent;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin: auto auto 10px auto;
+        }
+
+        pre {
+            font-family: 'Comfortaa', sans-serif;
+            font-size: large;
+            margin-top: 10px;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+            /* Vertikal zentrieren */
+        }
+
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        #loadMore_button {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -149,10 +188,10 @@
         <div style="text-align: center;">
             <img width="100vw" height="100vw" src="img/logo2.png" alt="logo">
         </div>
-        <div class="menu-item">Dashboard</div>
-        <div class="menu-item">Tech Settings</div>
-        <div class="menu-item">Custom Commands Option</div>
-        <div class="menu-item">Personal Commands</div>
+        <div class="menu-item"><a href="Dashboard.html">Dashboard</a></div>
+        <div id="currPage" class="menu-item"><a href="techSettings.html">Tech Settings</a></div>
+        <div class="menu-item"><a href="customCommands.html">Custom Commands Option</a></div>
+        <div class="menu-item"><a href="personalCommands.html">Personal Commands</a></div>
     </div>
     <div class="content">
         <h2>Language</h2>
@@ -167,14 +206,16 @@
         <table>
             <tr>
                 <td>
-                    <div class="card">Model1<br><pre>18 GB            80%</pre>
+                    <div class="card">Model1<br>
+                        <pre>18 GB            80%</pre>
                         <div class="card-actions">
                             <button class="download_button">Download</button>
                         </div>
                     </div>
                 </td>
                 <td>
-                    <div class="card">Model2<br>25 GB<br>40%
+                    <div class="card">Model2<br>
+                        <pre>25 GB            40%</pre>
                         <div class="card-actions">
                             <label class="switch">
                                 <input type="checkbox" checked>
@@ -187,7 +228,8 @@
 
             <tr>
                 <td>
-                    <div class="card">Model3<br>28 GB<br>60%
+                    <div class="card">Model3<br>
+                        <pre>28 GB            60%</pre>
                         <div class="card-actions">
                             <label class="switch">
                                 <input type="checkbox">
@@ -197,7 +239,8 @@
                     </div>
                 </td>
                 <td>
-                    <div class="card">Model4<br>32 GB<br>25%
+                    <div class="card">Model4<br>
+                        <pre>32 GB            25%</pre>
                         <div class="card-actions">
                             <button class="download_button">Download</button>
                         </div>
@@ -206,7 +249,8 @@
             </tr>
             <tr>
                 <td>
-                    <div class="card">Model5<br>14 GB<br>10%
+                    <div class="card">Model5<br>
+                        <pre>14 GB            10%</pre>
                         <div class="card-actions">
                             <label class="switch">
                                 <input type="checkbox">
@@ -216,7 +260,8 @@
                     </div>
                 </td>
                 <td>
-                    <div class="card">Model6<br>8 GB<br>30%
+                    <div class="card">Model6<br>
+                        <pre>8 GB            30%</pre>
                         <div class="card-actions">
                             <label class="switch">
                                 <input type="checkbox" checked>
@@ -228,14 +273,16 @@
             </tr>
             <tr>
                 <td>
-                    <div class="card">Model7<br>56 GB<br>85%
+                    <div class="card">Model7<br>
+                        <pre>56 GB            85%</pre>
                         <div class="card-actions">
                             <button class="download_button">Download</button>
                         </div>
                     </div>
                 </td>
                 <td>
-                    <div class="card">Model8<br>39 GB<br>90%
+                    <div class="card">Model8<br>
+                        <pre>39 GB            90%</pre>
                         <div class="card-actions">
                             <button class="download_button">Download</button>
                         </div>
@@ -245,7 +292,7 @@
         </table>
 
         <br>
-        <button class="button">Load More</button>
+        <div id="loadMore_button"><button class="button">Load More</button></div>
     </div>
 </body>
 

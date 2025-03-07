@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
     <title>Dashboard</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Comfortaa:wght@300;400&display=swap');
+
         body {
-            display: flex;
+            font-family: 'Comfortaa', sans-serif;
             margin: 0;
-            font-family: Arial, sans-serif;
-            height: 100vh;
+            display: flex;
             background-color: #d3d3d3;
+
         }
+
+        table {
+            width: 100%;
+            padding: auto;
+        }
+
         .sidebar {
-            width: 250px;
+            width: 300px;
             background-color: #1e1b33;
             color: white;
+            height: 200vw;
+            overflow: hidden;
             padding: 20px;
-            height: 100vh;
+            position: fixed;
+            /* Fixiert die Sidebar beim Scrollen */
+            top: 0;
+            left: 0;
+            overflow-y: auto;
         }
+
         .sidebar h2 {
             text-align: center;
         }
+
         .menu-item {
+            background-color: transparent;
             padding: 15px;
+            margin: 10px 0;
             border-radius: 5px;
             cursor: pointer;
-            background-color: #5c5470;
-            margin-bottom: 10px;
-            text-align: center;
+            transition: background 0.3s;
         }
+
+        #currPage {
+            background-color: #5c5470;
+        }
+
         .content {
             flex-grow: 1;
             display: flex;
@@ -38,6 +61,7 @@
             justify-content: center;
             position: relative;
         }
+
         .editor-container {
             background: white;
             border-radius: 10px;
@@ -50,7 +74,10 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            margin: 5% 10% 0% 0%;
+
         }
+
         .editor-header {
             background-color: #8882be;
             height: 50px;
@@ -61,11 +88,13 @@
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
+
         .editor-header img {
             width: 24px;
             height: 24px;
             cursor: pointer;
         }
+
         .editor-area {
             flex-grow: 1;
             padding: 20px;
@@ -76,13 +105,18 @@
             width: 100%;
             box-sizing: border-box;
         }
+
         .question-mark {
             position: absolute;
             right: 10px;
             top: 60px;
             font-size: 24px;
             cursor: pointer;
+            width: 4vw;
+            height: 4vw;
+            background-color: lightgrey;
         }
+
         .buttons {
             position: absolute;
             bottom: 10px;
@@ -90,6 +124,7 @@
             display: flex;
             gap: 10px;
         }
+
         .button {
             width: 40px;
             height: 40px;
@@ -101,48 +136,82 @@
             border: none;
             border-radius: 5px;
         }
+
         .close-button {
             background-color: #888;
             color: white;
         }
+
         .confirm-button {
             background-color: #fff;
             border: 1px solid #888;
             color: black;
         }
+
         .hidden {
             display: none;
         }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #popup {
+            background-color: white;
+            border: solid #8882be;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            padding: 5% 5% 5% 5%;
+            margin: auto;
+            display: none;
+            text-align: center;
+        }
     </style>
     <script>
+
         function closeEditor() {
+            document.getElementById('popup').style = "display: inline"
+            document.getElementById("popup").innerHTML =
+                `<div><h2>Added command failed</h2><button class="button close-button"><a href="customCommands.html">✖</a></button></div>`
+
+
             document.querySelector('.editor-container').classList.add('hidden');
         }
         function confirmAction() {
+            document.getElementById('popup').style = "display: inline"
+            document.getElementById("popup").innerHTML =
+                `<div><h2>Command successfully added</h2><button class="button close-button"><a href="customCommands.html">✖</a></button></div>`
+
             document.querySelector('.editor-container').classList.add('hidden');
-            // Hier könnte eine weitere Aktion hinzugefügt werden
         }
     </script>
 </head>
+
 <body>
     <div class="sidebar">
-        <h2>Logo</h2>
-        <div class="menu-item">Dashboard</div>
-        <div class="menu-item">Tech Settings</div>
-        <div class="menu-item">Custom Commands Option</div>
+        <div style="text-align: center;">
+            <img width="100vw" height="100vw" src="img/logo2.png" alt="logo">
+        </div>
+        <div class="menu-item"><a href="Dashboard.html">Dashboard</a></div>
+        <div class="menu-item"><a href="techSettings.html">Tech Settings</a></div>
+        <div id="currPage" class="menu-item"><a href="customCommands.html">Custom Commands Option</a></div>
+        <div class="menu-item"><a href="personalCommands.html">Personal Commands</a></div>
     </div>
     <div class="content">
         <div class="editor-container">
             <div class="editor-header">
-                <img src="folder-icon.png" alt="Folder">
+                <img src="img/folder.png" alt="Folder">
             </div>
-            <div class="question-mark">?</div>
-            <textarea class="editor-area" placeholder="Write here..."></textarea>
+            <!--<div class="question-mark">?</div>-->
+            <textarea class="editor-area" placeholder="Write a new command"></textarea>
             <div class="buttons">
                 <button class="button close-button" onclick="closeEditor()">✖</button>
                 <button class="button confirm-button" onclick="confirmAction()">✔</button>
             </div>
         </div>
+        <div id="popup"></div>
     </div>
 </body>
+
 </html>
