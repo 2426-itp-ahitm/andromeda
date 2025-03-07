@@ -7,7 +7,6 @@
 
 ## **Dateiverwaltung**
 
-- 📂 **Verschiebe** Datei (A) nach (B)
 - 🔍 **Suche** Datei (A)
 - 📦 **Komprimiere** Datei (A)
 - 📁 **Geh in Verzeichnis** (A)
@@ -47,4 +46,4 @@
 
 ## **Sonstiges**
 
-- 📸 **Mache einen Screenshot von** (A)
+- ###### 📸 **Mache einen Screenshot von** (A)

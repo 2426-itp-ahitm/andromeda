@@ -22,9 +22,10 @@ class ClientRunner:
                 response = self.response_associator.generateResponse(speech_text)
                 print(f"Analyzed Response: {response}")
                 if response == 0 or response == "0":
-                    chatresponse = self.chat_responder.generateResponse(speech_text)
-                    self.tts.say(chatresponse)
-                    print(chatresponse)
+                    #chatresponse = self.chat_responder.generateResponse(speech_text)
+                    #self.tts.say(chatresponse)
+                    #print(chatresponse)
+                    print("this feature was removed due to stupid reasoning")
                 else: 
                     response_parts = response.split(", ")
                     response_number = response_parts[0]
