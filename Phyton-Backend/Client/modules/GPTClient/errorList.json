@@ -1,0 +1,126 @@
+[
+    {
+        "prompt": "entstumme die audio",
+        "number": "17"
+    },
+    {
+        "prompt": "schalte andromeda aus ",
+        "number": "11"
+    },
+    {
+        "prompt": "öffne spotify",
+        "number": "3, spotify"
+    },
+    {
+        "prompt": "starte spotify",
+        "number": "3, spotify"
+    },
+    {
+        "prompt": "öffne powerpoint",
+        "number": "3, powerpoint"
+    },
+    {
+        "prompt": "starte powerpoint",
+        "number": "3, powerpoint"
+    },
+    {
+        "prompt": "öffne epic games",
+        "number": "3, epic games"
+    },
+    {
+        "prompt": "starte epic games",
+        "number": "3, epic games"
+    },
+    {
+        "prompt": "entstumme die audio",
+        "number": "17"
+    },
+    {
+        "prompt": "entstumme die audio",
+        "number": "17"
+    },
+    {
+        "prompt": "laustärke auf 50%",
+        "number": "16, 50%"
+    },
+    {
+        "prompt": "lautstärke hoch",
+        "number": "21"
+    },
+    {
+        "prompt": "helligkeit hoch",
+        "number": "19"
+    },
+    {
+        "prompt": "Helligkeit max",
+        "number": "18, max"
+    },
+    {
+        "prompt": "Helligkeit min",
+        "number": "18,min"
+    },
+    {
+        "prompt": "laustärke max",
+        "number": "16, max"
+    },
+    {
+        "prompt": "laustärke min",
+        "number": "16,min"
+    },
+    {
+        "prompt": "Mache das Fenster größer",
+        "number": "14"
+    },
+    {
+        "prompt": "bitte herunterfahren",
+        "number": "2"
+    },
+    {
+        "prompt": "fahre die Helligkeit herunter",
+        "number": "19"
+    },
+    {
+        "prompt": "erhöhe die Laute",
+        "number": "21"
+    },
+    {
+        "prompt": "mach spotify fullscreen",
+        "number": "14, spotify"
+    },
+    {
+        "prompt": "mache einen screenshot ",
+        "number": "23"
+    },
+    {
+        "prompt": "spotify auf fullscreen",
+        "number": "14, spotify"
+    },
+    {
+        "prompt": "nächstes lädt ",
+        "number": "24"
+    },
+    {
+        "prompt": "spiel den song ",
+        "number": "6"
+    },
+    {
+        "prompt": "pause ",
+        "number": "7"
+    },
+    {
+        "prompt": "play",
+        "number": "6"
+    },
+    {
+        "prompt": "weiter",
+        "number": "24"
+    },
+    {
+        "prompt": "zurück",
+        "number": "25"
+    },
+    {
+        "prompt": "Finde Schule",
+        "number": "10, Schule"
+    }
+]

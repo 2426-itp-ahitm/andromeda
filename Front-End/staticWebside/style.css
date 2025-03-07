@@ -62,6 +62,99 @@ p {
 
 
 
+/*nav*/
+nav {
+    background-color: var(--accent-color);
+    display: grid;
+    grid-template-columns: 75%  25%;
+    color: var(--background-color);
+    height: 2.5vw;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 0 0 0.5vh 0;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+a h1 {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--background-color);
+}
+
+#smallLogo {
+    width: 2vw;
+}
+
+#BigLogo {
+    width: 25vw;
+}
+
+
+/*Section*/
+
+
+
+.rightSection {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.leftSection {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.sildeText {
+    width: 40vw;
+    height: 40vh;
+    margin: auto;
+    background-color: #242038a6;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.sildeText p {
+    color: #F9F6F4;
+    font-size: 4vh;
+    text-align: center;
+    margin: 0; 
+    padding: 0; 
+}
+
+.slideHeadline {
+    margin: auto auto auto 0;
+    background-color: #f9f6f4a6;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    text-shadow: 0 1px 3px var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slideHeadline h2 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0%;
+}
+
+#section0 {
+    color: #242038;
+}
+
+.leftSection,
+.rightSection {
+    height: 100vh;
+}
+
 /*Standard tags*/
 a {
     text-decoration: none;
@@ -69,3 +162,72 @@ a {
 
 
 /*footer*/
+
+footer {
+    background-color: var(--primary-color);
+    display: grid;
+    height: 100%;
+    grid-template-columns: 25% 20% 20% 30%;
+    padding: 5%;
+}
+
+footer div a {
+    color: var(--background-color);
+}
+
+footer div h1 {
+    color: var(--background-color)
+}
+
+footer div h3 {
+    color: var(--background-color)
+}
+
+footer div p {
+    color: var(--background-color)
+}
+
+
+.rocket {
+    width: 100px;
+    height: 100px;
+    background: url('img/img.png') no-repeat center/contain;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    animation: rocketFlight 10s linear infinite;
+    z-index: 10;
+}
+
+@keyframes rocketFlight {
+    0% {
+        top: 10%;
+        left: 10%;
+        transform: rotate(0deg);
+    }
+
+    25% {
+        top: 25%;
+        /* Erste Section */
+        left: 50%;
+    }
+
+    50% {
+        top: 50%;
+        /* Zweite Section */
+        left: 70%;
+    }
+
+    75% {
+        top: 75%;
+        /* Dritte Section */
+        left: 30%;
+    }
+
+    100% {
+        top: 100%;
+        /* Vierte Section */
+        left: 50%;
+        transform: rotate(360deg);
+    }
+}

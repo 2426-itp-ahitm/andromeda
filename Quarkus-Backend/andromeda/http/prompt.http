@@ -128,6 +128,119 @@ Content-Type: application/json
   "userId": 1,
   "content": "Schalte dich selbst aus"
 }
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+"userId": 1,
+"content": "öffne das Fenster (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "schließe das Fenster (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "maximiere das Fenster (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "minimiere das Fenster (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "setze die Lautstärke auf (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+"userId": 1,
+"content": "stumme die Audio"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+"userId": 1,
+"content": "setze die Helligkeit auf (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Erhöhe die Helligkeit um (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Mach die Helligkeit niedriger um (A)"
+}
+###
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Erhöhe die Lautstärke um (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+"userId": 1,
+"content": "Mach die Lautstärke niedriger um (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Mache einen Screenshot von (A)"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Nächstes Lied"
+}
+###
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "content": "Lied zurück"
+}
 
 ###
 GET http://localhost:8080/api/andromeda/prompts/listAll
