@@ -3,6 +3,7 @@ import json
 import queue
 import sounddevice as sd
 from queue import Queue
+import sys
 from vosk import Model, KaldiRecognizer
 from helpers.txtWriter import txtWriter
 from helpers.textFormatter import TextFormatter
@@ -29,7 +30,7 @@ class SpeechRecognizer:
     def recognize_speech(self):
         with sd.RawInputStream(samplerate=16000, blocksize=4000, dtype='int16', channels=1, callback=self.callback):
             print(f"Listening for the keyword '{self.keyword}'...")
-
+            
             while True:
                 data = self.audio_queue.get()
                 if data is None:
@@ -55,7 +56,7 @@ class SpeechRecognizer:
                         partial_result = self.recognizer.PartialResult()
                         partial_dict = json.loads(partial_result)
                         partial_text = partial_dict.get("partial", "").lower()
-                        #print(f"Partial Text: {partial_result}")
+                        print(f"Partial Text: {partial_result}")
                         if not self.keyword_detected and self.keyword in partial_text:
                             print(f"Keyword '{self.keyword}' detected in partial result! Now actively listening...")
                             self.keyword_detected = True

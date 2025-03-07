@@ -30,14 +30,14 @@ class findFileOrFolder:
     
     def run(self, params):
         name = params[0]
-        if name in self.cache:
-            path = self.cache[name]
+        if name.lower() in self.cache:
+            path = self.cache[name.lower()]
             if os.path.exists(path) or path.startswith("shell:"):
                 subprocess.run(["explorer", "/select,", path])
                 print(f"Opened from cache: {path}")
                 return
             else:
-                del self.cache[name]  # Remove invalid path
+                del self.cache[name.lower()]  # Remove invalid path
                 self.save_cache()
         
         # Check special folders
@@ -66,7 +66,7 @@ class findFileOrFolder:
             for file in files:
                 if name in file:  # Matches if the name is part of the file name
                     file_path = os.path.join(root, file)
-                    self.cache[name] = file_path
+                    self.cache[name.lower()] = file_path
                     self.save_cache()
                     subprocess.run(["explorer", "/select,", file_path])
                     print(f"Opened file location: {file_path}")
