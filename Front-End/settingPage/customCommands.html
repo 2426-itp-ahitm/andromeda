@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background-color: #d3d3d3;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #1e1b33;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+        }
+        .sidebar h2 {
+            text-align: center;
+        }
+        .menu-item {
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #5c5470;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .editor-container {
+            background: white;
+            border-radius: 10px;
+            width: 800px;
+            height: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .editor-header {
+            background-color: #8882be;
+            height: 50px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .editor-header img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+        .editor-area {
+            flex-grow: 1;
+            padding: 20px;
+            font-size: 18px;
+            outline: none;
+            border: none;
+            resize: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .question-mark {
+            position: absolute;
+            right: 10px;
+            top: 60px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .buttons {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .close-button {
+            background-color: #888;
+            color: white;
+        }
+        .confirm-button {
+            background-color: #fff;
+            border: 1px solid #888;
+            color: black;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function closeEditor() {
+            document.querySelector('.editor-container').classList.add('hidden');
+        }
+        function confirmAction() {
+            document.querySelector('.editor-container').classList.add('hidden');
+            // Hier könnte eine weitere Aktion hinzugefügt werden
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Logo</h2>
+        <div class="menu-item">Dashboard</div>
+        <div class="menu-item">Tech Settings</div>
+        <div class="menu-item">Custom Commands Option</div>
+    </div>
+    <div class="content">
+        <div class="editor-container">
+            <div class="editor-header">
+                <img src="folder-icon.png" alt="Folder">
+            </div>
+            <div class="question-mark">?</div>
+            <textarea class="editor-area" placeholder="Write here..."></textarea>
+            <div class="buttons">
+                <button class="button close-button" onclick="closeEditor()">✖</button>
+                <button class="button confirm-button" onclick="confirmAction()">✔</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
