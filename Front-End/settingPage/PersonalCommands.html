@@ -1,49 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personalpage</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Comfortaa:wght@300;400&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Comfortaa', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             background: #d3d3d3;
             overflow: hidden;
         }
+
         .sidebar {
-            width: 260px;
-            background: #2c2a44;
+            width: 300px;
+            background-color: #1e1b33;
             color: white;
-            height: 100vh;
-            padding-top: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
+            height: 200vw;
+            overflow: hidden;
+            padding: 20px;
+            position: fixed;
+            /* Fixiert die Sidebar beim Scrollen */
+            top: 0;
+            left: 0;
+            overflow-y: auto;
         }
+
+        .sidebar h2 {
+            text-align: center;
+        }
+
+        .menu-item {
+            background-color: transparent;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
         .sidebar img {
             width: 80px;
             margin-bottom: 20px;
         }
+
         .sidebar a {
             text-decoration: none;
             color: white;
             padding: 12px;
-            background: #44405a;
             border-radius: 10px;
             text-align: center;
             width: 80%;
             font-size: 18px;
         }
+
         .sidebar a.active {
             background: #6c65ad;
         }
+
         .sidebar a:hover {
             background: #57536d;
         }
+
         .content {
             flex-grow: 1;
             padding: 20px 0 20px 20px;
@@ -54,6 +77,7 @@
             overflow-y: auto;
             height: 100vh;
         }
+
         .card {
             background: white;
             padding: 20px;
@@ -61,12 +85,16 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             font-size: 16px;
         }
-        .card h2, .card p {
+
+        .card h2,
+        .card p {
             margin: 10px 0;
         }
+
         .card p {
             line-height: 1.6;
         }
+
         .dropdown {
             position: relative;
             cursor: pointer;
@@ -79,7 +107,9 @@
             align-items: center;
             max-width: 400px;
             font-size: 16px;
+            margin-left: 20%;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -93,14 +123,19 @@
             z-index: 10;
             flex-direction: column;
         }
+
         .dropdown-content a {
             display: block;
             padding: 12px;
             text-decoration: none;
             color: black;
         }
+
         .dropdown-content a:hover {
             background-color: #f1f1f1;
+        }
+        .command-list{
+            margin-left: 20%;
         }
         .command-list p {
             background: #f5f5f5;
@@ -115,17 +150,23 @@
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
-        <img src="img/logo.png" alt="Logo">
-        <a href="Dashboard.html">Dashboard</a>
-        <a href="TechSettings.html">Tech Settings</a>
-        <a href="CostumCommand.html">Custom Commands option</a>
-        <a href="PersonalCommands.html" style="background:#6c65ad;">Personal Commands</a>
+        <div style="text-align: center;">
+            <img width="100vw" height="100vw" src="img/logo2.png" alt="logo">
+        </div>
+        <div class="menu-item"><a href="Dashboard.html">Dashboard</a></div>
+        <div class="menu-item"><a href="techSettings.html">Tech Settings</a>
+        </div>
+        <div class="menu-item"><a href="customCommands.html">Custom Commands </a></div>
+        <div id="currPage" class="menu-item"><a href="PersonalCommands.html">Personal Commands</a></div>
     </div>
 
     <div class="content">
-        <h1>Personal Commands</h1>
+        <div class="command-list">
+            <h1>Personal Commands</h1>
+        </div>
         <div class="dropdown" onclick="toggleDropdown()">
             <span>Select:</span>
             <span>personalized</span>
@@ -155,7 +196,7 @@
             dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
         }
 
-        document.addEventListener("click", function(event) {
+        document.addEventListener("click", function (event) {
             let dropdown = document.querySelector(".dropdown");
             let content = document.querySelector(".dropdown-content");
             if (!dropdown.contains(event.target)) {
@@ -164,4 +205,5 @@
         });
     </script>
 </body>
+
 </html>
