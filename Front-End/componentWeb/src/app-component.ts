@@ -1,12 +1,12 @@
 import { html, render } from "lit-html"
-
+import "./sites/GlobalComponents/navComponent/nav-component"
 class AppComponent extends HTMLElement {
     connectedCallback() {
         render(this.content(), this)
     }
     content() {
         return html`
-                <p>AppComponent</p>
+                <nav-component></nav-component>
             `
     }
 }
