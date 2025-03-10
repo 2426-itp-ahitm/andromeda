@@ -1,16 +1,32 @@
-import { html, render } from "lit-html"
-import "./sites/GlobalComponents/navComponent/nav-component"
-import "./sites/GlobalComponents/mainViewerComponent/main-viewer-component"
+import { html, render } from "lit-html";
+import "../src/sites/GlobalComponents/navComponent/nav-component";
+import "../src/sites/GlobalComponents/mainViewerComponent/main-viewer-component";
+import { router } from "./../../componentWeb/src/router/router"; // Import the router
+import "../src/sites/DashboardComponents/dashboardComponent/dashboard-component"; // Import the new components
+import "../src/sites/TechSettingsComponents/techSettingsComponent/tech-settings-component";
+import "../src/sites/CustomCommandsComponents/customCommandsComponent/custom-command-component";
+import "../src/sites/PersonalCommandsComponents/personalCommandsComponent/personal-command-component";
+
 class AppComponent extends HTMLElement {
     connectedCallback() {
-        render(this.content(), this)
+        this.render();
     }
-    content() {
-        return html`
-                <nav-component></nav-component>
-                <main-viewer-component><h1>asdasdad</h1></main-viewer-component>
-            `
-    }
-}
-customElements.define("app-component", AppComponent)
 
+    private render() {
+        render(
+            html`
+                <nav-component .navigate="${this.navigate}"></nav-component>
+                <main-viewer-component>
+                </main-viewer-component>
+            `,
+            this
+        );
+        router.render(); // Render initial route
+    }
+
+    private navigate = (event: Event, path: string) => {
+        router.navigate(event, path);
+    };
+}
+
+customElements.define("app-component", AppComponent);
