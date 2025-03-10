@@ -53,11 +53,15 @@
         }
 
         .content {
-            margin-left: 30%;
-            /* Verhindert Überlappung mit der Sidebar */
-            padding: 20px;
             flex-grow: 1;
-            padding-left: 20px;
+            padding: 20px;
+            margin-left: 30%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            height: 100vh;
+            pointer-events: none;
         }
 
         .card {
