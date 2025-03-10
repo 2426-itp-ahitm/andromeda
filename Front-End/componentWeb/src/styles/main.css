@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Comfortaa:wght@300;400&display=swap');
+
+body {
+    font-family: 'Comfortaa', sans-serif;
+    margin: 0;
+    display: flex;
+    background-color: #d3d3d3;
+
+}
+
+table {
+    width: 100%;
+    padding: auto;
+}
+
+.sidebar {
+    width: 300px;
+    background-color: #1e1b33;
+    color: white;
+    height: 200vw;
+    overflow: hidden;
+    padding: 20px;
+    position: fixed;
+    /* Fixiert die Sidebar beim Scrollen */
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.menu-item {
+    background-color: transparent;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#currPage {
+    background-color: #5c5470;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
