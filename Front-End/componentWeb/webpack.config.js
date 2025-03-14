@@ -38,6 +38,7 @@ const config = {
             patterns: [
                 {from: "./node_modules/@picocss/pico/css/pico.min.css", to: "styles"},
                 {from: "./src/styles/dashboard.css", to: "dashboard"},
+                {from: "./src/styles/techSettings.css", to: "techSettings"},
                 {from: "images", to: "images"}
             ]
         }),

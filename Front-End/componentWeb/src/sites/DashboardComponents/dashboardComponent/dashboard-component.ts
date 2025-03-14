@@ -15,7 +15,7 @@ export class DashboardComponent extends LitElement {
 
     render() {
         return html`
-        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/dashboard/dashboard.css">
         <link rel="stylesheet" href="/styles/style.css">
         <h1 style="color: black;">Welcome to Andromeda!</h1>
 

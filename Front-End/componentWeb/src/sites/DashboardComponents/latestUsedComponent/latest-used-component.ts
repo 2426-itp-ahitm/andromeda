@@ -13,7 +13,7 @@ export class LatestUsedComponent extends LitElement {
 
     render() {
         return html`
-        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/dashboard/dashboard.css">
         <link rel="stylesheet" href="/styles/style.css">
             <h2>Latest Used</h2>
             <p><strong>Today</strong></p>

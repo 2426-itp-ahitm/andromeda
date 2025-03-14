@@ -17,7 +17,7 @@ class AppComponent extends HTMLElement {
             html`
                 <nav-component></nav-component>
                 <main-viewer-component>
-                   <dashboard-component></dashboard-component>
+                   <tech-settings-component></tech-settings-component>
                 </main-viewer-component>
             `,
             this

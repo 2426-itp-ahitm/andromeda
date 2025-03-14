@@ -10,7 +10,6 @@
     height: 100%;
     position: relative;
     text-align: left;
-    color: black;
 }
 
 .button {
@@ -21,7 +20,6 @@
     padding: 10px 15px;
     cursor: pointer;
     margin: auto;
-    color: black;
 }
 
 .download_button {
@@ -37,7 +35,6 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: black;
 }
 
 .switch {

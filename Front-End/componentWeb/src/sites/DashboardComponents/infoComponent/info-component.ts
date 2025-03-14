@@ -13,7 +13,7 @@ export class InfoComponent extends LitElement {
 
     render() {
         return html`
-        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/dashboard/dashboard.css">
         <link rel="stylesheet" href="/styles/style.css">
             <h2>Contact us by Problems</h2>
             <p><strong>E-Mail:</strong> andromeda@gmail.com</p>
