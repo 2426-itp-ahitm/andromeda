@@ -1,11 +1,4 @@
 
-.content {
-    margin-left: 30%;
-    /* Verhindert Überlappung mit der Sidebar */
-    padding: 20px;
-    flex-grow: 1;
-    padding-left: 20px;
-}
 
 .card {
     background: white;

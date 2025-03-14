@@ -15,8 +15,9 @@ class AppComponent extends HTMLElement {
     private render() {
         render(
             html`
-                <nav-component .navigate="${this.navigate}"></nav-component>
+                <nav-component></nav-component>
                 <main-viewer-component>
+                   <dashboard-component></dashboard-component>
                 </main-viewer-component>
             `,
             this
@@ -24,9 +25,6 @@ class AppComponent extends HTMLElement {
         router.render(); // Render initial route
     }
 
-    private navigate = (event: Event, path: string) => {
-        router.navigate(event, path);
-    };
 }
 
 customElements.define("app-component", AppComponent);

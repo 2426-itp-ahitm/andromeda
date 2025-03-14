@@ -37,6 +37,7 @@ const config = {
         new CopyWebpackPlugin({
             patterns: [
                 {from: "./node_modules/@picocss/pico/css/pico.min.css", to: "styles"},
+                {from: "./src/styles/dashboard.css", to: "dashboard"},
                 {from: "images", to: "images"}
             ]
         }),
@@ -58,8 +59,7 @@ const config = {
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
-            },
-
+            }
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],

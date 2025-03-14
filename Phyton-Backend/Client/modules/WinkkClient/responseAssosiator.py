@@ -19,7 +19,7 @@ class responseAssosiator():
             ["system", error_promt + str(self.errListBuilder.format_actions())]
         ]
     def generateResponse(self, user_input):
-        url = "https://nexusdev.winkk.ai/streamChat"
+        url = "https://dev.api.winkk.ai/streamChat"
         headers = {
             "api-key": key,  # Replace with your actual API key
             "Content-Type": "application/json"
