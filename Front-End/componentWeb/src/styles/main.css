@@ -52,7 +52,7 @@ a {
     gap: 20px;
     overflow-y: auto;
     height: 100vh;
-    width: calc(100% - 300px);
+    width: calc(100% - 137px);
     pointer-events: auto;
 }
 
