@@ -4354,7 +4354,7 @@ class AppComponent extends HTMLElement {
         (0,lit_html__WEBPACK_IMPORTED_MODULE_0__.render)((0,lit_html__WEBPACK_IMPORTED_MODULE_0__.html) `
                 <nav-component></nav-component>
                 <main-viewer-component>
-                    <dashboard-component></dashboard-component>
+                   <tech-settings-component></tech-settings-component>
                 </main-viewer-component>
             `, this);
         _componentWeb_src_router_router__WEBPACK_IMPORTED_MODULE_3__.router.render(); // Render initial route
@@ -4464,12 +4464,13 @@ __webpack_require__.r(__webpack_exports__);
 let DashboardComponent = class DashboardComponent extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
     render() {
         return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `
-        <link rel="stylesheet" href="./src/styles/dashboard.css">
-        <h1>Welcome to Andromeda!</h1>
+        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/styles/style.css">
+        <h1 style="color: black;">Welcome to Andromeda!</h1>
 
-        <latest-used-component></latest-used-component>
-        <microphone-component></microphone-component>
-        <info-component></info-component>
+        <latest-used-component class="card"></latest-used-component>
+        <microphone-component class="card"></microphone-component>
+        <info-component class="card"></info-component>
         
         
         `;
@@ -4509,12 +4510,12 @@ __webpack_require__.r(__webpack_exports__);
 let InfoComponent = class InfoComponent extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
     render() {
         return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `
-        <div class="card">
+        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/styles/style.css">
             <h2>Contact us by Problems</h2>
             <p><strong>E-Mail:</strong> andromeda@gmail.com</p>
             <p><strong>Telephone:</strong> +43 6603 210701</p>
             <p>Our Team member Gabriel Pabst is amused to help you!</p>
-        </div><br><br>
         
         `;
     }
@@ -4553,7 +4554,8 @@ __webpack_require__.r(__webpack_exports__);
 let LatestUsedComponent = class LatestUsedComponent extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
     render() {
         return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `
-        <div class="card">
+        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/styles/style.css">
             <h2>Latest Used</h2>
             <p><strong>Today</strong></p>
             <p>Delete the folder 'Documents/Old Files'</p>
@@ -4566,8 +4568,7 @@ let LatestUsedComponent = class LatestUsedComponent extends lit__WEBPACK_IMPORTE
             <p>Increase the volume to 80%</p>
             <p><strong>The previous 30 days</strong></p>
             <p>Show my current IP address</p>
-        </div>
-
+    
         
         `;
     }
@@ -4606,8 +4607,8 @@ __webpack_require__.r(__webpack_exports__);
 let MicrophoneComponent = class MicrophoneComponent extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
     render() {
         return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `
-
-        <div class="card">
+        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/styles/style.css">
             <h2>Microphone status</h2>
             <div class="dropdown" onclick="toggleDropdown()">
                 <span>Microphone</span>
@@ -4619,8 +4620,6 @@ let MicrophoneComponent = class MicrophoneComponent extends lit__WEBPACK_IMPORTE
                     <a href="#">Bluetooth-Microphone</a>
                 </div>
             </div>
-        </div>
-        
         `;
     }
 };
@@ -4767,6 +4766,186 @@ PersonalCommandComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
+/***/ "./src/sites/TechSettingsComponents/languageSelectComponent/language-select-component.ts":
+/*!***********************************************************************************************!*\
+  !*** ./src/sites/TechSettingsComponents/languageSelectComponent/language-select-component.ts ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LanguageSelectComponent: () => (/* binding */ LanguageSelectComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var lit_decorators_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/decorators.js */ "./node_modules/lit/decorators.js");
+
+
+
+let LanguageSelectComponent = class LanguageSelectComponent extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
+    render() {
+        return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `     
+        <link rel="stylesheet" href="./techSettings/techSettings.css">
+        <link rel="stylesheet" href="/styles/style.css">
+        <h2>Language</h2>
+        <select>
+            <option>German</option>
+            <option>Englisch</option>
+        </select>
+        `;
+    }
+};
+LanguageSelectComponent.styles = [
+    (0,lit__WEBPACK_IMPORTED_MODULE_0__.css) `
+            :host {
+                display: block;
+            }
+        `
+];
+LanguageSelectComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,lit_decorators_js__WEBPACK_IMPORTED_MODULE_1__.customElement)("language-select-component")
+], LanguageSelectComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/sites/TechSettingsComponents/modelInsallComponent/model-install-component.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/sites/TechSettingsComponents/modelInsallComponent/model-install-component.ts ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ModelInstallComponent: () => (/* binding */ ModelInstallComponent)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
+/* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
+/* harmony import */ var lit_decorators_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/decorators.js */ "./node_modules/lit/decorators.js");
+
+
+
+let ModelInstallComponent = class ModelInstallComponent extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
+    render() {
+        return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `
+        <link rel="stylesheet" href="./techSettings/techSettings.css">
+        <link rel="stylesheet" href="/styles/style.css">
+        <h2>Install Models</h2>
+        <select>
+            <option>Select:</option>
+        </select>
+        <table>
+            <tr>
+                <td>
+                    <div class="card">Model1<br>
+                        <pre>18 GB            80%</pre>
+                        <div class="card-actions">
+                            <button class="download_button">Download</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model2<br>
+                        <pre>25 GB            40%</pre>
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="card">Model3<br>
+                        <pre>28 GB            60%</pre>
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model4<br>
+                        <pre>32 GB            25%</pre>
+                        <div class="card-actions">
+                            <button class="download_button">Download</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="card">Model5<br>
+                        <pre>14 GB            10%</pre>
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model6<br>
+                        <pre>8 GB            30%</pre>
+                        <div class="card-actions">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="card">Model7<br>
+                        <pre>56 GB            85%</pre>
+                        <div class="card-actions">
+                            <button class="download_button">Download</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">Model8<br>
+                        <pre>39 GB            90%</pre>
+                        <div class="card-actions">
+                            <button class="download_button">Download</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <div id="loadMore_button"><button class="button">Load More</button></div>
+
+
+
+        `;
+    }
+};
+ModelInstallComponent.styles = [
+    (0,lit__WEBPACK_IMPORTED_MODULE_0__.css) `
+            :host {
+                display: block;
+            }
+        `
+];
+ModelInstallComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,lit_decorators_js__WEBPACK_IMPORTED_MODULE_1__.customElement)("model-install-component")
+], ModelInstallComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/sites/TechSettingsComponents/techSettingsComponent/tech-settings-component.ts":
 /*!*******************************************************************************************!*\
   !*** ./src/sites/TechSettingsComponents/techSettingsComponent/tech-settings-component.ts ***!
@@ -4777,15 +4956,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   TechSettingsComponent: () => (/* binding */ TechSettingsComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.mjs");
 /* harmony import */ var lit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lit */ "./node_modules/lit/index.js");
 /* harmony import */ var lit_decorators_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lit/decorators.js */ "./node_modules/lit/decorators.js");
+/* harmony import */ var _modelInsallComponent_model_install_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../modelInsallComponent/model-install-component */ "./src/sites/TechSettingsComponents/modelInsallComponent/model-install-component.ts");
+/* harmony import */ var _languageSelectComponent_language_select_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../languageSelectComponent/language-select-component */ "./src/sites/TechSettingsComponents/languageSelectComponent/language-select-component.ts");
+
+
 
 
 
 let TechSettingsComponent = class TechSettingsComponent extends lit__WEBPACK_IMPORTED_MODULE_0__.LitElement {
     render() {
-        return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `<p>tech settings is working</p>`;
+        return (0,lit__WEBPACK_IMPORTED_MODULE_0__.html) `
+        <link rel="stylesheet" href="./techSettings/techSettings.css">
+        <link rel="stylesheet" href="/styles/style.css">
+        <language-select-component></language-select-component>
+        <model-install-component></model-install-component>
+        `;
     }
 };
 TechSettingsComponent.styles = [
@@ -4795,7 +4983,7 @@ TechSettingsComponent.styles = [
             }
         `
 ];
-TechSettingsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+TechSettingsComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,lit_decorators_js__WEBPACK_IMPORTED_MODULE_1__.customElement)("tech-settings-component")
 ], TechSettingsComponent);
 

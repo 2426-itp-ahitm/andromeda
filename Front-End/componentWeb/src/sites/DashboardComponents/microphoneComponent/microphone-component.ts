@@ -13,7 +13,7 @@ export class MicrophoneComponent extends LitElement {
 
     render() {
         return html`
-        <link rel="stylesheet" href="./dashboard/dashboard.css">
+        <link rel="stylesheet" href="/dashboard/dashboard.css">
         <link rel="stylesheet" href="/styles/style.css">
             <h2>Microphone status</h2>
             <div class="dropdown" onclick="toggleDropdown()">
@@ -25,7 +25,7 @@ export class MicrophoneComponent extends LitElement {
                     <a href="#">USB-Microphone</a>
                     <a href="#">Bluetooth-Microphone</a>
                 </div>
-        
+            </div>
         `;
     }
 }
