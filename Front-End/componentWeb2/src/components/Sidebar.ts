@@ -37,9 +37,10 @@ export class Sidebar implements Component {
   }
 
   private dispatchNavigationEvent(page: string): void {
-    const event = new CustomEvent('pageChange', { 
+    const event = new CustomEvent('pageChange', {
       detail: { page },
-      bubbles: true 
+      bubbles: true,
+      composed: true
     });
     this.container?.dispatchEvent(event);
   }

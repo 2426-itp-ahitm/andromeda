@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -22,20 +23,26 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/[name][ext]'
-        }
+        type: 'asset/resource'
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg'],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      favicon: './src/assets/logo2.png'
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { 
+          from: 'src/assets',
+          to: 'assets'
+        }
+      ]
+    })
   ],
   devServer: {
     static: {
