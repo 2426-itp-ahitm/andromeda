@@ -4,16 +4,22 @@ import { TechSettings } from './components/TechSettings';
 import { CustomCommands } from './components/CustomCommands';
 import { PersonalCommands } from './components/PersonalCommands';
 import { Sidebar } from './components/Sidebar';
+import { Component } from './types';
 import './styles.css';
 
 interface Components {
-  [key: string]: any;
+  dashboard: Dashboard;
+  techSettings: TechSettings;
+  customCommands: CustomCommands;
+  personalCommands: PersonalCommands;
 }
 
-export class App {
+class App {
   private container: HTMLElement | null = null;
   private sidebar: Sidebar;
   private components: Components;
+  private currentPage: string = 'dashboard';
+  private isNavigating: boolean = false;
 
   constructor() {
     this.container = document.getElementById('app');
@@ -23,9 +29,6 @@ export class App {
     
     // Initialize sidebar
     this.sidebar = new Sidebar();
-    this.sidebar.connectedCallback();
-
-    // Initialize components
     this.components = {
       dashboard: new Dashboard(),
       techSettings: new TechSettings(),
@@ -33,54 +36,50 @@ export class App {
       personalCommands: new PersonalCommands()
     };
 
-    // Call connectedCallback for each component
+    // Initialize components
+    this.sidebar.connectedCallback();
     Object.values(this.components).forEach(component => {
       component.connectedCallback();
     });
 
-    this.init();
-  }
-
-  private getCurrentPage(): string {
-    const path = window.location.pathname;
-    switch (path) {
-      case '/':
-      case '/dashboard':
-        return 'dashboard';
-      case '/tech-settings':
-        return 'techSettings';
-      case '/custom-commands':
-        return 'customCommands';
-      case '/personal-commands':
-        return 'personalCommands';
-      default:
-        return 'dashboard';
-    }
-  }
-
-  private init(): void {
-    window.addEventListener('popstate', () => this.render());
-    this.container?.addEventListener('click', (e: Event) => {
-      const target = e.target as HTMLElement;
-      const link = target.closest('a');
-      if (link) {
-        e.preventDefault();
-        const href = link.getAttribute('href');
-        if (href) {
-          window.history.pushState({}, '', href);
-          this.render();
-        }
-      }
+    // Set up event listeners
+    document.addEventListener('pageChange', (e: Event) => {
+      const customEvent = e as CustomEvent;
+      this.handlePageChange(customEvent.detail.page);
     });
+
     this.render();
+  }
+
+  private handlePageChange(page: string): void {
+    if (this.isNavigating || page === this.currentPage) return;
+    
+    this.isNavigating = true;
+    this.currentPage = page;
+    this.sidebar.setCurrentPage(page);
+    this.render();
+    this.isNavigating = false;
+  }
+
+  private getCurrentComponent(): Component {
+    switch (this.currentPage) {
+      case 'dashboard':
+        return this.components.dashboard;
+      case 'tech-settings':
+        return this.components.techSettings;
+      case 'custom-commands':
+        return this.components.customCommands;
+      case 'personal-commands':
+        return this.components.personalCommands;
+      default:
+        return this.components.dashboard;
+    }
   }
 
   private render(): void {
     if (!this.container) return;
 
-    const currentPage = this.getCurrentPage();
-    const currentComponent = this.components[currentPage];
-    this.sidebar.setCurrentPage(currentPage);
+    const currentComponent = this.getCurrentComponent();
 
     const template = html`
       <div class="app">
@@ -95,4 +94,5 @@ export class App {
   }
 }
 
+// Start the application
 new App(); 
