@@ -1,4 +1,5 @@
 import { html } from 'lit-html';
+import logo2 from '../assets/logo2.png';
 
 export class Sidebar {
     constructor(currentPage) {
@@ -9,7 +10,7 @@ export class Sidebar {
         return html`
             <div class="sidebar">
                 <div style="text-align: center;">
-                    <img width="100" height="100" src="img/logo2.png" alt="logo">
+                    <img width="100" height="100" src="${logo2}" alt="logo">
                 </div>
                 <div class="menu-item" ?id="currPage"=${this.currentPage === 'dashboard'}>
                     <a href="/dashboard">Dashboard</a>
