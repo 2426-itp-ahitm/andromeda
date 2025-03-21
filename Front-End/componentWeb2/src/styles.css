@@ -1,0 +1,316 @@
+body {
+    font-family: 'Comfortaa', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background: #d3d3d3;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 300px;
+    background-color: #1e1b33;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.menu-item {
+    background-color: transparent;
+    padding: 0;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.menu-item a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.menu-item:hover {
+    background: #57536d;
+}
+
+.menu-item[id="currPage"] {
+    background-color: #5c5470;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 60px;
+    margin-left: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    overflow-y: auto;
+    height: 100vh;
+    width: calc(100% - 340px);
+}
+
+.content h1 {
+    font-size: 36px;
+    margin-bottom: 35px;
+    color: #000;
+    font-weight: normal;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    color: #000;
+}
+
+.card p {
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #000;
+}
+
+.dropdown {
+    position: relative;
+    cursor: pointer;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px;
+    font-size: 16px;
+}
+
+.dropdown span:first-child {
+    margin-right: 20px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    margin-top: 5px;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Tech Settings specific styles */
+.model-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.model-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.model-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.model-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.model-size {
+    color: #666;
+    font-size: 16px;
+}
+
+.model-progress {
+    color: #666;
+    margin-left: auto;
+    margin-right: 25px;
+    font-size: 16px;
+}
+
+.model-action {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background: #e0e0e0;
+    cursor: pointer;
+    font-size: 16px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.model-action.download {
+    background: #e0e0e0;
+}
+
+.model-action.on {
+    background: #5c5470;
+    color: white;
+}
+
+.model-action.off {
+    background: #e0e0e0;
+}
+
+/* Language selector */
+.language-select {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 35px;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
+}
+
+/* Custom Commands specific styles */
+.command-editor {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.command-editor-header {
+    background: #5c5470;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.command-editor-content {
+    padding: 25px;
+    min-height: 300px;
+}
+
+.command-editor-content textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.command-editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 20px;
+}
+
+.command-editor-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    min-width: 50px;
+}
+
+.command-editor-button.cancel {
+    background: #e0e0e0;
+}
+
+.command-editor-button.save {
+    background: #5c5470;
+    color: white;
+}
+
+/* Personal Commands specific styles */
+.command-select {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 35px;
+    font-size: 16px;
+    background: white;
+    cursor: pointer;
+}
+
+.command-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.command-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.command-item:hover {
+    background: #f5f5f5;
+} 
