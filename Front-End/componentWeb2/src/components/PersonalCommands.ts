@@ -1,5 +1,6 @@
 import { html, render } from 'lit-html';
 import { Component } from '../types';
+import { CommandService } from '../services/CommandService';
 
 interface Command {
     text: string;
@@ -9,32 +10,45 @@ interface Command {
 
 export class PersonalCommands implements Component {
     container: HTMLElement | null = null;
+    private commandService: CommandService;
     private selectedType: string = 'personalized';
     private searchQuery: string = '';
     private selectedCommands: Set<string> = new Set();
 
-    private commands = {
-        personalized: [
-            { text: 'Delete folder "Downloads"', category: 'file', enabled: true },
-            { text: 'Create new folder "Projects"', category: 'file', enabled: true },
-            { text: 'Start application "Visual Studio Code"', category: 'app', enabled: true },
-            { text: 'Set system volume to 50%', category: 'system', enabled: true },
-            { text: 'Open website "github.com"', category: 'web', enabled: true },
-            { text: 'Take screenshot of current window', category: 'system', enabled: true }
-        ],
-        default: [
-            { text: 'Open file explorer', category: 'file', enabled: true },
-            { text: 'Close all windows', category: 'app', enabled: true },
-            { text: 'Mute system volume', category: 'system', enabled: true },
-            { text: 'Open browser', category: 'web', enabled: true },
-            { text: 'Show desktop', category: 'system', enabled: true }
-        ]
+    private commands: { personalized: Command[], default: Command[] } = {
+        personalized: [],
+        default: []
     };
+
+    constructor() {
+        this.commandService = CommandService.getInstance();
+    }
 
     connectedCallback(): void {
         this.container = document.createElement('div');
+        this.initialize();
+    }
+
+    private async initialize() {
+        await this.loadCommands();
         this.render();
         this.setupEventListeners();
+    }
+
+    private async loadCommands() {
+        const allCommands = await this.commandService.getCommands();
+        this.commands = {
+            personalized: allCommands.filter(cmd => cmd.category === 'personalized').map(cmd => ({
+                text: cmd.name,
+                category: cmd.category,
+                enabled: true
+            })),
+            default: allCommands.filter(cmd => cmd.category === 'default').map(cmd => ({
+                text: cmd.name,
+                category: cmd.category,
+                enabled: true
+            }))
+        };
     }
 
     private setupEventListeners(): void {
