@@ -1,12 +1,7 @@
 import { html, render } from 'lit-html';
 import { Component } from '../types';
-
-interface Model {
-    name: string;
-    size: string;
-    status: 'active' | 'inactive';
-    language: string;
-}
+import { ModelService } from '../services/ModelService';
+import { Model } from '../interfaces/Model';
 
 export class TechSettings implements Component {
     container: HTMLElement | null = null;
@@ -24,11 +19,30 @@ export class TechSettings implements Component {
 
     private languages: string[] = ['all', ...new Set(this.models.map(m => m.language))];
 
+    private modelService: ModelService;
+
+    constructor() {
+        this.modelService = ModelService.getInstance();
+    }
+
     connectedCallback(): void {
         this.container = document.createElement('div');
+        this.initialize();
+    }
+
+    private async initialize() {
+        await this.loadModels();
         this.render();
         this.setupEventListeners();
     }
+
+    private async loadModels() {
+        const allModels = await this.modelService.getModels();
+        this.models = allModels;
+    }
+
+
+
 
     private setupEventListeners(): void {
         // Search listener
