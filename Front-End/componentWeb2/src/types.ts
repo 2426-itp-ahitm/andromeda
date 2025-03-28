@@ -10,8 +10,3 @@ export interface Command {
   type: string;
 }
 
-export interface Component {
-  container: HTMLElement | null;
-  connectedCallback(): void;
-  render(): void;
-} 

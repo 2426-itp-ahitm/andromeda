@@ -1,5 +1,4 @@
 import { html, render } from 'lit-html';
-import { Component } from '../types';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 
 declare const hljs: any;

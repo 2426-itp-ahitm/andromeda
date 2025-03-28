@@ -1,5 +1,4 @@
 import { html, render } from 'lit-html';
-import { Component } from '../types';
 
 class Dashboard extends HTMLElement {
   container: HTMLElement | null = null;

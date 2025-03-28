@@ -1,5 +1,4 @@
 import { html, render } from 'lit-html';
-import { Component } from '../types';
 import { CommandService } from '../services/CommandService';
 import { Command, FrontendCommand } from '../interfaces/Command';
 
