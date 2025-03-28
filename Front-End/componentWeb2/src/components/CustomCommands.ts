@@ -4,21 +4,20 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 
 declare const hljs: any;
 
-export class CustomCommands implements Component {
+export class CustomCommands extends HTMLElement {
     container: HTMLElement | null = null;
     private currentCode: string = '';
     private voiceCommand: string = '';
     private fileName: string = '';
 
     connectedCallback(): void {
-        this.container = document.createElement('div');
         this.render();
         this.setupCodeHighlighting();
     }
 
     private setupCodeHighlighting(): void {
-        const textarea = this.container?.querySelector('.code-editor textarea') as HTMLTextAreaElement;
-        const codeDisplay = this.container?.querySelector('.code-display') as HTMLElement;
+        const textarea = this.querySelector('.code-editor textarea') as HTMLTextAreaElement;
+        const codeDisplay = this.querySelector('.code-display') as HTMLElement;
 
         if (textarea && codeDisplay) {
             textarea.addEventListener('input', () => {
@@ -60,8 +59,8 @@ export class CustomCommands implements Component {
                 this.currentCode = e.target?.result as string;
                 this.render();
                 // Highlight the uploaded code
-                const textarea = this.container?.querySelector('.code-editor textarea') as HTMLTextAreaElement;
-                const codeDisplay = this.container?.querySelector('.code-display') as HTMLElement;
+                const textarea = this.querySelector('.code-editor textarea') as HTMLTextAreaElement;
+                const codeDisplay = this.querySelector('.code-display') as HTMLElement;
                 if (textarea && codeDisplay) {
                     const highlighted = hljs.highlight(this.currentCode, { language: 'python' }).value;
                     codeDisplay.innerHTML = highlighted || '&nbsp;';
@@ -92,8 +91,6 @@ export class CustomCommands implements Component {
     }
 
     render(): void {
-        if (!this.container) return;
-
         const exampleCode = `class MyCommand:
     # Your command implementation
     def run(self, params):
@@ -173,7 +170,9 @@ export class CustomCommands implements Component {
             </div>
         `;
 
-        render(template, this.container);
+        render(template, this);
         this.setupCodeHighlighting();
     }
-} 
+}
+
+customElements.define('app-custom-commands', CustomCommands);

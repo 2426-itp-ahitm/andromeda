@@ -1,35 +1,29 @@
 import { html, render } from 'lit-html';
-import { Component } from '../types';
 
-export class Sidebar implements Component {
-  container: HTMLElement | null = null;
+class Sidebar extends HTMLElement {
   private currentPage: string = 'dashboard';
-  private listenersAttached: boolean = false;
 
-  connectedCallback(): void {
-    this.container = document.createElement('div');
-    this.render();
-    if (!this.listenersAttached) {
-      this.setupNavigationListeners();
-      this.listenersAttached = true;
-    }
+  static get observedAttributes() {
+    return ['current-page'];
   }
 
-  setCurrentPage(page: string): void {
-    if (this.currentPage !== page) {
-      this.currentPage = page;
+  connectedCallback(): void {
+    this.render();
+    this.setupNavigationListeners();
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+    if (name === 'current-page' && oldValue !== newValue) {
+      this.currentPage = newValue;
       this.render();
     }
   }
 
   private setupNavigationListeners(): void {
-    const menuItems = this.container?.querySelectorAll('.menu-item');
-    menuItems?.forEach(item => {
+    this.querySelectorAll('.menu-item').forEach(item => {
       item.addEventListener('click', () => {
         const page = item.getAttribute('data-page');
         if (page && page !== this.currentPage) {
-          this.currentPage = page;
-          this.render();
           this.dispatchNavigationEvent(page);
         }
       });
@@ -42,12 +36,10 @@ export class Sidebar implements Component {
       bubbles: true,
       composed: true
     });
-    this.container?.dispatchEvent(event);
+    this.dispatchEvent(event);
   }
 
-  render(): void {
-    if (!this.container) return;
-
+  private render(): void {
     const template = html`
       <div class="sidebar">
         <div class="sidebar-header">
@@ -75,6 +67,8 @@ export class Sidebar implements Component {
       </div>
     `;
 
-    render(template, this.container);
+    render(template, this);
   }
-} 
+}
+
+customElements.define('app-sidebar', Sidebar);

@@ -3,7 +3,7 @@ import { Component } from '../types';
 import { CommandService } from '../services/CommandService';
 import { Command, FrontendCommand } from '../interfaces/Command';
 
-export class PersonalCommands implements Component {
+export class PersonalCommands extends HTMLElement {
     container: HTMLElement | null = null;
     private commandService: CommandService;
     private selectedType: 'personalized' | 'default' = 'personalized';
@@ -16,11 +16,11 @@ export class PersonalCommands implements Component {
     };
 
     constructor() {
+        super();
         this.commandService = CommandService.getInstance();
     }
 
     connectedCallback(): void {
-        this.container = document.createElement('div');
         this.initialize();
     }
 
@@ -48,7 +48,7 @@ export class PersonalCommands implements Component {
 
     private setupEventListeners(): void {
         // Dropdown listener
-        const dropdown = this.container?.querySelector('.category-select select');
+        const dropdown = this.querySelector('.category-select select');
         dropdown?.addEventListener('change', (e) => {
             this.selectedType = (e.target as HTMLSelectElement).value as 'personalized' | 'default';
             this.selectedCommands.clear();
@@ -57,7 +57,7 @@ export class PersonalCommands implements Component {
         });
 
         // Search listener
-        const searchInput = this.container?.querySelector('.search-bar input') as HTMLInputElement;
+        const searchInput = this.querySelector('.search-bar input') as HTMLInputElement;
         searchInput?.addEventListener('input', (e) => {
             this.searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
             this.render();
@@ -65,14 +65,14 @@ export class PersonalCommands implements Component {
         });
 
         // Bulk action listeners
-        const bulkEnableBtn = this.container?.querySelector('.bulk-enable');
-        const bulkDisableBtn = this.container?.querySelector('.bulk-disable');
+        const bulkEnableBtn = this.querySelector('.bulk-enable');
+        const bulkDisableBtn = this.querySelector('.bulk-disable');
 
         bulkEnableBtn?.addEventListener('click', () => this.toggleBulkCommands(true));
         bulkDisableBtn?.addEventListener('click', () => this.toggleBulkCommands(false));
 
         // Command item listeners
-        const commandItems = this.container?.querySelectorAll('.command-item');
+        const commandItems = this.querySelectorAll('.command-item');
         commandItems?.forEach((item) => {
             const checkbox = item.querySelector('.command-checkbox') as HTMLInputElement;
             const toggleButton = item.querySelector('.toggle-button');
@@ -123,8 +123,6 @@ export class PersonalCommands implements Component {
     }
 
     render(): void {
-        if (!this.container) return;
-
         const filteredCommands = this.getFilteredCommands();
 
         const template = html`
@@ -177,6 +175,8 @@ export class PersonalCommands implements Component {
             </div>
         `;
 
-        render(template, this.container);
+        render(template, this);
     }
-} 
+}
+
+customElements.define('app-personal-commands', PersonalCommands);

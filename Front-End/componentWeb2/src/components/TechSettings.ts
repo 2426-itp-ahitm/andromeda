@@ -1,10 +1,8 @@
 import { html, render } from 'lit-html';
-import { Component } from '../types';
 import { ModelService } from '../services/ModelService';
 import { Model } from '../interfaces/Model';
 
-export class TechSettings implements Component {
-    container: HTMLElement | null = null;
+class TechSettings extends HTMLElement {
     private selectedModel: string = 'Vosk1';
     private searchQuery: string = '';
     private selectedLanguage: string = 'all';
@@ -22,11 +20,11 @@ export class TechSettings implements Component {
     private modelService: ModelService;
 
     constructor() {
+        super();
         this.modelService = ModelService.getInstance();
     }
 
     connectedCallback(): void {
-        this.container = document.createElement('div');
         this.initialize();
     }
 
@@ -41,12 +39,9 @@ export class TechSettings implements Component {
         this.models = allModels;
     }
 
-
-
-
     private setupEventListeners(): void {
         // Search listener
-        const searchInput = this.container?.querySelector('.search-bar input') as HTMLInputElement;
+        const searchInput = this.querySelector('.search-bar input') as HTMLInputElement;
         searchInput?.addEventListener('input', (e) => {
             this.searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
             this.render();
@@ -54,7 +49,7 @@ export class TechSettings implements Component {
         });
 
         // Language filter listener
-        const languageSelect = this.container?.querySelector('.language-filter select') as HTMLSelectElement;
+        const languageSelect = this.querySelector('.language-filter select') as HTMLSelectElement;
         languageSelect?.addEventListener('change', (e) => {
             this.selectedLanguage = (e.target as HTMLSelectElement).value;
             this.render();
@@ -88,9 +83,7 @@ export class TechSettings implements Component {
         });
     }
 
-    render(): void {
-        if (!this.container) return;
-
+    private render(): void {
         const filteredModels = this.getFilteredModels();
 
         const template = html`
@@ -161,6 +154,8 @@ export class TechSettings implements Component {
             </div>
         `;
 
-        render(template, this.container);
+        render(template, this);
     }
-} 
+}
+
+customElements.define('app-tech-settings', TechSettings);

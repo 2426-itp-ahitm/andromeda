@@ -1,7 +1,7 @@
 import { html, render } from 'lit-html';
 import { Component } from '../types';
 
-export class Dashboard implements Component {
+class Dashboard extends HTMLElement {
   container: HTMLElement | null = null;
   private selectedMicrophone: string = 'THC-GamingSensoricMicro';
   private recentCommands: string[] = [
@@ -13,6 +13,7 @@ export class Dashboard implements Component {
 
   connectedCallback(): void {
     this.container = document.createElement('div');
+    this.appendChild(this.container); // Append the container to the component
     this.setupDropdownListener();
     this.render();
   }
@@ -126,6 +127,8 @@ export class Dashboard implements Component {
       </div>
     `;
 
-    render(template, this.container);
+    render(template, this.container); // Render the template into the container
   }
-} 
+}
+
+customElements.define('app-dashboard', Dashboard);
