@@ -1,21 +1,16 @@
 import { html, render } from 'lit-html';
 import { Component } from '../types';
 import { CommandService } from '../services/CommandService';
-
-interface Command {
-    text: string;
-    category: string;
-    enabled: boolean;
-}
+import { Command, FrontendCommand } from '../interfaces/Command';
 
 export class PersonalCommands implements Component {
     container: HTMLElement | null = null;
     private commandService: CommandService;
-    private selectedType: string = 'personalized';
+    private selectedType: 'personalized' | 'default' = 'personalized';
     private searchQuery: string = '';
     private selectedCommands: Set<string> = new Set();
 
-    private commands: { personalized: Command[], default: Command[] } = {
+    private commands: { personalized: FrontendCommand[], default: FrontendCommand[] } = {
         personalized: [],
         default: []
     };
@@ -29,13 +24,13 @@ export class PersonalCommands implements Component {
         this.initialize();
     }
 
-    private async initialize() {
+    private async initialize(): Promise<void> {
         await this.loadCommands();
         this.render();
         this.setupEventListeners();
     }
 
-    private async loadCommands() {
+    private async loadCommands(): Promise<void> {
         const allCommands = await this.commandService.getCommands();
         this.commands = {
             personalized: allCommands.filter(cmd => cmd.category === 'personalized').map(cmd => ({
@@ -55,7 +50,7 @@ export class PersonalCommands implements Component {
         // Dropdown listener
         const dropdown = this.container?.querySelector('.category-select select');
         dropdown?.addEventListener('change', (e) => {
-            this.selectedType = (e.target as HTMLSelectElement).value;
+            this.selectedType = (e.target as HTMLSelectElement).value as 'personalized' | 'default';
             this.selectedCommands.clear();
             this.render();
             this.setupEventListeners();
@@ -73,13 +68,8 @@ export class PersonalCommands implements Component {
         const bulkEnableBtn = this.container?.querySelector('.bulk-enable');
         const bulkDisableBtn = this.container?.querySelector('.bulk-disable');
 
-        bulkEnableBtn?.addEventListener('click', () => {
-            this.toggleBulkCommands(true);
-        });
-
-        bulkDisableBtn?.addEventListener('click', () => {
-            this.toggleBulkCommands(false);
-        });
+        bulkEnableBtn?.addEventListener('click', () => this.toggleBulkCommands(true));
+        bulkDisableBtn?.addEventListener('click', () => this.toggleBulkCommands(false));
 
         // Command item listeners
         const commandItems = this.container?.querySelectorAll('.command-item');
@@ -108,7 +98,7 @@ export class PersonalCommands implements Component {
     }
 
     private toggleCommand(commandText: string): void {
-        const currentCommands = this.commands[this.selectedType as keyof typeof this.commands];
+        const currentCommands = this.commands[this.selectedType];
         const command = currentCommands.find(cmd => cmd.text === commandText);
         if (command) {
             command.enabled = !command.enabled;
@@ -117,7 +107,7 @@ export class PersonalCommands implements Component {
     }
 
     private toggleBulkCommands(enabled: boolean): void {
-        const currentCommands = this.commands[this.selectedType as keyof typeof this.commands];
+        const currentCommands = this.commands[this.selectedType];
         currentCommands.forEach(cmd => {
             if (this.selectedCommands.has(cmd.text)) {
                 cmd.enabled = enabled;
@@ -126,9 +116,8 @@ export class PersonalCommands implements Component {
         this.render();
     }
 
-    private getFilteredCommands(): Command[] {
-        const currentCommands = this.commands[this.selectedType as keyof typeof this.commands];
-        return currentCommands.filter(command => 
+    private getFilteredCommands(): FrontendCommand[] {
+        return this.commands[this.selectedType].filter(command => 
             command.text.toLowerCase().includes(this.searchQuery)
         );
     }
