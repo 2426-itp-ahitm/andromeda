@@ -1,74 +1,87 @@
 import { html, render } from 'lit-html';
 
 class Sidebar extends HTMLElement {
-  private currentPage: string = 'dashboard';
+    private currentPage: string = 'dashboard';
 
-  static get observedAttributes() {
-    return ['current-page'];
-  }
-
-  connectedCallback(): void {
-    this.render();
-    this.setupNavigationListeners();
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
-    if (name === 'current-page' && oldValue !== newValue) {
-      this.currentPage = newValue;
-      this.render();
+    static get observedAttributes() {
+        return ['current-page'];
     }
-  }
 
-  private setupNavigationListeners(): void {
-    this.querySelectorAll('.menu-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const page = item.getAttribute('data-page');
-        if (page && page !== this.currentPage) {
-          this.dispatchNavigationEvent(page);
+    connectedCallback(): void {
+        this.render();
+        this.addEventListener('click', this.handleNavigation.bind(this));
+    }
+
+    attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
+        if (name === 'current-page' && oldValue !== newValue) {
+            this.currentPage = newValue;
+            this.render();
         }
-      });
-    });
-  }
+    }
 
-  private dispatchNavigationEvent(page: string): void {
-    const event = new CustomEvent('pageChange', {
-      detail: { page },
-      bubbles: true,
-      composed: true
-    });
-    this.dispatchEvent(event);
-  }
+    private handleNavigation(event: Event): void {
+        const target = (event.target as HTMLElement).closest('.menu-item');
+        if (target) {
+            const page = target.getAttribute('data-page');
+            if (page && page !== this.currentPage) {
+                const generalSettings = document.querySelector('app-general-settings') as any;
+                if (generalSettings?.hasUnsavedChanges) {
+                    event.preventDefault();
+                    generalSettings.showUnsavedChangesPopup(page);
+                } else {
+                    this.navigateToPage(page);
+                }
+            }
+        }
+    }
 
-  private render(): void {
-    const template = html`
-      <div class="sidebar">
-        <div class="sidebar-header">
-          <img src="/assets/logo2.png" alt="Andromeda Logo" class="logo">
-          <h1>Andromeda</h1>
-        </div>
-        <nav class="sidebar-nav">
-          <div class="menu-item ${this.currentPage === 'dashboard' ? 'active' : ''}" data-page="dashboard">
-            <span>📊</span>
-            Dashboard
-          </div>
-          <div class="menu-item ${this.currentPage === 'tech-settings' ? 'active' : ''}" data-page="tech-settings">
-            <span>⚙️</span>
-            Tech Settings
-          </div>
-          <div class="menu-item ${this.currentPage === 'personal-commands' ? 'active' : ''}" data-page="personal-commands">
-            <span>🎯</span>
-            Personal Commands
-          </div>
-          <div class="menu-item ${this.currentPage === 'custom-commands' ? 'active' : ''}" data-page="custom-commands">
-            <span>💻</span>
-            Custom Commands
-          </div>
-        </nav>
-      </div>
-    `;
+    private navigateToPage(page: string): void {
+        this.currentPage = page;
+        this.dispatchNavigationEvent(page);
+        this.render();
+    }
 
-    render(template, this);
-  }
+    private dispatchNavigationEvent(page: string): void {
+        const event = new CustomEvent('pageChange', {
+            detail: { page },
+            bubbles: true,
+            composed: true
+        });
+        this.dispatchEvent(event);
+    }
+
+    private render(): void {
+        render(html`
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <img src="/assets/logo2.png" alt="Andromeda Logo" class="logo">
+                    <h1>Andromeda</h1>
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="menu-item ${this.currentPage === 'dashboard' ? 'active' : ''}" data-page="dashboard">
+                        <span>📊</span>
+                        Dashboard
+                    </div>
+                    <div class="menu-item ${this.currentPage === 'tech-settings' ? 'active' : ''}" data-page="tech-settings">
+                        <span>⚙️</span>
+                        Tech Settings
+                    </div>
+                    <div class="menu-item ${this.currentPage === 'personal-commands' ? 'active' : ''}" data-page="personal-commands">
+                        <span>🎯</span>
+                        Personal Commands
+                    </div>
+                    <div class="menu-item ${this.currentPage === 'custom-commands' ? 'active' : ''}" data-page="custom-commands">
+                        <span>💻</span>
+                        Custom Commands
+                    </div>
+                    <div class="menu-item ${this.currentPage === 'general-settings' ? 'active' : ''}" data-page="general-settings">
+                        <span>⚙️</span>
+                        General Settings
+                    </div>
+                </nav>
+            </div>
+        `, this);
+    }
 }
 
 customElements.define('app-sidebar', Sidebar);

@@ -3,6 +3,7 @@ import './components/Dashboard';
 import './components/TechSettings';
 import './components/CustomCommands';
 import './components/PersonalCommands';
+import './components/GeneralSettings';
 import './components/Sidebar';
 import './styles.css';
 
@@ -60,6 +61,8 @@ class App {
         return document.createElement('app-custom-commands');
       case 'personal-commands':
         return document.createElement('app-personal-commands');
+      case 'general-settings':
+        return document.createElement('app-general-settings');
       default:
         return document.createElement('app-dashboard'); // Fallback to dashboard
     }
