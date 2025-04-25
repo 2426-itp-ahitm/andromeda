@@ -50,7 +50,7 @@ class Dashboard extends HTMLElement {
             <div class="stat-icon">📊</div>
             <div class="stat-info">
               <div class="stat-value">98%</div>
-              <div class="stat-label">Accuracy</div>
+              <div class="stat-label">Detection Accuracy</div>
             </div>
           </div>
           <div class="stat-card">
@@ -72,16 +72,19 @@ class Dashboard extends HTMLElement {
         <div class="dashboard-sections">
           <div class="card microphone-section">
             <h2>Microphone Status</h2>
-            <div class="dropdown">
-              <span>${this.selectedMicrophone}</span>
-              <span>▼</span>
-              <div class="dropdown-content">
-                <a @click=${() => this.handleMicrophoneSelect('THC-GamingSensoricMicro')}>THC-GamingSensoricMicro</a>
-                <a @click=${() => this.handleMicrophoneSelect('USB-Microphone')}>USB-Microphone</a>
-                <a @click=${() => this.handleMicrophoneSelect('Bluetooth-Microphone')}>Bluetooth-Microphone</a>
-              </div>
-            </div>
             <div class="microphone-settings">
+              <div class="setting-item">
+                <label class="dropdown-label">Input Device</label>
+                <div class="dropdown">
+                  <span>${this.selectedMicrophone}</span>
+                  <span>▼</span>
+                  <div class="dropdown-content">
+                    <a @click=${() => this.handleMicrophoneSelect('THC-GamingSensoricMicro')}>THC-GamingSensoricMicro</a>
+                    <a @click=${() => this.handleMicrophoneSelect('USB-Microphone')}>USB-Microphone</a>
+                    <a @click=${() => this.handleMicrophoneSelect('Bluetooth-Microphone')}>Bluetooth-Microphone</a>
+                  </div>
+                </div>
+              </div>
               <div class="setting-item">
                 <label>Microphone Sensitivity</label>
                 <input type="range" min="0" max="100" value="75">
