@@ -1,9 +1,40 @@
--- This file allow to write SQL commands that will be emitted in test and dev.
--- The commands are commented as their support depends of the database
--- insert into command (id, field) values(1, 'field-1');
--- insert into myentity (id, field) values(2, 'field-2');
--- insert into myentity (id, field) values(3, 'field-3');
--- alter sequence myentity_seq restart with 4;
+
+-- Funktion und Trigger müssen manuell in einer query console in die Datenbank eingefügt werden. Trigger und Function
+-- über inport.sql erstellen funktioniert nicht.
+-- todo: das Einfügen der default settins bei Anlegen eines Users muss im Code stattfinden.
+
+/*
+CREATE FUNCTION insert_default_settings()
+    RETURNS TRIGGER AS $$
+BEGIN
+INSERT INTO dbSetting(name, type, value, user_id)
+VALUES ('pathToSysCommandList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\sysCommandList.json', NEW.id);
+
+INSERT INTO dbSetting(name, type, value, user_id)
+VALUES ('pathToPromtList', 'string', 'http://localhost:8080/api/andromeda/user/userId/prompts', NEW.id);
+
+INSERT INTO dbSetting(name, type, value, user_id)
+VALUES ('pathToErrorList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\GPTClient\\errorList.json', NEW.id);
+
+INSERT INTO dbSetting(name, type, value, user_id)
+VALUES ('MODEL_ENGLISH_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-en-us-0.42-gigaspeech\\vosk-model-en-us-0.42-gigaspeech', NEW.id);
+
+INSERT INTO dbSetting(name, type, value, user_id)
+VALUES ('MODEL_GERMAN_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-de-0.21\\vosk-model-de-0.21', NEW.id);
+
+INSERT INTO dbSetting(name, type, value, user_id)
+VALUES ('pathToScreenshotFolder', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\screenshots', NEW.id);
+
+RETURN NEW;
+END
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trigger_insert_default_settings
+    AFTER INSERT ON dbUser
+    FOR EACH ROW
+    EXECUTE FUNCTION insert_default_settings();
+*/
 
 insert into command(id, type, prompt, code) values (1, 'default', 'Verschiebe Datei (A) nach (B)', null);
 insert into command(id, type, prompt, code) values (2, 'default', 'Schalte den Rechner aus', null);

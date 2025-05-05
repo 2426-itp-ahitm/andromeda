@@ -48,10 +48,10 @@ public class SettingRepository {
         return user.getSettings();
     }
 
-    public Setting getSettingByUser(Long userId, Long settingId) {
+    public Setting getSettingByUser(Long userId, String settingName) {
         List<Setting> settings = getSettingsByUser(userId);
         for(Setting setting : settings) {
-            if(setting.getId().equals(settingId)) {
+            if(setting.getName().equals(settingName)) {
                 return setting;
             }
         }

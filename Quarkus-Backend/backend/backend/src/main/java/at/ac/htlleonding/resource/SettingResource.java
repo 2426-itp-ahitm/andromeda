@@ -70,10 +70,10 @@ public class SettingResource {
     }
 
     @GET
-    @Path("/getSettingByUser/{userId}/{settingId}")
-    public Response getSettingByUser(@PathParam("userId") Long userId, @PathParam("settingId") Long settingId) {
+    @Path("/getSettingByUser/{userId}/{settingName}")
+    public Response getSettingByUser(@PathParam("userId") Long userId, @PathParam("settingName") String settingName) {
         try {
-            Setting setting = settingRepository.getSettingByUser(userId, settingId);
+            Setting setting = settingRepository.getSettingByUser(userId, settingName);
             return Response.status(Response.Status.OK).entity(setting).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
