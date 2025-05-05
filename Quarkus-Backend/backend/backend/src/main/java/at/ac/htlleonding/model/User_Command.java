@@ -3,7 +3,12 @@ package at.ac.htlleonding.model;
 import jakarta.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name=User_Command.QUERY_FIND_BY_USERID, query="select uc.command from User_Command uc where uc.user.id = :userId")
+})
 public class User_Command {
+
+    public static final String QUERY_FIND_BY_USERID = "User_Command.findByUserId";
 
     @EmbeddedId
     @AttributeOverride(name="userId", column=@Column(name="user_id"))

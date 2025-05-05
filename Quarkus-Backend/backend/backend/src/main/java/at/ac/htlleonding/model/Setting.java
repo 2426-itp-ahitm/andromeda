@@ -3,6 +3,7 @@ package at.ac.htlleonding.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name="dbSetting")
 public class Setting {
 
     @Id
@@ -21,8 +22,7 @@ public class Setting {
 
     public Setting() {}
 
-    public Setting(Long id, String name, String type, String value, User user) {
-        this.id = id;
+    public Setting(String name, String type, String value, User user) {
         this.name = name;
         this.type = type;
         this.value = value;

@@ -6,13 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name=Command.QUERY_FIND_ALL, query="select c from Command c"),
+        @NamedQuery(name=Command.QUERY_FIND_ALL_DEFAULT, query="select c from Command c where type = 'default'")
+})
 public class Command {
+
+    public static final String QUERY_FIND_ALL = "Command.findAll";
+    public static final String QUERY_FIND_ALL_DEFAULT = "Command.getDefaultCommands";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
+    private String type; //default or personalized
 
     private String prompt;
 

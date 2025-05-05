@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name=Model.QUERY_FIND_ALL, query="select m from Model m")
+})
 public class Model {
+
+    public static final String QUERY_FIND_ALL = "Model.findAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
