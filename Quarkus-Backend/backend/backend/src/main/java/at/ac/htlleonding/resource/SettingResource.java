@@ -62,7 +62,7 @@ public class SettingResource {
     @Path("/getSettingsByUser/{userId}")
     public Response getSettingsByUser(@PathParam("userId") Long userId) {
         try {
-            List<Setting> settings = settingRepository.getSettingsByUser(userId);
+            List<SettingDTO> settings = settingRepository.getSettingsByUser(userId);
             return Response.status(Response.Status.OK).entity(settings).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

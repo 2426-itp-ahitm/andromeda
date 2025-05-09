@@ -43,17 +43,23 @@ public class SettingRepository {
         entityManager.merge(settingDTO);
     }
 
-    public List<Setting> getSettingsByUser(Long userId) {
+    public List<SettingDTO> getSettingsByUser(Long userId) {
         User user = entityManager.find(User.class, userId);
-        return user.getSettings();
+        return user.getSettings().stream()
+                .map(setting -> new SettingDTO(
+                        setting.getId(),
+                        setting.getName(),
+                        setting.getType(),
+                        setting.getValue(),
+                        setting.getUser().getId()
+                ))
+                .toList();
     }
 
     public SettingDTO getSettingByUser(Long userId, String settingName) {
-        List<Setting> settings = getSettingsByUser(userId);
-        for(Setting setting : settings) {
-            if(setting.getName().equals(settingName)) {
-                return new SettingDTO(setting.getId(), setting.getName(), setting.getType(), setting.getValue(), setting.getUser().getId());
-            }
+        List<SettingDTO> settings = getSettingsByUser(userId);
+        for(SettingDTO setting : settings) {
+            return setting;
         }
         return null;
     }
