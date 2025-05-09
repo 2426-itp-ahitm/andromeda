@@ -4,28 +4,28 @@
 -- todo: das Einfügen der default settins bei Anlegen eines Users muss im Code stattfinden.
 
 /*
-CREATE FUNCTION insert_default_settings()
+CREATE OR REPLACE FUNCTION insert_default_settings()
     RETURNS TRIGGER AS $$
 BEGIN
-INSERT INTO dbSetting(name, type, value, user_id)
-VALUES ('pathToSysCommandList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\sysCommandList.json', NEW.id);
+    INSERT INTO dbSetting(name, type, value, user_id)
+    VALUES ('pathToSysCommandList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\sysCommandList.json', NEW.id);
 
-INSERT INTO dbSetting(name, type, value, user_id)
-VALUES ('pathToPromtList', 'string', 'http://localhost:8080/api/andromeda/user/userId/prompts', NEW.id);
+    INSERT INTO dbSetting(name, type, value, user_id)
+    VALUES ('pathToPromtList', 'string', 'http://localhost:8080/api/andromeda/user/userId/prompts', NEW.id);
 
-INSERT INTO dbSetting(name, type, value, user_id)
-VALUES ('pathToErrorList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\GPTClient\\errorList.json', NEW.id);
+    INSERT INTO dbSetting(name, type, value, user_id)
+    VALUES ('pathToErrorList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\GPTClient\\errorList.json', NEW.id);
 
-INSERT INTO dbSetting(name, type, value, user_id)
-VALUES ('MODEL_ENGLISH_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-en-us-0.42-gigaspeech\\vosk-model-en-us-0.42-gigaspeech', NEW.id);
+    INSERT INTO dbSetting(name, type, value, user_id)
+    VALUES ('MODEL_ENGLISH_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-en-us-0.42-gigaspeech\\vosk-model-en-us-0.42-gigaspeech', NEW.id);
 
-INSERT INTO dbSetting(name, type, value, user_id)
-VALUES ('MODEL_GERMAN_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-de-0.21\\vosk-model-de-0.21', NEW.id);
+    INSERT INTO dbSetting(name, type, value, user_id)
+    VALUES ('MODEL_GERMAN_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-de-0.21\\vosk-model-de-0.21', NEW.id);
 
-INSERT INTO dbSetting(name, type, value, user_id)
-VALUES ('pathToScreenshotFolder', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\screenshots', NEW.id);
+    INSERT INTO dbSetting(name, type, value, user_id)
+    VALUES ('pathToScreenshotFolder', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\screenshots', NEW.id);
 
-RETURN NEW;
+    RETURN NEW;
 END
 $$ LANGUAGE plpgsql;
 
@@ -33,7 +33,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trigger_insert_default_settings
     AFTER INSERT ON dbUser
     FOR EACH ROW
-    EXECUTE FUNCTION insert_default_settings();
+EXECUTE FUNCTION insert_default_settings();
 */
 
 insert into command(id, type, prompt, code) values (1, 'default', 'Verschiebe Datei (A) nach (B)', null);
