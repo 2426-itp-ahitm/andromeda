@@ -53,32 +53,32 @@ class Sidebar extends HTMLElement {
     private render(): void {
         render(html`
             <div class="sidebar">
-                <div class="sidebar-header">
-                    <img src="/assets/logo2.png" alt="Andromeda Logo" class="logo">
-                    <h1>Andromeda</h1>
+            <div class="sidebar-header">
+                <img src="/assets/logo2.png" alt="Andromeda Logo" class="logo">
+                <h1>Andromeda</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="menu-item ${this.currentPage === 'dashboard' ? 'active' : ''}" data-page="dashboard" style="${this.currentPage === 'dashboard' ? 'background-color: #57536d;' : ''}">
+                <span>📊</span>
+                Dashboard
                 </div>
-                <nav class="sidebar-nav">
-                    <div class="menu-item ${this.currentPage === 'dashboard' ? 'active' : ''}" data-page="dashboard">
-                        <span>📊</span>
-                        Dashboard
-                    </div>
-                    <div class="menu-item ${this.currentPage === 'tech-settings' ? 'active' : ''}" data-page="tech-settings">
-                        <span>⚙️</span>
-                        Tech Settings
-                    </div>
-                    <div class="menu-item ${this.currentPage === 'personal-commands' ? 'active' : ''}" data-page="personal-commands">
-                        <span>🎯</span>
-                        Personal Commands
-                    </div>
-                    <div class="menu-item ${this.currentPage === 'custom-commands' ? 'active' : ''}" data-page="custom-commands">
-                        <span>💻</span>
-                        Custom Commands
-                    </div>
-                    <div class="menu-item ${this.currentPage === 'general-settings' ? 'active' : ''}" data-page="general-settings">
-                        <span>⚙️</span>
-                        General Settings
-                    </div>
-                </nav>
+                <div class="menu-item ${this.currentPage === 'tech-settings' ? 'active' : ''}" data-page="tech-settings" style="${this.currentPage === 'tech-settings' ? 'background-color: #57536d;' : ''}">
+                <span>⚙️</span>
+                Tech Settings
+                </div>
+                <div class="menu-item ${this.currentPage === 'personal-commands' ? 'active' : ''}" data-page="personal-commands" style="${this.currentPage === 'personal-commands' ? 'background-color: #57536d;' : ''}">
+                <span>🎯</span>
+                Personal Commands
+                </div>
+                <div class="menu-item ${this.currentPage === 'custom-commands' ? 'active' : ''}" data-page="custom-commands" style="${this.currentPage === 'custom-commands' ? 'background-color: #57536d;' : ''}">
+                <span>💻</span>
+                Custom Commands
+                </div>
+                <div class="menu-item ${this.currentPage === 'general-settings' ? 'active' : ''}" data-page="general-settings" style="${this.currentPage === 'general-settings' ? 'background-color: #57536d;' : ''}">
+                <span>⚙️</span>
+                General Settings
+                </div>
+            </nav>
             </div>
         `, this);
     }
