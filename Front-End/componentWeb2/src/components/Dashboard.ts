@@ -117,7 +117,7 @@ class Dashboard extends HTMLElement {
             <div class="contact-info">
               <div class="contact-item">
                 <span class="contact-icon">📧</span>
-                <span>support@andromeda.ai</span>
+                <span>andromeda@gmail.com</span>
               </div>
               <div class="contact-item">
                 <span class="contact-icon">💬</span>

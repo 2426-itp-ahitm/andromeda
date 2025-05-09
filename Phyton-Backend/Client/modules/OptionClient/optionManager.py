@@ -7,17 +7,18 @@ from helpers.config import (
 
 class OptionManager:
     def __init__(self):
-        self.system_prompt = system_promt
-        self.error_prompt = error_promt
-        self.path_to_sys_command_list = pathToSysCommandList
-        self.path_to_prompt_list = pathToPromtList
-        self.path_to_error_list = pathToErrorList
-        self.model_english_path = MODEL_ENGLISH_PATH
-        self.model_german_path = MODEL_GERMAN_PATH
-        self.path_to_screenshot_folder = pathToScreenshotFolder
-        self.selected_module = selected_module
-        self.keyword = keyword
-        self.CONFIG_FILE_PATH = CONFIG_FILE_PATH
+        self.system_prompt = system_promt.replace("\\", "\\\\")
+        self.error_prompt = error_promt.replace("\\", "\\\\")
+        self.path_to_sys_command_list = pathToSysCommandList.replace("\\", "\\\\")
+        self.path_to_prompt_list = pathToPromtList.replace("\\", "\\\\")
+        self.path_to_error_list = pathToErrorList.replace("\\", "\\\\")
+        self.model_english_path = MODEL_ENGLISH_PATH.replace("\\", "\\\\")
+        self.model_german_path = MODEL_GERMAN_PATH.replace("\\", "\\\\")
+        self.path_to_screenshot_folder = pathToScreenshotFolder.replace("\\", "\\\\")
+        self.selected_module = selected_module.replace("\\", "\\\\")
+        self.keyword = keyword.replace("\\", "\\\\")
+        self.CONFIG_FILE_PATH = CONFIG_FILE_PATH.replace("\\", "\\\\")
+
 
     def _update_config(self):
         with open(CONFIG_FILE_PATH, 'w') as configfile:

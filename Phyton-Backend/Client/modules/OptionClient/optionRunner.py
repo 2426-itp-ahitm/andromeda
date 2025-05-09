@@ -8,8 +8,9 @@ from optionManager import OptionManager
 def main():
     option_manager = OptionManager()
     
+    
     # Example usage
-    option_manager._set_value_from_url(url="lol", attribute="keyword")
+    option_manager._set_value_from_url(url="http://localhost:8080/getSettingByUser/1/keyword", attribute="keyword")
 
 if __name__ == "__main__":
     main()
