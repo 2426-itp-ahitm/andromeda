@@ -19,7 +19,7 @@ public class Model {
 
     private String name;
 
-    private Integer size;
+    private String size;
 
     private String language;
 
@@ -31,13 +31,20 @@ public class Model {
     public Model() {
     }
 
-    public Model(Long id, String name, Integer size, String language, Long precision, List<User_Model> userModels) {
+    public Model(Long id, String name, String size, String language, Long precision, List<User_Model> userModels) {
         this.id = id;
         this.name = name;
         this.size = size;
         this.language = language;
         this.precision = precision;
         this.userModels = userModels;
+    }
+
+    public Model(String name, String size, String language, Long precision) {
+        this.name = name;
+        this.size = size;
+        this.language = language;
+        this.precision = precision;
     }
 
     public Long getId() {
@@ -56,11 +63,11 @@ public class Model {
         this.name = name;
     }
 
-    public Integer getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(String size) {
         this.size = size;
     }
 

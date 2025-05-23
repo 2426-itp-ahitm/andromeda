@@ -33,9 +33,8 @@ public class SettingResource {
 
     @DELETE
     @Path("/removeSettingOfUser")
-    @Consumes(MediaType.TEXT_PLAIN)
-    public Response removeSetting(String idString) {
-        Long id = Long.parseLong(idString);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response removeSetting(Long id) {
         try {
             settingRepository.deleteSetting(id);
         } catch (Exception e) {

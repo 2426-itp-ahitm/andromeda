@@ -33,7 +33,7 @@ public class UserResource {
     @PUT
     @Path("/updateUser")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateUser(UserDTO userDTO) {
+    public Response     updateUser(UserDTO userDTO) {
         try {
             userRepository.updateUser(userDTO);
             return Response.status(Response.Status.OK).build();
