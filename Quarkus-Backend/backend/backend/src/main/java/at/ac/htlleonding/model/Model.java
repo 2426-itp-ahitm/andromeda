@@ -1,5 +1,7 @@
 package at.ac.htlleonding.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class Model {
     private Long precision;
 
     @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     public List<User_Model> userModels = new ArrayList<>();
 
     public Model() {
