@@ -10,7 +10,7 @@ def main():
     
     
     # Example usage
-    option_manager._set_value_from_url(url="http://localhost:8080/getSettingByUser/1/keyword", attribute="keyword")
+    option_manager._set_value_from_url(url="http://localhost:8080/api/andromeda/setting/getSettingByUser/1/keyword", attribute="keyword")
 
 if __name__ == "__main__":
     main()

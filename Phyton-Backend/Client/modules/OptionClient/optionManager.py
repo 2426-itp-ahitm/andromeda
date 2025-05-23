@@ -34,12 +34,11 @@ class OptionManager:
             configfile.write(f'selected_module = "{self.selected_module}"\n')
             configfile.write(f'keyword = "{self.keyword}"\n')
       
-
     def _set_value_from_url(self, attribute, url):
         try:
             response = requests.get(url)
-            response.raise_for_status()
-            value = response.text
+            json_data = response.json()
+            value = json_data.get("value", url)
         except requests.RequestException:
             value = url
         setattr(self, attribute, value)
