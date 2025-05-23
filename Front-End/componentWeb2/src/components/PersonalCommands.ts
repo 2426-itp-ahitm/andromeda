@@ -32,15 +32,15 @@ export class PersonalCommands extends HTMLElement {
     private async loadCommands(): Promise<void> {
         const allCommands = await this.commandService.getCommands();
         this.commands = {
-            personalized: allCommands.filter(cmd => cmd.category === 'personalized').map(cmd => ({
-                text: cmd.name,
-                category: cmd.category,
-                enabled: true
+            personalized: allCommands.filter(cmd => cmd.type === 'personalized').map(cmd => ({
+                text: cmd.prompt,
+                enabled: true,
+                type: cmd.type
             })),
-            default: allCommands.filter(cmd => cmd.category === 'default').map(cmd => ({
-                text: cmd.name,
-                category: cmd.category,
-                enabled: true
+            default: allCommands.filter(cmd => cmd.type === 'default').map(cmd => ({
+                text: cmd.prompt,
+                enabled: true,
+                type: cmd.type
             }))
         };
     }

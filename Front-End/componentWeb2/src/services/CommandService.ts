@@ -10,105 +10,86 @@ export class CommandService {
     private commands: Command[] = [
         {
             id: '1',
-            name: 'Delete folder "Downloads"',
-            category: 'personalized',
+            prompt: 'Delete folder "Downloads"',
+            type: 'personalized',
             code: 'rm -rf ~/Downloads',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
         },
         {
             id: '2',
-            name: 'Create new folder "Projects"',
-            category: 'personalized',
+            prompt: 'Create new folder "Projects"',
+            type: 'personalized',
             code: 'mkdir ~/Projects',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
         },
         {
             id: '3',
-            name: 'Start application "Visual Studio Code"',
-            category: 'personalized',
+            prompt: 'Start application "Visual Studio Code"',
+            type: 'personalized',
             code: 'code .',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
+
         },
         {
             id: '4',
-            name: 'Set system volume to 50%',
-            category: 'personalized',
+            prompt: 'Set system volume to 50%',
+            type: 'personalized',
             code: 'amixer -D pulse sset Master 50%',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
+
         },
         {
             id: '5',
-            name: 'Open website "github.com"',
-            category: 'personalized',
+            prompt: 'Open website "github.com"',
+            type: 'personalized',
             code: 'xdg-open https://github.com',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
+
         },
         {
             id: '6',
-            name: 'Take screenshot of current window',
-            category: 'personalized',
+            prompt: 'Take screenshot of current window',
+            type: 'personalized',
             code: 'import -window root screenshot.png',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
+
         },
         {
             id: '7',
-            name: 'Open file explorer',
-            category: 'default',
+            prompt: 'Open file explorer',
+            type: 'default',
             code: 'xdg-open .',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
-        },
-        {
+            lastUsed: new Date()
+        },{
             id: '8',
-            name: 'Close all windows',
-            category: 'default',
+            prompt: 'Close all windows',
+            type: 'default',
             code: 'wmctrl -c :ACTIVE:',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
         },
         {
             id: '9',
-            name: 'Mute system volume',
-            category: 'default',
+            prompt: 'Mute system volume',
+            type: 'default',
             code: 'amixer -D pulse sset Master mute',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
         },
         {
             id: '10',
-            name: 'Open browser',
-            category: 'default',
+            prompt: 'Open browser',
+            type: 'default',
             code: 'xdg-open https://www.google.com',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
         },
         {
             id: '11',
-            name: 'Show desktop',
-            category: 'default',
+            prompt: 'Show desktop',
+            type: 'default',
             code: 'wmctrl -k on',
-            lastUsed: new Date(),
-            createdAt: new Date(),
-            updatedAt: new Date()
+            lastUsed: new Date()
         }
     ];
-
+    private basicURL : string = 'http://localhost:9001/api/api';
     private constructor() {}
 
     public static getInstance(): CommandService {
@@ -120,10 +101,16 @@ export class CommandService {
 
     // GET /api/commands
     public async getCommands(): Promise<Command[]> {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(this.commands);
-            }, 500);
-        });
+        try {
+            const response = await fetch(this.basicURL + '/andromeda/command/getDefaultCommands');
+            if (!response.ok) {
+                throw new Error('Failed to fetch commands');
+            }
+            const data = await response.json();
+            return data as Command[];
+        } catch (error) {
+            console.error('Network error:', error);
+            throw new Error('Network error: Could not fetch commands. Is the backend running and the URL correct?');
+        }
     }
 } 
