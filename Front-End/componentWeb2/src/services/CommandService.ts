@@ -107,7 +107,16 @@ export class CommandService {
                 throw new Error('Failed to fetch commands');
             }
             const data = await response.json();
-            return data as Command[];
+
+            const response2 = await fetch(this.basicURL + '/andromeda/command/getCommandsByUser/1');
+            if (!response2.ok) {
+                throw new Error('Failed to fetch commands');
+            }
+            const data2 = await response2.json();
+
+            const combinedData = [...data, ...data2];
+
+            return combinedData as Command[];
         } catch (error) {
             console.error('Network error:', error);
             throw new Error('Network error: Could not fetch commands. Is the backend running and the URL correct?');
