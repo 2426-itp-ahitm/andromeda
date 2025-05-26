@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name=User_Command.QUERY_FIND_BY_USERID, query="select uc.command from User_Command uc where uc.user.id = :userId")
+        @NamedQuery(name=User_Command.QUERY_FIND_ALL_PERSONALIZED_BY_USERID, query="SELECT c FROM Command c JOIN User_Command uc ON c.id = uc.command.id WHERE uc.user.id = :id")
 })
 public class User_Command {
 
-    public static final String QUERY_FIND_BY_USERID = "User_Command.findByUserId";
+    public static final String QUERY_FIND_ALL_PERSONALIZED_BY_USERID = "User_Command.findByUserId";
 
     @EmbeddedId
     @AttributeOverride(name="userId", column=@Column(name="user_id"))

@@ -6,5 +6,5 @@ import at.ac.htlleonding.model.User_Model;
 
 import java.util.List;
 
-public record UserDTO(String name, List<Setting> settings, List<User_Command> userCommands, List<User_Model> userModels) {
+public record UserDTO(Long id, String name) {
 }

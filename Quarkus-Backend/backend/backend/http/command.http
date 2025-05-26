@@ -1,0 +1,5 @@
+###
+GET http://localhost:8080/api/andromeda/command/getDefaultCommands
+
+###
+GET http://localhost:8080/api/andromeda/command/getCommandsByUser/1

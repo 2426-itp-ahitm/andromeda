@@ -23,8 +23,8 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(UserDTO userDTO) {
         try {
-            userRepository.addUser(userDTO);
-            return Response.status(Response.Status.OK).build();
+            User user = userRepository.addUser(userDTO);
+            return Response.status(Response.Status.OK).entity(user.getId()).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
@@ -33,13 +33,11 @@ public class UserResource {
     @PUT
     @Path("/updateUser")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response     updateUser(UserDTO userDTO) {
-        try {
-            userRepository.updateUser(userDTO);
-            return Response.status(Response.Status.OK).build();
-        } catch(Exception e ) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
+    public Response updateUser(UserDTO userDTO) {
+
+            UserDTO userDTOToReturn = userRepository.updateUser(userDTO);
+            return Response.status(Response.Status.OK).entity(userDTOToReturn).build();
+
     }
 
     @GET

@@ -20,8 +20,8 @@ public class CommandRepository {
         return entityManager.createNamedQuery(Command.QUERY_FIND_ALL_DEFAULT, Command.class).getResultList();
     }
 
-    public List<User_Command> getCommandsByUser(Long id) {
-        TypedQuery<User_Command> query = entityManager.createNamedQuery(User_Command.QUERY_FIND_BY_USERID, User_Command.class);
+    public List<Command> getCommandsByUser(Long id) {
+        TypedQuery<Command> query = entityManager.createNamedQuery(User_Command.QUERY_FIND_ALL_PERSONALIZED_BY_USERID, Command.class);
         query.setParameter("id", id);
         return query.getResultList();
     }
