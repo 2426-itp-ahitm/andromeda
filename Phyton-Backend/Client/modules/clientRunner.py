@@ -9,6 +9,8 @@ import threading
 
 class ClientRunner:
     def __init__(self):
+
+        
         self.data_queue = Queue()
         self.response_associator = responseAssosiator()
         self.chat_responder = chatResponder()
