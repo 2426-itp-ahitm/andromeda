@@ -2,6 +2,8 @@ package at.ac.htlleonding.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @NamedQueries({
         @NamedQuery(name=User_Command.QUERY_FIND_ALL_PERSONALIZED_BY_USERID, query="SELECT c FROM Command c JOIN User_Command uc ON c.id = uc.command.id WHERE uc.user.id = :id")
@@ -24,16 +26,15 @@ public class User_Command {
     private Command command;
 
     //it is "default" or "personalised"
-    private String type;
+    //private String type;
 
     public User_Command() {
     }
 
-    public User_Command(UserCommandId userCommandId, User user, Command command, String type) {
-        this.userCommandId = userCommandId;
+    public User_Command(User user, Command command /*, String type*/) {
         this.user = user;
         this.command = command;
-        this.type = type;
+        this.userCommandId = new UserCommandId(user.getId(), command.getId());
     }
 
     public UserCommandId getUserCommandId() {
@@ -60,11 +61,4 @@ public class User_Command {
         this.command = command;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

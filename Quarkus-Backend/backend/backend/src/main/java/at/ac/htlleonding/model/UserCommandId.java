@@ -8,32 +8,32 @@ import java.util.Objects;
 @Embeddable
 public class UserCommandId implements Serializable {
 
-    private Integer userId;
-    private Integer commandId;
+    private Long userId;
+    private Long commandId;
 
     public UserCommandId() {
 
 
     }
 
-    public UserCommandId(Integer userId, Integer commandId) {
+    public UserCommandId(Long userId, Long commandId) {
         this.userId = userId;
         this.commandId = commandId;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Integer getCommandId() {
+    public Long getCommandId() {
         return commandId;
     }
 
-    public void setCommandId(Integer commandId) {
+    public void setCommandId(Long commandId) {
         this.commandId = commandId;
     }
 

@@ -33,12 +33,10 @@ public class Command {
     public Command() {
     }
 
-    public Command(Long id, String type, String prompt, String code, List<User_Command> userCommands) {
-        this.id = id;
+    public Command(String type, String prompt, String code) {
         this.type = type;
         this.prompt = prompt;
         this.code = code;
-        this.userCommands = userCommands;
     }
 
     public Long getId() {
