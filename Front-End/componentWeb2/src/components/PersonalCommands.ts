@@ -1,66 +1,127 @@
 import { html, render } from 'lit-html';
-import { Component } from '../types';
+import { CommandService } from '../services/CommandService';
+import { Command, FrontendCommand } from '../interfaces/Command';
 
-export class PersonalCommands implements Component {
+export class PersonalCommands extends HTMLElement {
     container: HTMLElement | null = null;
-    private selectedType: string = 'personalized';
+    private commandService: CommandService;
+    private selectedType: 'personalized' | 'default' = 'personalized';
     private searchQuery: string = '';
+    private selectedCommands: Set<string> = new Set();
 
-    private commands = {
-        personalized: [
-            { text: 'Delete folder "Downloads"', category: 'file' },
-            { text: 'Create new folder "Projects"', category: 'file' },
-            { text: 'Start application "Visual Studio Code"', category: 'app' },
-            { text: 'Set system volume to 50%', category: 'system' },
-            { text: 'Open website "github.com"', category: 'web' },
-            { text: 'Take screenshot of current window', category: 'system' }
-        ],
-        default: [
-            { text: 'Open file explorer', category: 'file' },
-            { text: 'Close all windows', category: 'app' },
-            { text: 'Mute system volume', category: 'system' },
-            { text: 'Open browser', category: 'web' },
-            { text: 'Show desktop', category: 'system' }
-        ]
+    private commands: { personalized: FrontendCommand[], default: FrontendCommand[] } = {
+        personalized: [],
+        default: []
     };
 
+    constructor() {
+        super();
+        this.commandService = CommandService.getInstance();
+    }
+
     connectedCallback(): void {
-        this.container = document.createElement('div');
+        this.initialize();
+    }
+
+    private async initialize(): Promise<void> {
+        await this.loadCommands();
         this.render();
-        this.setupDropdownListener();
-        this.setupSearchListener();
+        this.setupEventListeners();
     }
 
-    private setupDropdownListener(): void {
-        const dropdown = this.container?.querySelector('.category-select select');
-        if (dropdown) {
-            dropdown.addEventListener('change', (e) => {
-                this.selectedType = (e.target as HTMLSelectElement).value;
+    private async loadCommands(): Promise<void> {
+        const allCommands = await this.commandService.getCommands();
+        this.commands = {
+            personalized: allCommands.filter(cmd => cmd.type === 'personalized').map(cmd => ({
+                text: cmd.prompt,
+                enabled: true,
+                type: cmd.type
+            })),
+            default: allCommands.filter(cmd => cmd.type === 'default').map(cmd => ({
+                text: cmd.prompt,
+                enabled: true,
+                type: cmd.type
+            }))
+        };
+    }
+
+    private setupEventListeners(): void {
+        // Dropdown listener
+        const dropdown = this.querySelector('.category-select select');
+        dropdown?.addEventListener('change', (e) => {
+            this.selectedType = (e.target as HTMLSelectElement).value as 'personalized' | 'default';
+            this.selectedCommands.clear();
+            this.render();
+            this.setupEventListeners();
+        });
+
+        // Search listener
+        const searchInput = this.querySelector('.search-bar input') as HTMLInputElement;
+        searchInput?.addEventListener('input', (e) => {
+            this.searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
+            this.render();
+            this.setupEventListeners();
+        });
+
+        // Bulk action listeners
+        const bulkEnableBtn = this.querySelector('.bulk-enable');
+        const bulkDisableBtn = this.querySelector('.bulk-disable');
+
+        bulkEnableBtn?.addEventListener('click', () => this.toggleBulkCommands(true));
+        bulkDisableBtn?.addEventListener('click', () => this.toggleBulkCommands(false));
+
+        // Command item listeners
+        const commandItems = this.querySelectorAll('.command-item');
+        commandItems?.forEach((item) => {
+            const checkbox = item.querySelector('.command-checkbox') as HTMLInputElement;
+            const toggleButton = item.querySelector('.toggle-button');
+            const commandText = item.querySelector('p')?.textContent || '';
+
+            checkbox?.addEventListener('change', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (checkbox.checked) {
+                    this.selectedCommands.add(commandText);
+                } else {
+                    this.selectedCommands.delete(commandText);
+                }
                 this.render();
             });
+
+            toggleButton?.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleCommand(commandText);
+            });
+        });
+    }
+
+    private toggleCommand(commandText: string): void {
+        const currentCommands = this.commands[this.selectedType];
+        const command = currentCommands.find(cmd => cmd.text === commandText);
+        if (command) {
+            command.enabled = !command.enabled;
+            this.render();
         }
     }
 
-    private setupSearchListener(): void {
-        const searchInput = this.container?.querySelector('.search-bar input') as HTMLInputElement;
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                this.searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
-                this.render();
-            });
-        }
+    private toggleBulkCommands(enabled: boolean): void {
+        const currentCommands = this.commands[this.selectedType];
+        currentCommands.forEach(cmd => {
+            if (this.selectedCommands.has(cmd.text)) {
+                cmd.enabled = enabled;
+            }
+        });
+        this.render();
     }
 
-    private getFilteredCommands(): Array<{ text: string; category: string }> {
-        const currentCommands = this.commands[this.selectedType as keyof typeof this.commands];
-        return currentCommands.filter(command => 
+    private getFilteredCommands(): FrontendCommand[] {
+        return this.commands[this.selectedType].filter(command => 
             command.text.toLowerCase().includes(this.searchQuery)
         );
     }
 
     render(): void {
-        if (!this.container) return;
-
         const filteredCommands = this.getFilteredCommands();
 
         const template = html`
@@ -87,14 +148,34 @@ export class PersonalCommands implements Component {
                     </select>
                 </div>
 
+                <div class="bulk-actions">
+                    <button class="bulk-enable">Enable Selected</button>
+                    <button class="bulk-disable">Disable Selected</button>
+                </div>
+
                 <div class="command-list">
                     ${filteredCommands.map(command => html`
-                        <p>${command.text}</p>
+                        <div class="command-item">
+                            <input 
+                                type="checkbox" 
+                                class="command-checkbox"
+                                ?checked=${this.selectedCommands.has(command.text)}
+                            >
+                            <p>${command.text}</p>
+                            <button 
+                                class="toggle-button ${command.enabled ? 'enabled' : 'disabled'}"
+                                type="button"
+                            >
+                                ${command.enabled ? 'Enabled' : 'Disabled'}
+                            </button>
+                        </div>
                     `)}
                 </div>
             </div>
         `;
 
-        render(template, this.container);
+        render(template, this);
     }
-} 
+}
+
+customElements.define('app-personal-commands', PersonalCommands);

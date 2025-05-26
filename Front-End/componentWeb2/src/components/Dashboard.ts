@@ -1,7 +1,6 @@
 import { html, render } from 'lit-html';
-import { Component } from '../types';
 
-export class Dashboard implements Component {
+class Dashboard extends HTMLElement {
   container: HTMLElement | null = null;
   private selectedMicrophone: string = 'THC-GamingSensoricMicro';
   private recentCommands: string[] = [
@@ -13,6 +12,7 @@ export class Dashboard implements Component {
 
   connectedCallback(): void {
     this.container = document.createElement('div');
+    this.appendChild(this.container); // Append the container to the component
     this.setupDropdownListener();
     this.render();
   }
@@ -50,7 +50,7 @@ export class Dashboard implements Component {
             <div class="stat-icon">📊</div>
             <div class="stat-info">
               <div class="stat-value">98%</div>
-              <div class="stat-label">Accuracy</div>
+              <div class="stat-label">Detection Accuracy</div>
             </div>
           </div>
           <div class="stat-card">
@@ -72,16 +72,19 @@ export class Dashboard implements Component {
         <div class="dashboard-sections">
           <div class="card microphone-section">
             <h2>Microphone Status</h2>
-            <div class="dropdown">
-              <span>${this.selectedMicrophone}</span>
-              <span>▼</span>
-              <div class="dropdown-content">
-                <a @click=${() => this.handleMicrophoneSelect('THC-GamingSensoricMicro')}>THC-GamingSensoricMicro</a>
-                <a @click=${() => this.handleMicrophoneSelect('USB-Microphone')}>USB-Microphone</a>
-                <a @click=${() => this.handleMicrophoneSelect('Bluetooth-Microphone')}>Bluetooth-Microphone</a>
-              </div>
-            </div>
             <div class="microphone-settings">
+              <div class="setting-item">
+                <label class="dropdown-label">Input Device</label>
+                <div class="dropdown">
+                  <span>${this.selectedMicrophone}</span>
+                  <span>▼</span>
+                  <div class="dropdown-content">
+                    <a @click=${() => this.handleMicrophoneSelect('THC-GamingSensoricMicro')}>THC-GamingSensoricMicro</a>
+                    <a @click=${() => this.handleMicrophoneSelect('USB-Microphone')}>USB-Microphone</a>
+                    <a @click=${() => this.handleMicrophoneSelect('Bluetooth-Microphone')}>Bluetooth-Microphone</a>
+                  </div>
+                </div>
+              </div>
               <div class="setting-item">
                 <label>Microphone Sensitivity</label>
                 <input type="range" min="0" max="100" value="75">
@@ -114,7 +117,7 @@ export class Dashboard implements Component {
             <div class="contact-info">
               <div class="contact-item">
                 <span class="contact-icon">📧</span>
-                <span>support@andromeda.ai</span>
+                <span>andromeda@gmail.com</span>
               </div>
               <div class="contact-item">
                 <span class="contact-icon">💬</span>
@@ -126,6 +129,8 @@ export class Dashboard implements Component {
       </div>
     `;
 
-    render(template, this.container);
+    render(template, this.container); // Render the template into the container
   }
-} 
+}
+
+customElements.define('app-dashboard', Dashboard);

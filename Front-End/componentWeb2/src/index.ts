@@ -1,23 +1,14 @@
 import { html, render } from 'lit-html';
-import { Dashboard } from './components/Dashboard';
-import { TechSettings } from './components/TechSettings';
-import { CustomCommands } from './components/CustomCommands';
-import { PersonalCommands } from './components/PersonalCommands';
-import { Sidebar } from './components/Sidebar';
-import { Component } from './types';
+import './components/Dashboard';
+import './components/TechSettings';
+import './components/CustomCommands';
+import './components/PersonalCommands';
+import './components/GeneralSettings';
+import './components/Sidebar';
 import './styles.css';
-
-interface Components {
-  dashboard: Dashboard;
-  techSettings: TechSettings;
-  customCommands: CustomCommands;
-  personalCommands: PersonalCommands;
-}
 
 class App {
   private container: HTMLElement | null = null;
-  private sidebar: Sidebar;
-  private components: Components;
   private currentPage: string = 'dashboard';
   private isNavigating: boolean = false;
 
@@ -26,21 +17,6 @@ class App {
     if (!this.container) {
       throw new Error('App container not found');
     }
-    
-    // Initialize sidebar
-    this.sidebar = new Sidebar();
-    this.components = {
-      dashboard: new Dashboard(),
-      techSettings: new TechSettings(),
-      customCommands: new CustomCommands(),
-      personalCommands: new PersonalCommands()
-    };
-
-    // Initialize components
-    this.sidebar.connectedCallback();
-    Object.values(this.components).forEach(component => {
-      component.connectedCallback();
-    });
 
     // Set up event listeners
     document.addEventListener('pageChange', (e: Event) => {
@@ -53,46 +29,45 @@ class App {
 
   private handlePageChange(page: string): void {
     if (this.isNavigating || page === this.currentPage) return;
-    
+
     this.isNavigating = true;
     this.currentPage = page;
-    this.sidebar.setCurrentPage(page);
     this.render();
     this.isNavigating = false;
-  }
-
-  private getCurrentComponent(): Component {
-    switch (this.currentPage) {
-      case 'dashboard':
-        return this.components.dashboard;
-      case 'tech-settings':
-        return this.components.techSettings;
-      case 'custom-commands':
-        return this.components.customCommands;
-      case 'personal-commands':
-        return this.components.personalCommands;
-      default:
-        return this.components.dashboard;
-    }
   }
 
   private render(): void {
     if (!this.container) return;
 
-    const currentComponent = this.getCurrentComponent();
-
     const template = html`
       <div class="app">
-        ${this.sidebar.container}
+        <app-sidebar current-page=${this.currentPage}></app-sidebar>
         <div class="content">
-          ${currentComponent.container}
+          ${this.getCurrentComponent()}
         </div>
       </div>
     `;
 
     render(template, this.container);
   }
+
+  private getCurrentComponent(): HTMLElement {
+    switch (this.currentPage) {
+      case 'dashboard':
+        return document.createElement('app-dashboard'); // Ensure this matches the component name
+      case 'tech-settings':
+        return document.createElement('app-tech-settings');
+      case 'custom-commands':
+        return document.createElement('app-custom-commands');
+      case 'personal-commands':
+        return document.createElement('app-personal-commands');
+      case 'general-settings':
+        return document.createElement('app-general-settings');
+      default:
+        return document.createElement('app-dashboard'); // Fallback to dashboard
+    }
+  }
 }
 
 // Start the application
-new App(); 
+new App();

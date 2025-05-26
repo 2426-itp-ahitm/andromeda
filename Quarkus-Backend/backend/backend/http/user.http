@@ -1,0 +1,19 @@
+###
+POST http://localhost:8080/api/andromeda/user/addUser
+Content-Type: application/json
+
+{
+  "name": "Harald"
+}
+
+###
+PUT http://localhost:8080/api/andromeda/user/updateUser
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Harald"
+}
+
+###
+GET http://localhost:8080/api/andromeda/user/getUsers
