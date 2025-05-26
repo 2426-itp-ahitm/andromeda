@@ -122,3 +122,4 @@ INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-ja-
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-ja-0.22', '1G', 'Japanese', 0);
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-eo-0.42', '42M', 'Esperanto', 0);
 
+SELECT setval('command_id_seq', (SELECT MAX(id) FROM command));

@@ -2,12 +2,11 @@ package at.ac.htlleonding.resource;
 
 import at.ac.htlleonding.model.Command;
 import at.ac.htlleonding.model.User_Command;
+import at.ac.htlleonding.model.dto.CommandDTO;
 import at.ac.htlleonding.repository.CommandRepository;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
@@ -39,8 +38,10 @@ public class CommandResource {
     }
 
     @POST
-    @Path("/addCommandToUser/{userId}")
-    public Response addCommandToUser() {
-        return Response.status(Response.Status.OK).build();
+    @Path("/addCommand/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addCommandToUser(CommandDTO commandDTO) {
+        Command command = commandRepository.addCommand(commandDTO);
+        return Response.status(Response.Status.OK).entity(command).build();
     }
 }
