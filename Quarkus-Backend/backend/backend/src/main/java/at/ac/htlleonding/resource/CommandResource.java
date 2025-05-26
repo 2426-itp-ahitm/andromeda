@@ -42,6 +42,9 @@ public class CommandResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addCommandToUser(CommandDTO commandDTO) {
         Command command = commandRepository.addCommand(commandDTO);
+        if(command == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
         return Response.status(Response.Status.OK).entity(command).build();
     }
 }

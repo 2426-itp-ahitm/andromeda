@@ -42,8 +42,9 @@ public class CommandRepository {
                 entityManager.persist(command);
                 User_Command userCommand = new User_Command(user, command);
                 entityManager.persist(userCommand);
+                return command;
         }
-        return command;
+        return null;
         }
     }
 
