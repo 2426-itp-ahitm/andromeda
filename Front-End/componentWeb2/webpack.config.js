@@ -52,6 +52,20 @@ module.exports = {
     port: 9001,
     historyApiFallback: true,
     hot: true,
-    open: true
+    open: true,
+    proxy: [{
+      context: ['/api'],
+      target: 'http://localhost:8080',
+      secure: false,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': ''
+      }
+    }],
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
   }
-}; 
+};

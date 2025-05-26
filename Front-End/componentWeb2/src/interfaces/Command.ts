@@ -2,17 +2,15 @@
 export interface Command {
     // Backend properties
     id: string;
-    name: string;
+    type: string;
+    prompt: string;
     code: string;
-    category: string;
-    createdAt: Date;
-    updatedAt: Date;
     lastUsed?: Date;
 }
 
 // Frontend command interface
 export interface FrontendCommand {
     text: string;
-    category: string;
+    type: string;
     enabled: boolean;
 } 
