@@ -11,7 +11,7 @@ class responseAssosiator():
     standartPromt = None
 
     def __init__(self):
-        self.assosListBuilder = listBuilder(pathToPromtList)
+        self.assosListBuilder = listBuilder(defURL=pathToPromtList, persURL='http://localhost:8080/api/andromeda/command/getCommandsByUser/1')
         self.errListBuilder = errorListBuilder(pathToErrorList)
         self.standartPromt = [
             ["system", system_promt],
