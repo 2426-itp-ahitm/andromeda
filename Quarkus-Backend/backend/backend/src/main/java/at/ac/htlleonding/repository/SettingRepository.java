@@ -31,10 +31,14 @@ public class SettingRepository {
     }
 
     @Transactional
-    public void deleteSetting(Long id) {
-        Setting setting = entityManager.find(Setting.class, id);
-        if(setting != null) {
-            entityManager.remove(setting);
+    public void deleteSetting(Long userId, String settingName) {
+        List<SettingDTO> settings = getSettingsByUser(userId);
+        for (SettingDTO setting : settings) {
+            if(setting.name().equals(settingName)) {
+                entityManager.remove(setting);
+                return;
+            }
+            //throw new Exception()
         }
     }
 

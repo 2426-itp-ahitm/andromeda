@@ -1,5 +1,6 @@
 package at.ac.htlleonding.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -26,17 +27,16 @@ public class Command {
     private String code;
 
     @OneToMany(mappedBy = "command", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     public List<User_Command> userCommands = new ArrayList<>();
 
     public Command() {
     }
 
-    public Command(Long id, String type, String prompt, String code, List<User_Command> userCommands) {
-        this.id = id;
+    public Command(String type, String prompt, String code) {
         this.type = type;
         this.prompt = prompt;
         this.code = code;
-        this.userCommands = userCommands;
     }
 
     public Long getId() {

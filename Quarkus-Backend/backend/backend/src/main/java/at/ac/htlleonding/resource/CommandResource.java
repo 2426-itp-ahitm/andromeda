@@ -2,11 +2,11 @@ package at.ac.htlleonding.resource;
 
 import at.ac.htlleonding.model.Command;
 import at.ac.htlleonding.model.User_Command;
+import at.ac.htlleonding.model.dto.CommandDTO;
 import at.ac.htlleonding.repository.CommandRepository;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.List;
@@ -32,11 +32,19 @@ public class CommandResource {
     @Path("/getCommandsByUser/{userId}")
     public Response getCommandsByUser(@PathParam("userId") Long userId) {
         //todo: repo getCommandsByUser
-        try {
-            List<User_Command> commands = commandRepository.getCommandsByUser(userId);
+            List<Command> commands = commandRepository.getCommandsByUser(userId);
             return Response.status(Response.Status.OK).entity(commands).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+
+    }
+
+    @POST
+    @Path("/addCommand/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addCommandToUser(CommandDTO commandDTO) {
+        Command command = commandRepository.addCommand(commandDTO);
+        if(command == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
+        return Response.status(Response.Status.OK).entity(command).build();
     }
 }

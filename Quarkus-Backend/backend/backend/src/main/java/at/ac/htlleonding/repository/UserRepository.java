@@ -17,14 +17,21 @@ public class UserRepository {
     EntityManager entityManager;
 
     @Transactional
-    public void updateUser(UserDTO userDTO) {
-        entityManager.merge(userDTO);
+    public UserDTO updateUser(UserDTO userDTO) {
+        User user = entityManager.find(User.class, userDTO.id());
+        if(userDTO.name() != null) {
+        user.setName(userDTO.name());
+        entityManager.merge(user);
+        }
+        UserDTO userDTOToReturn = new UserDTO(user.getId(), userDTO.name());
+        return userDTOToReturn;
     }
 
     @Transactional
-    public void addUser(UserDTO userDTO) {
+    public User addUser(UserDTO userDTO) {
         User user = new User(userDTO.name(), null, null, null);
         entityManager.persist(user);
+        return user;
     }
 
     public List<User> getUsers() {

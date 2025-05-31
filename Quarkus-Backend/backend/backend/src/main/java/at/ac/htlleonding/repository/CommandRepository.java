@@ -1,11 +1,14 @@
 package at.ac.htlleonding.repository;
 
 import at.ac.htlleonding.model.Command;
+import at.ac.htlleonding.model.User;
 import at.ac.htlleonding.model.User_Command;
+import at.ac.htlleonding.model.dto.CommandDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -20,9 +23,28 @@ public class CommandRepository {
         return entityManager.createNamedQuery(Command.QUERY_FIND_ALL_DEFAULT, Command.class).getResultList();
     }
 
-    public List<User_Command> getCommandsByUser(Long id) {
-        TypedQuery<User_Command> query = entityManager.createNamedQuery(User_Command.QUERY_FIND_BY_USERID, User_Command.class);
+    public List<Command> getCommandsByUser(Long id) {
+        TypedQuery<Command> query = entityManager.createNamedQuery(User_Command.QUERY_FIND_ALL_PERSONALIZED_BY_USERID, Command.class);
         query.setParameter("id", id);
         return query.getResultList();
     }
-}
+
+    @Transactional
+    public Command addCommand(CommandDTO commandDTO) {
+        if(commandDTO.userId() == null) {
+            Command command = new Command("default", commandDTO.prompt(), commandDTO.code());
+            entityManager.persist(command);
+            return command;
+        }
+            User user = entityManager.find(User.class, commandDTO.userId());
+        Command command = new Command("personalized", commandDTO.prompt(), commandDTO.code());
+        if(user != null) {
+                entityManager.persist(command);
+                User_Command userCommand = new User_Command(user, command);
+                entityManager.persist(userCommand);
+                return command;
+        }
+        return null;
+        }
+    }
+

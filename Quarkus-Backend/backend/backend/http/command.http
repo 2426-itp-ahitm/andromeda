@@ -1,0 +1,45 @@
+###
+GET http://localhost:8080/api/andromeda/command/getDefaultCommands
+
+###
+GET http://localhost:8080/api/andromeda/command/getCommandsByUser/1
+
+###
+POST http://localhost:8080/api/andromeda/command/addCommand/
+Content-Type: application/json
+
+{
+  "code": "2",
+  "prompt": "hallo",
+  "userId": 1
+}
+
+###
+POST http://localhost:8080/api/andromeda/command/addCommand/
+Content-Type: application/json
+
+{
+  "code": "2",
+  "prompt": "hall2",
+  "userId": 1
+}
+
+###
+POST http://localhost:8080/api/andromeda/command/addCommand/
+Content-Type: application/json
+
+{
+  "code": "3",
+  "prompt": "hallo3",
+  "userId": 1
+}
+
+###
+POST http://localhost:8080/api/andromeda/command/addCommand/
+Content-Type: application/json
+
+{
+  "code": "2",
+  "prompt": "TSCHÜSS",
+  "userId": null
+}

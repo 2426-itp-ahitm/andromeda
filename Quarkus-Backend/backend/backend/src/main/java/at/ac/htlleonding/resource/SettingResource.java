@@ -32,11 +32,10 @@ public class SettingResource {
     }
 
     @DELETE
-    @Path("/removeSettingOfUser")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response removeSetting(Long id) {
+    @Path("/removeSettingOfUser/{userId}/{settingName}")
+    public Response removeSetting(@PathParam("userId") Long userId, @PathParam("settingName") String settingName) {
         try {
-            settingRepository.deleteSetting(id);
+            settingRepository.deleteSetting(userId, settingName);
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
