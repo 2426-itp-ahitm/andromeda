@@ -78,6 +78,10 @@ class Sidebar extends HTMLElement {
                 <span>⚙️</span>
                 General Settings
                 </div>
+                <div class="menu-item ${this.currentPage === 'account-settings' ? 'active' : ''}" data-page="account-settings" style="${this.currentPage === 'account-settings' ? 'background-color: #57536d;' : ''}">
+                <span>⚙️</span>
+                Account Settings
+                </div>
             </nav>
             </div>
         `, this);

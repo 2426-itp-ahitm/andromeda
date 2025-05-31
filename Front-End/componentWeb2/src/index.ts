@@ -63,6 +63,8 @@ class App {
         return document.createElement('app-personal-commands');
       case 'general-settings':
         return document.createElement('app-general-settings');
+      case 'account-settings':
+        return document.createElement('app-account-settings');
       default:
         return document.createElement('app-dashboard'); // Fallback to dashboard
     }
