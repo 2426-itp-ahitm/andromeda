@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Elemente Übersicht</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="content">
+        <h1>UI Elemente Übersicht</h1>
+
+        <!-- Headings Section -->
+        <div class="card">
+            <h2>Überschriften</h2>
+            <div>
+                <h1>Überschrift H1</h1>
+                <h2>Überschrift H2</h2>
+                <h3>Überschrift H3</h3>
+                <h4>Überschrift H4</h4>
+                <h5>Überschrift H5</h5>
+                <h6>Überschrift H6</h6>
+            </div>
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="card">
+            <h2>Buttons</h2>
+            <div>
+                <div class="setting-item">
+                    <button class="primary">Primär Button</button>
+                    <button class="secondary">Sekundär Button</button>
+                    <button class="success">Erfolg Button</button>
+                    <button class="danger">Gefahr Button</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Fields Section -->
+        <div class="card">
+            <h2>Eingabefelder</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Text Eingabe:</label>
+                    <input type="text" placeholder="Text Eingabe" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>Zahlen Eingabe:</label>
+                    <input type="number" placeholder="Zahlen Eingabe" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>E-Mail Eingabe:</label>
+                    <input type="email" placeholder="E-Mail Eingabe" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>Passwort:</label>
+                    <input type="password" placeholder="Passwort" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>Telefon:</label>
+                    <input type="tel" placeholder="Telefonnummer" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>URL:</label>
+                    <input type="url" placeholder="https://" class="setting-value">
+                </div>
+            </div>
+        </div>
+
+        <!-- Date and Time Section -->
+        <div class="card">
+            <h2>Datum und Zeit</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Datum:</label>
+                    <input type="date" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>Zeit:</label>
+                    <input type="time" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>Datum und Zeit:</label>
+                    <input type="datetime-local" class="setting-value">
+                </div>
+            </div>
+        </div>
+
+        <!-- Radio Buttons Section -->
+        <div class="card">
+            <h2>Radio Buttons</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Option 1</label>
+                    <input type="radio" name="option" value="1" class="command-checkbox">
+                </div>
+                <div class="setting-item">
+                    <label>Option 2</label>
+                    <input type="radio" name="option" value="2" class="command-checkbox">
+                </div>
+                <div class="setting-item">
+                    <label>Option 3</label>
+                    <input type="radio" name="option" value="3" class="command-checkbox">
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkboxes Section -->
+        <div class="card">
+            <h2>Checkboxen</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Option A</label>
+                    <input type="checkbox" value="1" class="command-checkbox">
+                </div>
+                <div class="setting-item">
+                    <label>Option B</label>
+                    <input type="checkbox" value="2" class="command-checkbox">
+                </div>
+                <div class="setting-item">
+                    <label>Option C</label>
+                    <input type="checkbox" value="3" class="command-checkbox">
+                </div>
+            </div>
+        </div>
+
+        <!-- Select Dropdown Section -->
+        <div class="card">
+            <h2>Auswahlmenü</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Einfache Auswahl:</label>
+                    <select class="setting-value">
+                        <option value="">Bitte wählen</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Mehrfachauswahl:</label>
+                    <select multiple class="setting-value">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Textarea Section -->
+        <div class="card">
+            <h2>Textbereich</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Mehrzeiliger Text:</label>
+                    <textarea class="setting-value" placeholder="Geben Sie hier Ihren Text ein..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toggle Switches Section -->
+        <div class="card">
+            <h2>Toggle Switches</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Toggle 1</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>Toggle 2</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sliders Section -->
+        <div class="card">
+            <h2>Slider</h2>
+            <div>
+                <div class="setting-item">
+                    <label>Wert 1:</label>
+                    <input type="range" min="0" max="100" value="50" class="setting-value">
+                </div>
+                <div class="setting-item">
+                    <label>Wert 2:</label>
+                    <input type="range" min="0" max="100" value="75" class="setting-value">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
