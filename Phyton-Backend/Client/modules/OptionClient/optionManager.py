@@ -1,6 +1,6 @@
 import requests
 from helpers.config import (
-    system_promt, error_promt, pathToSysCommandList, pathToPromtList,
+    system_promt, error_promt, pathToCommandList, pathToPromtList,
     pathToErrorList, MODEL_ENGLISH_PATH, MODEL_GERMAN_PATH,
     pathToScreenshotFolder, selected_module, keyword, CONFIG_FILE_PATH
 )
@@ -9,7 +9,7 @@ class OptionManager:
     def __init__(self):
         self.system_prompt = system_promt.replace("\\", "\\\\")
         self.error_prompt = error_promt.replace("\\", "\\\\")
-        self.path_to_sys_command_list = pathToSysCommandList.replace("\\", "\\\\")
+        self.path_to_sys_command_list = pathToCommandList.replace("\\", "\\\\")
         self.path_to_prompt_list = pathToPromtList.replace("\\", "\\\\")
         self.path_to_error_list = pathToErrorList.replace("\\", "\\\\")
         self.model_english_path = MODEL_ENGLISH_PATH.replace("\\", "\\\\")
@@ -25,7 +25,7 @@ class OptionManager:
             configfile.write(f'CONFIG_FILE_PATH = "{self.CONFIG_FILE_PATH}"\n')
             configfile.write(f'system_promt = "{self.system_prompt}"\n')
             configfile.write(f'error_promt = "{self.error_prompt}"\n')
-            configfile.write(f'pathToSysCommandList = "{self.path_to_sys_command_list}"\n')
+            configfile.write(f'pathToCommandList = "{self.path_to_sys_command_list}"\n')
             configfile.write(f'pathToPromtList = "{self.path_to_prompt_list}"\n')
             configfile.write(f'pathToErrorList = "{self.path_to_error_list}"\n')
             configfile.write(f'MODEL_ENGLISH_PATH = "{self.model_english_path}"\n')
