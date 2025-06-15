@@ -35,32 +35,33 @@ CREATE TRIGGER trigger_insert_default_settings
     FOR EACH ROW
 EXECUTE FUNCTION insert_default_settings();
 */
-
-insert into command(id, type, prompt, code) values (1, 'default', 'Verschiebe Datei (A) nach (B)', "testCode1");
-insert into command(id, type, prompt, code) values (2, 'default', 'Schalte den Rechner aus', "testCode2");
-insert into command(id, type, prompt, code) values (3, 'default', 'Öffne Programm (A)', "testCode3");
-insert into command(id, type, prompt, code) values (4, 'default', 'Schließe Programm (A)', "testCode4");
-insert into command(id, type, prompt, code) values (5, 'default', 'Führe ein git commit aus', "testCode5");
-insert into command(id, type, prompt, code) values (6, 'default', 'Spiel die Wiedergabe', "testCode6");
-insert into command(id, type, prompt, code) values (7, 'default', 'Pausiere die Wiedergabe', "testCode7");
-insert into command(id, type, prompt, code) values (8, 'default', 'Komprimiere Datei (A)', "testCode8");
-insert into command(id, type, prompt, code) values (9, 'default', 'Suche Datei (A)', "testCode9");
-insert into command(id, type, prompt, code) values (10, 'default', 'Geh in Verzeichnis (A)', "testCode10");
-insert into command(id, type, prompt, code) values (11, 'default', 'Schalte dich selbst aus', "testCode11");
-insert into command(id, type, prompt, code) values (12, 'default', 'öffne das Fenster (A)', "testCode12");
-insert into command(id, type, prompt, code) values (13, 'default', 'schließe das Fenster (A)', "testCode13");
-insert into command(id, type, prompt, code) values (14, 'default', 'maximiere das Fenster (A)', "testCode14");
-insert into command(id, type, prompt, code) values (15, 'default', 'minimiere das Fenster (A)', "testCode15");
-insert into command(id, type, prompt, code) values (16, 'default', 'setze die Lautstärke auf (A)', "testCode16");
-insert into command(id, type, prompt, code) values (17, 'default', 'stumme die Audio', "testCod17e");
-insert into command(id, type, prompt, code) values (18, 'default', 'setze die Helligkeit auf (A)', "testCode18");
-insert into command(id, type, prompt, code) values (19, 'default', 'Erhöhe die Helligkeit um (A)', "testCode19");
-insert into command(id, type, prompt, code) values (20, 'default', 'Mach die Helligkeit niedriger um (A)', "testCode20");
-insert into command(id, type, prompt, code) values (21, 'default', 'Erhöhe die Lautstärke um (A)', "testCode21");
-insert into command(id, type, prompt, code) values (22, 'default', 'Mach die Lautstärke niedriger um (A)', "testCode22");
-insert into command(id, type, prompt, code) values (23, 'default', 'Mache einen Screenshot von (A)', "testCode23");
-insert into command(id, type, prompt, code) values (24, 'default', 'Nächstes Lied', "testCode24");
-insert into command(id, type, prompt, code) values (25, 'default', 'Lied zurück', "testCode25");
+/*
+insert into command(id, type, prompt, code) values (1, 'default', 'Verschiebe Datei (A) nach (B)', 'testCode1');
+insert into command(id, type, prompt, code) values (2, 'default', 'Schalte den Rechner aus', 'testCode2');
+insert into command(id, type, prompt, code) values (3, 'default', 'Öffne Programm (A)', 'testCode3');
+insert into command(id, type, prompt, code) values (4, 'default', 'Schließe Programm (A)', 'testCode4');
+insert into command(id, type, prompt, code) values (5, 'default', 'Führe ein git commit aus', 'testCode5');
+insert into command(id, type, prompt, code) values (6, 'default', 'Spiel die Wiedergabe', 'testCode6');
+insert into command(id, type, prompt, code) values (7, 'default', 'Pausiere die Wiedergabe', 'testCode7');
+insert into command(id, type, prompt, code) values (8, 'default', 'Komprimiere Datei (A)', 'testCode8');
+insert into command(id, type, prompt, code) values (9, 'default', 'Suche Datei (A)', 'testCode9');
+insert into command(id, type, prompt, code) values (10, 'default', 'Geh in Verzeichnis (A)', 'testCode10');
+insert into command(id, type, prompt, code) values (11, 'default', 'Schalte dich selbst aus', 'testCode11');
+insert into command(id, type, prompt, code) values (12, 'default', 'öffne das Fenster (A)', 'testCode12');
+insert into command(id, type, prompt, code) values (13, 'default', 'schließe das Fenster (A)', 'testCode13');
+insert into command(id, type, prompt, code) values (14, 'default', 'maximiere das Fenster (A)', 'testCode14');
+insert into command(id, type, prompt, code) values (15, 'default', 'minimiere das Fenster (A)', 'testCode15');
+insert into command(id, type, prompt, code) values (16, 'default', 'setze die Lautstärke auf (A)', 'testCode16');
+insert into command(id, type, prompt, code) values (17, 'default', 'stumme die Audio', 'testCod17e');
+insert into command(id, type, prompt, code) values (18, 'default', 'setze die Helligkeit auf (A)', 'testCode18');
+insert into command(id, type, prompt, code) values (19, 'default', 'Erhöhe die Helligkeit um (A)', 'testCode19');
+insert into command(id, type, prompt, code) values (20, 'default', 'Mach die Helligkeit niedriger um (A)', 'testCode20');
+insert into command(id, type, prompt, code) values (21, 'default', 'Erhöhe die Lautstärke um (A)', 'testCode21');
+insert into command(id, type, prompt, code) values (22, 'default', 'Mach die Lautstärke niedriger um (A)', 'testCode22');
+insert into command(id, type, prompt, code) values (23, 'default', 'Mache einen Screenshot von (A)', 'testCode23');
+insert into command(id, type, prompt, code) values (24, 'default', 'Nächstes Lied', 'testCode24');
+insert into command(id, type, prompt, code) values (25, 'default', 'Lied zurück', 'testCode25');
+*/
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-en-us-0.15', '40M', 'English', 0);
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-en-us-0.22', '1.8G', 'English', 0);
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-en-us-0.22-lgraph', '128M', 'English', 0);
@@ -122,6 +123,8 @@ INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-ja-
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-ja-0.22', '1G', 'Japanese', 0);
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-eo-0.42', '42M', 'Esperanto', 0);
 
+
+ */
 SELECT setval('command_id_seq', (SELECT MAX(id) FROM command));
 
 /* insert into command("codexy", "code xy ausführen", "personalized");
