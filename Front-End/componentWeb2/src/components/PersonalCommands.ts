@@ -7,7 +7,6 @@ export class PersonalCommands extends HTMLElement {
     private commandService: CommandService;
     private selectedType: 'personalized' | 'default' = 'personalized';
     private searchQuery: string = '';
-    private selectedCommands: Set<string> = new Set();
 
     private commands: { personalized: FrontendCommand[], default: FrontendCommand[] } = {
         personalized: [],
@@ -46,16 +45,13 @@ export class PersonalCommands extends HTMLElement {
     }
 
     private setupEventListeners(): void {
-        // Dropdown listener
         const dropdown = this.querySelector('.category-select select');
         dropdown?.addEventListener('change', (e) => {
             this.selectedType = (e.target as HTMLSelectElement).value as 'personalized' | 'default';
-            this.selectedCommands.clear();
             this.render();
             this.setupEventListeners();
         });
 
-        // Search listener
         const searchInput = this.querySelector('.search-bar input') as HTMLInputElement;
         searchInput?.addEventListener('input', (e) => {
             this.searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
@@ -63,30 +59,16 @@ export class PersonalCommands extends HTMLElement {
             this.setupEventListeners();
         });
 
-        // Bulk action listeners
         const bulkEnableBtn = this.querySelector('.bulk-enable');
         const bulkDisableBtn = this.querySelector('.bulk-disable');
 
         bulkEnableBtn?.addEventListener('click', () => this.toggleBulkCommands(true));
         bulkDisableBtn?.addEventListener('click', () => this.toggleBulkCommands(false));
 
-        // Command item listeners
         const commandItems = this.querySelectorAll('.command-item');
         commandItems?.forEach((item) => {
-            const checkbox = item.querySelector('.command-checkbox') as HTMLInputElement;
             const toggleButton = item.querySelector('.toggle-button');
             const commandText = item.querySelector('p')?.textContent || '';
-
-            checkbox?.addEventListener('change', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (checkbox.checked) {
-                    this.selectedCommands.add(commandText);
-                } else {
-                    this.selectedCommands.delete(commandText);
-                }
-                this.render();
-            });
 
             toggleButton?.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -108,9 +90,7 @@ export class PersonalCommands extends HTMLElement {
     private toggleBulkCommands(enabled: boolean): void {
         const currentCommands = this.commands[this.selectedType];
         currentCommands.forEach(cmd => {
-            if (this.selectedCommands.has(cmd.text)) {
-                cmd.enabled = enabled;
-            }
+            cmd.enabled = enabled;
         });
         this.render();
     }
@@ -149,24 +129,16 @@ export class PersonalCommands extends HTMLElement {
                 </div>
 
                 <div class="bulk-actions">
-                    <button class="bulk-enable">Enable Selected</button>
-                    <button class="bulk-disable">Disable Selected</button>
+                    <button class="bulk-enable">Enable All</button>
+                    <button class="bulk-disable">Disable All</button>
                 </div>
 
                 <div class="command-list">
                     ${filteredCommands.map(command => html`
                         <div class="command-item">
-                            <input 
-                                type="checkbox" 
-                                class="command-checkbox"
-                                ?checked=${this.selectedCommands.has(command.text)}
-                            >
                             <p>${command.text}</p>
-                            <button 
-                                class="toggle-button ${command.enabled ? 'enabled' : 'disabled'}"
-                                type="button"
-                            >
-                                ${command.enabled ? 'Enabled' : 'Disabled'}
+                            <button class="toggle-button ${command.enabled ? 'enabled' : 'disabled'}"
+                                type="button">${command.enabled ? 'Enabled' : 'Disabled'}
                             </button>
                         </div>
                     `)}
