@@ -47,4 +47,5 @@ jobs:
           PGPASSWORD: demo
 
       - name: Build and run tests
+        working-directory: Quarkus-Backend/backend
         run: mvn clean test
