@@ -1,4 +1,4 @@
-name: Backend Request testing
+name: Java CI with Quarkus and PostgreSQL
 
 on:
   push:
@@ -29,13 +29,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set executable permission for mvnw
-        run: chmod +x mvnw
-
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
 
       - name: Wait for Postgres to be ready
@@ -48,4 +45,4 @@ jobs:
           PGPASSWORD: demo
 
       - name: Build and test with Maven
-        run: ./mvnw clean verify
+        run: mvn clean verify
