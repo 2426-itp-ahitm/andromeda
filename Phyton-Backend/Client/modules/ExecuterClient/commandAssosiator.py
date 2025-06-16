@@ -10,13 +10,21 @@ class commandAssosiator:
         self.lister = commandLister(pathToCommandList)
         
     def assosiate(self,number,params):
-        command_name = self.lister.get_commands(number)
+        command_name = str(number)
 
         if str(command_name).endswith('.py'):
             command_name = command_name[:-3]
-        command_class_name = f"ExecuterClient.commands.systemCommands.{command_name}.{command_name}"
-        module_name, class_name = command_class_name.rsplit('.', 1)
-        module = importlib.import_module(module_name)
-        command_class = getattr(module, class_name)
-        executer = commandExecuter()
-        executer.execute(command_class, params=params)
+        module_path = f"ExecuterClient.commands.testFolder2.{command_name}"
+        module = importlib.import_module(module_path)
+        # Get the first class defined in the module
+        command_class = None
+        for attr_name in dir(module):
+            attr = getattr(module, attr_name)
+            if isinstance(attr, type):  # Check if it's a class
+                command_class = attr
+                break
+        if command_class:
+            executer = commandExecuter()
+            executer.execute(command_class, params=params)
+        else:
+            raise ValueError(f"No class found in module {module_path}")
