@@ -1,0 +1,184 @@
+openapi: 3.0.0
+info:
+  title: Andromeda API
+  version: 1.0.0
+  description: API für User, Settings, Models und Commands
+
+servers:
+  - url: http://localhost:8080/api/andromeda
+
+paths:
+
+  /user/addUser:
+    post:
+      summary: Benutzer hinzufügen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+                - name
+      responses:
+        '200':
+          description: Benutzer erfolgreich hinzugefügt
+
+  /user/updateUser:
+    put:
+      summary: Benutzer aktualisieren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+              required:
+                - id
+                - name
+      responses:
+        '200':
+          description: Benutzer aktualisiert
+
+  /user/getUsers:
+    get:
+      summary: Alle Benutzer abrufen
+      responses:
+        '200':
+          description: Liste der Benutzer
+
+  /setting/addSettingToUser:
+    post:
+      summary: Setting zu Benutzer hinzufügen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Payload nicht definiert
+      responses:
+        '200':
+          description: Setting hinzugefügt
+
+  /setting/removeSettingOfUser/{userId}/{path}:
+    delete:
+      summary: Setting eines Benutzers entfernen
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Setting entfernt
+
+  /setting/updateSettingOfUser:
+    put:
+      summary: Setting eines Benutzers aktualisieren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Inhalt nicht definiert
+      responses:
+        '200':
+          description: Setting aktualisiert
+
+  /setting/getSettingsByUser/{userId}:
+    get:
+      summary: Alle Settings eines Benutzers abrufen
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Liste der Settings
+
+  /setting/getSettingByUser/{userId}/{path}:
+    get:
+      summary: Einzelnes Setting eines Benutzers abrufen
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Setting gefunden
+
+  /model/getModels:
+    get:
+      summary: Modelle abrufen
+      responses:
+        '200':
+          description: Liste der Modelle
+
+  /command/getDefaultCommands:
+    get:
+      summary: Standardbefehle abrufen
+      responses:
+        '200':
+          description: Liste der Standardbefehle
+
+  /command/getCommandsByUser/{userId}:
+    get:
+      summary: Benutzerbezogene Befehle abrufen
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Liste der Befehle
+
+  /command/addCommand/:
+    post:
+      summary: Befehl hinzufügen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                prompt:
+                  type: string
+                userId:
+                  type: integer
+                  nullable: true
+              required:
+                - code
+                - prompt
+      responses:
+        '200':
+          description: Befehl hinzugefügt
