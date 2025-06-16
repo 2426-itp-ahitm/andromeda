@@ -1,0 +1,404 @@
+GET http://localhost:8080/api/andromeda/user/1/prompts
+Content-Type: */*
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-03-06T111136-1.200.json
+
+###
+
+GET http://localhost:8080/api/andromeda/prompts/listAll
+Content-Type: */*
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-03-06T111136.200.json
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 58
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+"userId": 1,
+"content": "setze die Helligkeit auf (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 46
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+"userId": 1,
+"content": "stumme die Audio"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 63
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "setze die Lautstärke auf (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 59
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "minimiere das Fenster (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 59
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "maximiere das Fenster (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 59
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "schließe das Fenster (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 52
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+"userId": 1,
+"content": "öffne das Fenster (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 57
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Schalte dich selbst aus"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 56
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Geh in Verzeichnis (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 49
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Suche Datei (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 55
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Komprimiere Datei (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 57
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Pausiere die Wiedergabe"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 54
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Spiel die Wiedergabe"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 59
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Führe ein git commit aus"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 56
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Schließe Programm (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Öffne Programm (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 57
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Schalte den Rechner aus"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 63
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Verschiebe Datei (A) nach (B)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 26
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Ursula"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 29
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Friedolin"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 27
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Brionka"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 25
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Peter"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Öffne Programm (A)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addPrompt
+Content-Type: application/json
+Content-Length: 63
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "userId": 1,
+  "content": "Verschiebe Datei (A) nach (B)"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 29
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Friedolin"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 27
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Brionka"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 25
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Peter"
+}
+
+###
+
+POST http://localhost:8080/api/andromeda/addUser
+Content-Type: application/json
+Content-Length: 27
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "username": "Brionka"
+}
+
+###
+
