@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:16-alpine
@@ -25,20 +26,14 @@ jobs:
           --health-retries 5
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up JDK 21
+      - name: Set up Java 21
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Show directory structure
-        run: |
-          pwd
-          ls -la Quarkus-Backend/backend/backend/backend-projekt
-
-      - name: Run Maven tests
-        working-directory: Quarkus-Backend/backend/backend/backend-projekt
+      - name: Build and test Quarkus backend
+        working-directory: Quarkus-Backend/backend/backend
         run: mvn clean test
