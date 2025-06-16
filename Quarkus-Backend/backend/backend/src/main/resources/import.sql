@@ -35,6 +35,7 @@ CREATE TRIGGER trigger_insert_default_settings
     FOR EACH ROW
 EXECUTE FUNCTION insert_default_settings();
 */
+/*
 insert into command(id, type, prompt, code) values (1, 'default', 'Verschiebe Datei (A) nach (B)', 'testCode1');
 insert into command(id, type, prompt, code) values (2, 'default', 'Schalte den Rechner aus', 'testCode2');
 insert into command(id, type, prompt, code) values (3, 'default', 'Öffne Programm (A)', 'testCode3');
@@ -60,6 +61,7 @@ insert into command(id, type, prompt, code) values (22, 'default', 'Mach die Lau
 insert into command(id, type, prompt, code) values (23, 'default', 'Mache einen Screenshot von (A)', 'testCode23');
 insert into command(id, type, prompt, code) values (24, 'default', 'Nächstes Lied', 'testCode24');
 insert into command(id, type, prompt, code) values (25, 'default', 'Lied zurück', 'testCode25');
+*/
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-en-us-0.15', '40M', 'English', 0);
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-en-us-0.22', '1.8G', 'English', 0);
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-en-us-0.22-lgraph', '128M', 'English', 0);
@@ -121,6 +123,8 @@ INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-ja-
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-ja-0.22', '1G', 'Japanese', 0);
 INSERT INTO model(name, size, language, precision) VALUES ('vosk-model-small-eo-0.42', '42M', 'Esperanto', 0);
 
+
+ */
 SELECT setval('command_id_seq', (SELECT MAX(id) FROM command));
 
 /* insert into command("codexy", "code xy ausführen", "personalized");

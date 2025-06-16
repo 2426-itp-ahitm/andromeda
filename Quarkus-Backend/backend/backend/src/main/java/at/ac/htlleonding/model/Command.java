@@ -8,8 +8,8 @@ import java.util.List;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name=Command.QUERY_FIND_ALL, query="select c from Command c"),
-        @NamedQuery(name=Command.QUERY_FIND_ALL_DEFAULT, query="select c from Command c where type = 'default'")
+        @NamedQuery(name = Command.QUERY_FIND_ALL, query = "select c from Command c"),
+        @NamedQuery(name = Command.QUERY_FIND_ALL_DEFAULT, query = "select c from Command c where type = 0")
 })
 public class Command {
 
@@ -20,10 +20,11 @@ public class Command {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type; //default or personalized
+    private Integer type; //default 0 or personalized 1
 
     private String prompt;
 
+    @Column(columnDefinition = "TEXT")
     private String code;
 
     @OneToMany(mappedBy = "command", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -33,7 +34,7 @@ public class Command {
     public Command() {
     }
 
-    public Command(String type, String prompt, String code) {
+    public Command(Integer type, String prompt, String code) {
         this.type = type;
         this.prompt = prompt;
         this.code = code;
@@ -47,11 +48,11 @@ public class Command {
         this.id = id;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

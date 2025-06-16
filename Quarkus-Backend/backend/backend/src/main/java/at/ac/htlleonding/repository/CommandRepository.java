@@ -32,12 +32,12 @@ public class CommandRepository {
     @Transactional
     public Command addCommand(CommandDTO commandDTO) {
         if(commandDTO.userId() == null) {
-            Command command = new Command("default", commandDTO.prompt(), commandDTO.code());
+            Command command = new Command(0, commandDTO.prompt(), commandDTO.code());
             entityManager.persist(command);
             return command;
         }
             User user = entityManager.find(User.class, commandDTO.userId());
-        Command command = new Command("personalized", commandDTO.prompt(), commandDTO.code());
+        Command command = new Command(1, commandDTO.prompt(), commandDTO.code());
         if(user != null) {
                 entityManager.persist(command);
                 User_Command userCommand = new User_Command(user, command);
