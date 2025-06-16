@@ -27,15 +27,15 @@ class listBuilder:
             raise ValueError("Each action must be a dictionary containing a 'content' key.")
         
         assosiateList = []
-        commands = self.defaultCommands.append(self.personalisedCommands)
-
+        commands = self.defaultCommands
+        print(f"Commands: {commands}")
         for action in commands:
             if isinstance(action, dict) and "prompt" in action:
                 prompt = action["prompt"]
                 id = action["id"]
                 if isinstance(prompt, str):
-                    assosiateList.append(id + ": " + prompt)
-                    #  self.creator.write_code(filename=id),code=action["code"], folder_path=r'C:\Users\gabri\Desktop\Schule\ITP\4.Klasse\andromeda\Phyton-Backend\Client\modules\ExecuterClient\commands\testFolder')#  self.creator.write_code(filename=str(counter),code=action["code"], folder_path=r'C:\Users\gabri\Desktop\Schule\ITP\4.Klasse\andromeda\Phyton-Backend\Client\modules\ExecuterClient\commands\testFolder')
+                    assosiateList.append(str(id) + ": " + prompt)
+                    self.creator.write_code(filename=str(id),code=action["code"], folder_path=r'C:\Users\gabri\Desktop\Schule\ITP\4.Klasse\andromeda\Phyton-Backend\Client\modules\ExecuterClient\commands\testFolder2')
                 else:
                     raise ValueError("The 'prompt' key must contain a string value.")
             else:
