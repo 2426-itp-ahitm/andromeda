@@ -14,7 +14,7 @@ class commandAssosiator:
 
         if str(command_name).endswith('.py'):
             command_name = command_name[:-3]
-        module_path = f"ExecuterClient.commands.testFolder2.{command_name}"
+        module_path = f"ExecuterClient.commands.generatedCommands.{command_name}"
         module = importlib.import_module(module_path)
         # Get the first class defined in the module
         command_class = None

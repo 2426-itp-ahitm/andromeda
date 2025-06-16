@@ -35,7 +35,7 @@ class listBuilder:
                 id = action["id"]
                 if isinstance(prompt, str):
                     assosiateList.append(str(id) + ": " + prompt)
-                    self.creator.write_code(filename=str(id),code=action["code"], folder_path=r'C:\Users\gabri\Desktop\Schule\ITP\4.Klasse\andromeda\Phyton-Backend\Client\modules\ExecuterClient\commands\testFolder2')
+                    self.creator.write_code(filename=str(id),code=action["code"], folder_path=r'C:\Users\gabri\Desktop\Schule\ITP\4.Klasse\andromeda\Phyton-Backend\Client\modules\ExecuterClient\commands\generatedCommands')
                 else:
                     raise ValueError("The 'prompt' key must contain a string value.")
             else:
