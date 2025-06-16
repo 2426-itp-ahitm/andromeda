@@ -32,6 +32,7 @@
 - Custom Commands mit Python-Modulen
 - Custom Commands testen
 - User-Verwaltung
+- Error List Verwaltung
 
 ---
 
@@ -48,5 +49,6 @@
 - User-Verwaltung
 - Dashboard Daten 
 - Einstellungen zu Models und Commands 
+- Commands in DB automatisch Escapen und Parsen
 
 ---
