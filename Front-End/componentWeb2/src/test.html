@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech Settings – Andromeda</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #2e2b3f;
+      color: #fff;
+      padding: 20px 10px;
+      box-sizing: border-box;
+    }
+
+    .sidebar-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 50px;
+      height: auto;
+    }
+
+    .sidebar h1 {
+      font-size: 18px;
+      margin: 10px 0 0;
+    }
+
+    .sidebar-nav .menu-item {
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .sidebar-nav .menu-item:hover,
+    .sidebar-nav .active {
+      background-color: #57536d;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .settings-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .filters {
+      margin-bottom: 15px;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 5px 10px;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    tr.active {
+      background-color: #e6ffe6;
+      font-weight: bold;
+    }
+
+    .status.active {
+      color: green;
+      cursor: default;
+    }
+
+    .status.inactive {
+      color: gray;
+      cursor: pointer;
+    }
+
+    .actions span {
+      cursor: pointer;
+      margin: 0 4px;
+      opacity: 0.7;
+    }
+
+    .actions span:hover {
+      opacity: 1;
+    }
+
+    .disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>Andromeda</h1>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="menu-item active"><span>⚙️</span> Tech Settings</div>
+      <div class="menu-item"><span>📊</span> Dashboard</div>
+      <div class="menu-item"><span>🎯</span> Personal Commands</div>
+      <div class="menu-item"><span>💻</span> Custom Commands</div>
+      <div class="menu-item"><span>⚙️</span> General Settings</div>
+    </nav>
+  </div>
+
+  <div class="main-content">
+    <h1 class="settings-title">Tech Settings</h1>
+
+    <div class="filters">
+      <input type="text" id="filterName" placeholder="Filter by name...">
+      <select id="filterLanguage">
+        <option value="">All Languages</option>
+        <option>German</option>
+        <option>English</option>
+      </select>
+      <select id="filterStatus">
+        <option value="">All Status</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+
+    <table id="modelTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Language</th>
+          <th>Size</th>
+          <th>Status</th>
+          <th>⚙️</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const models = [
+      { name: "vosk-model-en-us-0.22-lgraph", language: "English", size: "1.2 GB", status: "active", downloaded: true },
+      { name: "vosk-model-en-us-librispeech-0.2", language: "German", size: "860 MB", status: "inactive", downloaded: false },
+      { name: "vosk-model-en-us-librispeech-0.2", language: "English", size: "2.5 GB", status: "inactive", downloaded: false },
+      { name: "Lanvosk-model-cn-0.22", language: "English", size: "540 MB", status: "inactive", downloaded: false },
+      { name: "vosk-model-en-us-aspire-0.2", language: "German", size: "2.1 GB", status: "inactive", downloaded: false },
+      { name: "vosk-model-small-en-us-zamia-0.5", language: "English", size: "1.0 GB", status: "inactive", downloaded: false }
+    ];
+
+    const tableBody = document.getElementById("tableBody");
+
+    function renderTable() {
+      tableBody.innerHTML = "";
+
+      let filtered = [...models];
+
+      const name = document.getElementById("filterName").value.toLowerCase();
+      const lang = document.getElementById("filterLanguage").value;
+      const status = document.getElementById("filterStatus").value;
+
+      filtered = filtered.filter(m =>
+        m.name.toLowerCase().includes(name) &&
+        (lang === "" || m.language === lang) &&
+        (status === "" || m.status === status)
+      );
+
+      filtered.sort((a, b) => {
+        if (a.status === "active") return -1;
+        if (b.status === "active") return 1;
+        if (a.downloaded && !b.downloaded) return -1;
+        if (!a.downloaded && b.downloaded) return 1;
+        return a.name.localeCompare(b.name);
+      });
+
+      filtered.forEach(model => {
+        const tr = document.createElement("tr");
+        tr.className = model.status === "active" ? "active" : "";
+
+        const canActivate = model.downloaded;
+
+        tr.innerHTML = `
+          <td><input type="checkbox" ${model.status === "active" ? "checked" : ""} disabled></td>
+          <td>${model.name}</td>
+          <td>${model.language}</td>
+          <td>${model.size}</td>
+          <td 
+            class="status ${model.status}" 
+            onclick="${canActivate && model.status !== 'active' ? `toggleStatus('${model.name}')` : ''}"
+            title="${canActivate ? 'Click to activate' : 'Download first to activate'}"
+          >
+            ${model.status === "active" ? "🟢" : "⚪"}
+          </td>
+          <td class="actions">
+            <span title="Download" onclick="downloadModel('${model.name}')">⬇️</span>
+            <span title="Delete">🗑️</span>
+            <span title="Show Logs">📄</span>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function toggleStatus(name) {
+      const target = models.find(m => m.name === name);
+      if (!target || !target.downloaded) return;
+
+      models.forEach(m => m.status = m.name === name ? "active" : "inactive");
+      renderTable();
+    }
+
+    function downloadModel(name) {
+      const target = models.find(m => m.name === name);
+      if (target) {
+        target.downloaded = true;
+        alert(`${name} downloaded!`);
+        renderTable();
+      }
+    }
+
+    document.getElementById("filterName").addEventListener("input", renderTable);
+    document.getElementById("filterLanguage").addEventListener("change", renderTable);
+    document.getElementById("filterStatus").addEventListener("change", renderTable);
+
+    renderTable();
+  </script>
+</body>
+</html>
