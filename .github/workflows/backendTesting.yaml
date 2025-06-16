@@ -1,13 +1,15 @@
-name: Backend Request Testing
+name: Build and Test Backend
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     services:
@@ -20,21 +22,29 @@ jobs:
           POSTGRES_PASSWORD: demo
           POSTGRES_DB: demo
         options: >-
-          --health-cmd="pg_isready -U demo"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+          --health-cmd "pg_isready -U demo"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: 21
 
-      - name: Build and test with Maven
-        working-directory: Quarkus-Backend/backend/backend
-        run: mvn clean verify
+      - name: Wait for Postgres to be ready
+        run: |
+          until pg_isready -h localhost -p 5432 -U demo; do
+            echo "Waiting for Postgres..."
+            sleep 3
+          done
+        env:
+          PGPASSWORD: demo
+
+      - name: Build and run tests
+        run: mvn clean test
