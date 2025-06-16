@@ -1,4 +1,4 @@
-name: Java CI with Quarkus and PostgreSQL
+name: Backend Request Testing
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     services:
@@ -20,10 +20,10 @@ jobs:
           POSTGRES_PASSWORD: demo
           POSTGRES_DB: demo
         options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd="pg_isready -U demo"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
       - name: Checkout repository
@@ -32,17 +32,9 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: '21'
-          distribution: 'temurin'
-
-      - name: Wait for Postgres to be ready
-        run: |
-          until pg_isready -h localhost -p 5432 -U demo; do
-            echo "Waiting for Postgres..."
-            sleep 2
-          done
-        env:
-          PGPASSWORD: demo
+          distribution: temurin
+          java-version: 21
 
       - name: Build and test with Maven
+        working-directory: Quarkus-Backend/backend/backend
         run: mvn clean verify
