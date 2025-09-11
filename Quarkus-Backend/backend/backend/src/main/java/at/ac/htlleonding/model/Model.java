@@ -25,7 +25,9 @@ public class Model {
 
     private String language;
 
-    private Long precision;;
+    private Long precision;
+
+    private String link;
 
     @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -34,12 +36,13 @@ public class Model {
     public Model() {
     }
 
-    public Model(Long id, String name, String size, String language, Long precision, List<User_Model> userModels) {
+    public Model(Long id, String name, String size, String language, Long precision, String link, List<User_Model> userModels) {
         this.id = id;
         this.name = name;
         this.size = size;
         this.language = language;
         this.precision = precision;
+        this.link = link;
         this.userModels = userModels;
     }
 
@@ -88,6 +91,14 @@ public class Model {
 
     public void setPrecision(Long precision) {
         this.precision = precision;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public List<User_Model> getUserModels() {
