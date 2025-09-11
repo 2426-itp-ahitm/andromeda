@@ -25,7 +25,7 @@ public class Model {
 
     private String language;
 
-    private Long precision;
+    private Long precision;;
 
     @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
