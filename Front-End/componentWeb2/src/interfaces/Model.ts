@@ -5,4 +5,5 @@ export interface Model {
     status: 'active' | 'inactive' | 'downloading';
     language: string;
     percision: number;
+    link: string
 } 

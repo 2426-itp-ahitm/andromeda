@@ -4,7 +4,7 @@
     "mozilla firefox": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
     "microsoft edge": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
     "safari": "C:\\Program Files\\Safari\\Safari.exe",
-    "spotify": "C:\\Users\\%USERNAME%\\AppData\\Roaming\\Spotify\\Spotify.exe",
+    "spotify": "C:\\Users\\%USERNAME%\\AppData\\Local\\Microsoft\\WindowsApps\\Spotify.exe",
     "visual studio code": "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
     "vs code": "C:\\Users\\%USERNAME%\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
     "intellij idea": "C:\\Program Files\\JetBrains\\IntelliJ IDEA\\bin\\idea64.exe",

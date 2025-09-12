@@ -61,6 +61,16 @@ module.exports = {
       pathRewrite: {
         '^/api': ''
       }
+    },
+  {
+      context: ['/download', '/setActiveModule'],
+      target: 'http://localhost:65323',
+      secure: false,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/download': '',
+        '^/setActiveModule': ''
+      }
     }],
     headers: {
       "Access-Control-Allow-Origin": "*",

@@ -50,5 +50,6 @@
 - Dashboard Daten 
 - Einstellungen zu Models und Commands 
 - Commands in DB automatisch Escapen und Parsen
+- Speichere Known-Paths ins backend und lade sie 
 
 ---

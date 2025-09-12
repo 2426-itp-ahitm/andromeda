@@ -2,6 +2,7 @@ import { html, render } from 'lit-html';
 import { ModelService } from '../services/ModelService';
 import { Model } from '../interfaces/Model';
 
+
 class TechSettings extends HTMLElement {
     private selectedModel: string = 'Vosk1';
     private searchQuery: string = '';
@@ -60,14 +61,34 @@ class TechSettings extends HTMLElement {
         }));
         if (this.models.find(m => m.name === modelName)?.status === 'active') {
             this.selectedModel = modelName;
+            fetch('http://localhost:65323/set_selected_module', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ path: modelName }),
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
         }
         this.render();
         this.setupEventListeners();
     }
 
-    private handleModelDownload(modelName: string): void {
-        console.log(`Downloading model: ${modelName}`);
-    }
+    private async handleModelDownload(modelLink: string): Promise<void> {
+        console.log(`Downloading model from ${modelLink}`);
+        fetch('http://localhost:65323/download', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: modelLink }),
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
+                }
 
     private getFilteredModels(): Model[] {
         return this.models.filter(model => {
@@ -155,7 +176,7 @@ class TechSettings extends HTMLElement {
                     </button>
                     <button 
                         class="model-action download"
-                        @click=${() => this.handleModelDownload(model.name)}
+                        @click=${() => this.handleModelDownload(model.link)}
                     >
                         Download
                     </button>

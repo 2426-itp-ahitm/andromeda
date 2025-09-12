@@ -60,16 +60,16 @@
     <configuration name="All in prompt" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/http/prompt.http">
       <method v="2" />
     </configuration>
-    <configuration name="prompt | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" executionIdentifier="#2" index="2" runType="Run single request">
+    <configuration name="prompt | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" index="2" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="prompt | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" executionIdentifier="#3" index="3" runType="Run single request">
+    <configuration name="prompt | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" index="3" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="prompt | #5" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" executionIdentifier="#5" index="5" runType="Run single request">
+    <configuration name="prompt | #5" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" index="5" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="prompt | #7" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" executionIdentifier="#7" index="7" runType="Run single request">
+    <configuration name="prompt | #7" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/http/prompt.http" index="7" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="backend" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
@@ -123,8 +123,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
@@ -158,6 +158,7 @@
       <workItem from="1746428432740" duration="862000" />
       <workItem from="1746432090954" duration="1008000" />
       <workItem from="1746443287793" duration="542000" />
+      <workItem from="1757575922641" duration="7000" />
     </task>
     <servers />
   </component>

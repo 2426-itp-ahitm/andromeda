@@ -5,6 +5,7 @@ from ChatClient.chatResponder import chatResponder
 from TTSClient.ttsHandler import ttsHandler
 from ExecuterClient.commandAssosiator import commandAssosiator
 from helpers.config import keyword, selected_module
+from FlaskClient.flaskClient import app, run_flask
 import threading
 
 class ClientRunner:
@@ -34,5 +35,8 @@ class ClientRunner:
                 
 
 if __name__ == "__main__":
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
     client_runner = ClientRunner()
     client_runner.run()

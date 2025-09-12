@@ -146,3 +146,7 @@ class openProgramm:
                 print("Error: path does not point to a valid executable.")
         else:
             print("Application not found.")
+
+if __name__ == "__main__":
+    opener = openProgramm()
+    opener.run(["Spotify"])  # Example usage; replace with desired application name

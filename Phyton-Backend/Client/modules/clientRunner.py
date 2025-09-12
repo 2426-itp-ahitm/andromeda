@@ -4,6 +4,7 @@ from WinkkClient.responseAssosiator import responseAssosiator
 from ChatClient.chatResponder import chatResponder
 from TTSClient.ttsHandler import ttsHandler
 from ExecuterClient.commandAssosiator import commandAssosiator
+from FlaskClient.flaskClient import app, run_flask
 from helpers.config import keyword, selected_module
 import threading
 
@@ -16,7 +17,6 @@ class ClientRunner:
         self.chat_responder = chatResponder()
         self.command_associator = commandAssosiator()
         self.speech_recognizer = SpeechRecognizer(selected_module, keyword, self.data_queue)
-
 
         self.tts = ttsHandler()
     def run(self):
@@ -39,11 +39,14 @@ class ClientRunner:
                     response_strings = response_parts[1:]
                     print(f"Executing command")
                     self.command_associator.assosiate(response_number, response_strings)
-
+    
 
 if __name__ == "__main__":
     client_runner = ClientRunner()
     speech_thread = threading.Thread(target=client_runner.speech_recognizer.recognize_speech)
+    flask_thread = threading.Thread(target=run_flask)
     speech_thread.daemon = True
     speech_thread.start()
+    flask_thread.daemon = True
+    flask_thread.start()
     client_runner.run()
