@@ -25,7 +25,18 @@ export class ModelService {
                 if (!response.ok) {
                     throw new Error('Failed to fetch commands');
                 }
+
                 const data = await response.json();
+
+                  const response2 = await fetch('http://localhost:65323/get-json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch commands');
+                }
+                const data2 = await response2.json();
+                console.log(data2);
+
+                
+
                 return data as Model[];
             } catch (error) {
                 console.error('Network error:', error);

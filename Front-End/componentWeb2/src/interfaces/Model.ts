@@ -2,7 +2,7 @@ export interface Model {
     id: number
     name: string;
     size: string;
-    status: 'active' | 'inactive' | 'downloading';
+    status: 'active' | 'inactive' | 'not downloaded';
     language: string;
     percision: number;
     link: string

@@ -88,6 +88,17 @@ def set_selected_module():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/get-json', methods=['GET'])
+def get_json():
+    try:
+        with open(model_state_path, "r") as file:
+            data = json.load(file)
+        return jsonify(data), 200
+    except FileNotFoundError:
+        return jsonify({"error": "File not found"}), 404
+    except json.JSONDecodeError:
+        return jsonify({"error": "Invalid JSON format"}), 400
+
 
 def run_flask():
         # Use 0.0.0.0 if you want it accessible from other devices
