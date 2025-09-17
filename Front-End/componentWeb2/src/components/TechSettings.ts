@@ -171,12 +171,14 @@ class TechSettings extends HTMLElement {
                     <button 
                         class="model-action ${model.status === 'active' ? 'on' : 'off'}"
                         @click=${() => this.handleModelToggle(model.name)}
+                        style="display: ${model.status === 'not downloaded' ? 'none' : 'inline-block'}"
                     >
                         ${model.status === 'active' ? 'Active' : 'Inactive'}
                     </button>
                     <button 
                         class="model-action download"
                         @click=${() => this.handleModelDownload(model.link)}
+                        style="display: ${model.status === 'not downloaded' ? 'inline-block' : 'none'}"
                     >
                         Download
                     </button>
