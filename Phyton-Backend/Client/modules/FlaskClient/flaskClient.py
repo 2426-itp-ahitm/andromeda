@@ -83,6 +83,8 @@ def set_selected_module():
         with open(model_state_path, 'r') as f:
             model_state = json.load(f)
             model_state["active_speach_module"] = data['path']
+        with open(model_state_path, 'w') as f:
+            json.dump(model_state, f, indent=4)
             
         return jsonify({'message': 'Selected module updated successfully'}), 200
     except Exception as e:

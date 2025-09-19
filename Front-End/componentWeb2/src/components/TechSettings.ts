@@ -56,8 +56,8 @@ class TechSettings extends HTMLElement {
         this.models = this.models.map(model => ({
             ...model,
             status: model.name === modelName ? 
-                (model.status === 'active' ? 'inactive' : 'active') : 
-                'inactive'
+            (model.status === 'active' ? 'inactive' : 'active') : 
+            (model.status === 'not downloaded' ? 'not downloaded' : 'inactive')
         }));
         if (this.models.find(m => m.name === modelName)?.status === 'active') {
             this.selectedModel = modelName;
@@ -87,6 +87,7 @@ class TechSettings extends HTMLElement {
             })
             .then(res => res.json())
             .then(data => console.log(data))
+            .then(async () => { await this.initialize() })
             .catch(err => console.error(err));
                 }
 
@@ -117,9 +118,9 @@ class TechSettings extends HTMLElement {
                 <div class="model-display">
                     <span 
                     class="model-name"
-                    title=${this.selectedModel}
+                    title=${filteredModels.find(m => m.status === 'active')?.name || ''}
                     >
-                    ${truncate(this.selectedModel)}
+                    ${truncate(filteredModels.find(m => m.status === 'active')?.name || '')}
                     </span>
                     <span class="model-status active">Active</span>
                 </div>
