@@ -178,9 +178,14 @@ class TechSettings extends HTMLElement {
                     </button>
                     <button 
                         class="model-action download"
-                        @click=${() => this.handleModelDownload(model.link)}
+                        @click=${(e: Event) => {
+                            const btn = e.target as HTMLButtonElement;
+                            btn.textContent = 'Downloading...';
+                            btn.disabled = true;
+                            this.handleModelDownload(model.link);
+                        }}
                         style="display: ${model.status === 'not downloaded' ? 'inline-block' : 'none'}"
-                    >
+    >
                         Download
                     </button>
                     </div>
