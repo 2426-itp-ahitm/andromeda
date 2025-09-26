@@ -10,6 +10,7 @@ export interface Command {
 
 // Frontend command interface
 export interface FrontendCommand {
+    id: string;
     text: string;
     type: number; // 0 for default, 1 for personalized
     enabled: boolean;

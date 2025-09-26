@@ -33,11 +33,13 @@ export class PersonalCommands extends HTMLElement {
         console.log('Loaded commands:', allCommands);
         this.commands = {
             personalized: allCommands.filter(cmd => cmd.type === 1).map(cmd => ({
+                id: cmd.id,
                 text: cmd.prompt,
                 enabled: true,
                 type: cmd.type
             })),
             default: allCommands.filter(cmd => cmd.type === 0).map(cmd => ({
+                id: cmd.id,
                 text: cmd.prompt,
                 enabled: true,
                 type: cmd.type
@@ -69,21 +71,24 @@ export class PersonalCommands extends HTMLElement {
         const commandCards = this.querySelectorAll('.command-card');
         commandCards?.forEach((card) => {
             const toggleButton = card.querySelector('.command-action');
-            const commandText = card.querySelector('.command-text')?.textContent || '';
+            const cmdid = card.querySelector('.command-text')?.id || '';
 
             toggleButton?.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                this.toggleCommand(commandText);
+                this.toggleCommand(cmdid);
             });
         });
     }
 
-    private toggleCommand(commandText: string): void {
+    private toggleCommand(cmdid: string): void {
         const currentCommands = this.commands[this.selectedType];
-        const command = currentCommands.find(cmd => cmd.text === commandText);
+        console.log(currentCommands)
+        const command = currentCommands.find(cmd =>  cmd.id  == cmdid);
+        console.log(`Toggling command with id: ${cmdid}`, command);
         if (command) {
             command.enabled = !command.enabled;
+            console.log(`Toggled command "${command.text}" to ${command.enabled}`);
             this.render();
         }
     }
@@ -157,8 +162,7 @@ export class PersonalCommands extends HTMLElement {
                             <div class="command-info">
                                 <div 
                                     class="command-text"
-                                    title=${command.text}
-                                >
+                                    title=${command.text} id=${command.id}>
                                     ${this.truncate(command.text)}
                                 </div>
                                 <div class="command-details">
@@ -171,9 +175,7 @@ export class PersonalCommands extends HTMLElement {
                             </div>
                             <div class="command-actions">
                                 <button 
-                                    class="command-action ${command.enabled ? 'on' : 'off'}"
-                                    type="button"
-                                >
+                                    class="command-action ${command.enabled ? 'on' : 'off'}"type="button">
                                     ${command.enabled ? 'Disable' : 'Enable'}
                                 </button>
                             </div>
