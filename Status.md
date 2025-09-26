@@ -1,6 +1,6 @@
-# Projektstatus: Andromeda 🚀
+# Andromeda 🚀
 
-## 🧠 Quarkus Backend + Frontend
+## Quarkus Backend + Frontend
 
 ### ✅ Erledigt
 
@@ -9,17 +9,14 @@
 
 ### 📝 TODO
 
-- General Settings verbinden
 - User-Verwaltung
 - Custom-Commands hochladen & erstellen
 - Dashboard mit Live-Daten aktualisieren
-- Einstellungen von Modules und Commands zurück ans Quarkus-Backend → Weiterleitung ans Python-Backend
-- Verwaltung von VOSK-Models
 - ? **UI-Redesign von Tech Settings, Personal Commands & Custom Commands** ?
 
 ---
 
-## 🐍 Python Backend
+## Python Backend
 
 ### ✅ Erledigt
 
@@ -28,15 +25,14 @@
 
 ### 📝 TODO
 
-- Mehr Default Commands
+- Command Settings to Python
 - Custom Commands mit Python-Modulen
-- Custom Commands testen
 - User-Verwaltung
 - Error List Verwaltung
 
 ---
 
-## 🗄️ Datenbank (DB)
+## Datenbank (DB)
 
 ### ✅ Erledigt
 
@@ -48,8 +44,6 @@
 
 - User-Verwaltung
 - Dashboard Daten 
-- Einstellungen zu Models und Commands 
-- Commands in DB automatisch Escapen und Parsen
 - Speichere Known-Paths ins backend und lade sie 
 
 ---

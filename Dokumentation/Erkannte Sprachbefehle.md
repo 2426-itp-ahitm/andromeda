@@ -1,14 +1,8 @@
 # **Erkannte Sprachbefehle**
 
-## **Sprachausgabe & KI-Generierte Antworten**
-
-- 🗣️ **Der Bot spricht mit uns** und gibt gesprochene Antworten zurück
-- 🤖 **KI-Generierte Antworten** passen sich dem Kontext an und reagieren dynamisch auf Befehle
-
 ## **Dateiverwaltung**
 
 - 🔍 **Suche** Datei (A)
-- 📦 **Komprimiere** Datei (A)
 - 📁 **Geh in Verzeichnis** (A)
 
 ## **Programmsteuerung**

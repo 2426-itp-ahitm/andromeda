@@ -132,10 +132,6 @@ class TechSettings extends HTMLElement {
                     placeholder="Search models..."
                     .value=${this.searchQuery}
                     >
-                    <button>
-                    <span>🔍</span>
-                    Search
-                    </button>
                 </div>
                 <div class="language-filter">
                     <select>

@@ -66,10 +66,10 @@ export class PersonalCommands extends HTMLElement {
         bulkEnableBtn?.addEventListener('click', () => this.toggleBulkCommands(true));
         bulkDisableBtn?.addEventListener('click', () => this.toggleBulkCommands(false));
 
-        const commandItems = this.querySelectorAll('.command-item');
-        commandItems?.forEach((item) => {
-            const toggleButton = item.querySelector('.toggle-button');
-            const commandText = item.querySelector('p')?.textContent || '';
+        const commandCards = this.querySelectorAll('.command-card');
+        commandCards?.forEach((card) => {
+            const toggleButton = card.querySelector('.command-action');
+            const commandText = card.querySelector('.command-text')?.textContent || '';
 
             toggleButton?.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -102,31 +102,48 @@ export class PersonalCommands extends HTMLElement {
         );
     }
 
+    private truncate(text: string, max: number = 50): string {
+        if (text.length > max) {
+            return text.slice(0, max - 3) + '...';
+        }
+        return text;
+    }
+
     render(): void {
         const filteredCommands = this.getFilteredCommands();
+        const enabledCount = filteredCommands.filter(cmd => cmd.enabled).length;
+        const totalCount = filteredCommands.length;
 
         const template = html`
             <div class="personal-commands">
                 <div class="commands-header">
-                    <h2>Personal Commands</h2>
-                    <div class="search-bar">
-                        <input 
-                            type="text" 
-                            placeholder="Search commands..."
-                            .value=${this.searchQuery}
-                        >
-                        <button>
-                            <span>🔍</span>
-                            Search
-                        </button>
+                    <h1>Personal Commands</h1>
+                    <div class="current-status">
+                        <label>Currently Enabled:</label>
+                        <div class="status-display">
+                            <span class="status-count">${enabledCount} / ${totalCount}</span>
+                            <span class="status-label">Commands Active</span>
+                        </div>
                     </div>
-                </div>
-
-                <div class="category-select">
-                    <select>
-                        <option value="personalized" ?selected=${this.selectedType === 'personalized'}>Personalized Commands</option>
-                        <option value="default" ?selected=${this.selectedType === 'default'}>Default Commands</option>
-                    </select>
+                    <div class="filters">
+                        <div class="search-bar">
+                            <input 
+                                type="text" 
+                                placeholder="Search commands..."
+                                .value=${this.searchQuery}
+                            >
+                        </div>
+                        <div class="category-select">
+                            <select>
+                                <option value="personalized" ?selected=${this.selectedType === 'personalized'}>
+                                    ${this.selectedType === 'personalized' ? 'Personalized' : 'Personalized'}
+                                </option>
+                                <option value="default" ?selected=${this.selectedType === 'default'}>
+                                    ${this.selectedType === 'default' ? 'Default' : 'Default'}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="bulk-actions">
@@ -134,13 +151,32 @@ export class PersonalCommands extends HTMLElement {
                     <button class="bulk-disable">Disable All</button>
                 </div>
 
-                <div class="command-list">
+                <div class="command-grid">
                     ${filteredCommands.map(command => html`
-                        <div class="command-item">
-                            <p>${command.text}</p>
-                            <button class="toggle-button ${command.enabled ? 'enabled' : 'disabled'}"
-                                type="button">${command.enabled ? 'Enabled' : 'Disabled'}
-                            </button>
+                        <div class="command-card">
+                            <div class="command-info">
+                                <div 
+                                    class="command-text"
+                                    title=${command.text}
+                                >
+                                    ${this.truncate(command.text)}
+                                </div>
+                                <div class="command-details">
+                                    <div class="command-type">Type: ${command.type === 1 ? 'Personalized' : 'Default'}</div>
+                                    <div class="status-indicator">
+                                        <div class="status-dot ${command.enabled ? 'enabled' : 'disabled'}"></div>
+                                        Status: ${command.enabled ? 'Enabled' : 'Disabled'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="command-actions">
+                                <button 
+                                    class="command-action ${command.enabled ? 'on' : 'off'}"
+                                    type="button"
+                                >
+                                    ${command.enabled ? 'Disable' : 'Enable'}
+                                </button>
+                            </div>
                         </div>
                     `)}
                 </div>

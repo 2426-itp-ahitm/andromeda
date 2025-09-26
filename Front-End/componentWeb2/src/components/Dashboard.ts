@@ -1,20 +1,24 @@
 import { html, render } from 'lit-html';
+import { StatisticService } from '../services/StatisticService';
+import { Statistics } from '../interfaces/Statistics';
 
 class Dashboard extends HTMLElement {
   container: HTMLElement | null = null;
-  private selectedMicrophone: string = 'THC-GamingSensoricMicro';
-  private recentCommands: string[] = [
-    'Open Chrome browser',
-    'Create new folder on Desktop',
-    'Check system status',
-    'Update applications'
-  ];
+  private selectedMicrophone: string = 'Default Microphone';
+  private availableMicrophones: MediaDeviceInfo[] = [];
+  private statistics: Statistics | null = null;
+  private recentCommands: any[] = [];
+  private statisticService: StatisticService = StatisticService.getInstance();
 
-  connectedCallback(): void {
+  async connectedCallback(): Promise<void> {
     this.container = document.createElement('div');
     this.appendChild(this.container); // Append the container to the component
+    await this.fetchStatistics();
     this.setupDropdownListener();
     this.render();
+
+    // Refresh statistics every 30 seconds
+    setInterval(() => this.fetchStatistics(), 30000);
   }
 
   private setupDropdownListener(): void {
@@ -34,6 +38,18 @@ class Dashboard extends HTMLElement {
     }
   }
 
+  private async fetchStatistics(): Promise<void> {
+    try {
+      this.statistics = await this.statisticService.getStatistics();
+      if (this.statistics) {
+        this.recentCommands = this.statistics.latestCommandsExecuted || [];
+      }
+      this.render();
+    } catch (error) {
+      console.error('Error fetching statistics:', error);
+    }
+  }
+
   private handleMicrophoneSelect(mic: string): void {
     this.selectedMicrophone = mic;
     this.toggleDropdown();
@@ -50,20 +66,20 @@ class Dashboard extends HTMLElement {
             <div class="stat-icon">📊</div>
             <div class="stat-info">
               <div class="stat-value">98%</div>
-              <div class="stat-label">Detection Accuracy</div>
+              <div class="stat-label">Server Uptime</div>
             </div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">⚡</div>
             <div class="stat-info">
-              <div class="stat-value">2.3s</div>
+              <div class="stat-value">${this.statistics?.responseTime || '0'}ms</div>
               <div class="stat-label">Response Time</div>
             </div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">🎯</div>
             <div class="stat-info">
-              <div class="stat-value">1,234</div>
+              <div class="stat-value">${this.recentCommands.length || 0}</div>
               <div class="stat-label">Commands Executed</div>
             </div>
           </div>
@@ -77,23 +93,6 @@ class Dashboard extends HTMLElement {
                 <label class="dropdown-label">Input Device</label>
                 <div class="dropdown">
                   <span>${this.selectedMicrophone}</span>
-                  <span>▼</span>
-                  <div class="dropdown-content">
-                    <a @click=${() => this.handleMicrophoneSelect('THC-GamingSensoricMicro')}>THC-GamingSensoricMicro</a>
-                    <a @click=${() => this.handleMicrophoneSelect('USB-Microphone')}>USB-Microphone</a>
-                    <a @click=${() => this.handleMicrophoneSelect('Bluetooth-Microphone')}>Bluetooth-Microphone</a>
-                  </div>
-                </div>
-              </div>
-              <div class="setting-item">
-                <label>Microphone Sensitivity</label>
-                <input type="range" min="0" max="100" value="75">
-              </div>
-              <div class="setting-item">
-                <label>Noise Cancellation</label>
-                <div class="toggle-switch">
-                  <input type="checkbox" checked>
-                  <span class="toggle-slider"></span>
                 </div>
               </div>
             </div>
@@ -105,7 +104,7 @@ class Dashboard extends HTMLElement {
               ${this.recentCommands.map(command => html`
                 <div class="command-item">
                   <span class="command-text">${command}</span>
-                  <span class="command-time">2 min ago</span>
+                  <span class="command-time">just now</span>
                 </div>
               `)}
             </div>
