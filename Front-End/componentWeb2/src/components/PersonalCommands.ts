@@ -7,6 +7,7 @@ export class PersonalCommands extends HTMLElement {
     private commandService: CommandService;
     private selectedType: 'personalized' | 'default' = 'personalized';
     private searchQuery: string = '';
+    private selectedCommand: FrontendCommand | null = null;
 
     private commands: { personalized: FrontendCommand[], default: FrontendCommand[] } = {
         personalized: [],
@@ -35,14 +36,18 @@ export class PersonalCommands extends HTMLElement {
             personalized: allCommands.filter(cmd => cmd.type === 1).map(cmd => ({
                 id: cmd.id,
                 text: cmd.prompt,
+                code: cmd.code,
                 enabled: true,
-                type: cmd.type
+                type: cmd.type,
+                lastUsed: cmd.lastUsed
             })),
             default: allCommands.filter(cmd => cmd.type === 0).map(cmd => ({
                 id: cmd.id,
                 text: cmd.prompt,
+                code: cmd.code,
                 enabled: true,
-                type: cmd.type
+                type: cmd.type,
+                lastUsed: cmd.lastUsed
             }))
         };
     }
@@ -68,10 +73,18 @@ export class PersonalCommands extends HTMLElement {
         bulkEnableBtn?.addEventListener('click', () => this.toggleBulkCommands(true));
         bulkDisableBtn?.addEventListener('click', () => this.toggleBulkCommands(false));
 
+        // Add click listeners for command cards to show popup
         const commandCards = this.querySelectorAll('.command-card');
         commandCards?.forEach((card) => {
+            const commandText = card.querySelector('.command-text');
             const toggleButton = card.querySelector('.command-action');
-            const cmdid = card.querySelector('.command-text')?.id || '';
+            const cmdid = commandText?.id || '';
+
+            commandText?.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.showCommandPopup(cmdid);
+            });
 
             toggleButton?.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -79,17 +92,67 @@ export class PersonalCommands extends HTMLElement {
                 this.toggleCommand(cmdid);
             });
         });
+
+        // Close popup listeners
+        const modal = this.querySelector('.modal-overlay');
+        const closeBtn = this.querySelector('.modal-close');
+        const copyBtn = this.querySelector('.copy-code-btn');
+
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.closePopup();
+            }
+        });
+
+        closeBtn?.addEventListener('click', () => this.closePopup());
+        
+        copyBtn?.addEventListener('click', () => this.copyCodeToClipboard());
+    }
+
+    private showCommandPopup(cmdid: string): void {
+        const currentCommands = this.commands[this.selectedType];
+        const command = currentCommands.find(cmd => cmd.id == cmdid);
+        
+        if (command) {
+            this.selectedCommand = command;
+            this.render();
+            this.setupEventListeners();
+        }
+    }
+
+    private closePopup(): void {
+        this.selectedCommand = null;
+        this.render();
+        this.setupEventListeners();
+    }
+
+    private async copyCodeToClipboard(): Promise<void> {
+        if (this.selectedCommand?.code) {
+            try {
+                await navigator.clipboard.writeText(this.selectedCommand.code);
+                const copyBtn = this.querySelector('.copy-code-btn');
+                if (copyBtn) {
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('Failed to copy code:', err);
+            }
+        }
     }
 
     private toggleCommand(cmdid: string): void {
         const currentCommands = this.commands[this.selectedType];
-        console.log(currentCommands)
-        const command = currentCommands.find(cmd =>  cmd.id  == cmdid);
+        const command = currentCommands.find(cmd => cmd.id == cmdid);
         console.log(`Toggling command with id: ${cmdid}`, command);
         if (command) {
             command.enabled = !command.enabled;
             console.log(`Toggled command "${command.text}" to ${command.enabled}`);
             this.render();
+            this.setupEventListeners();
         }
     }
 
@@ -99,6 +162,7 @@ export class PersonalCommands extends HTMLElement {
             cmd.enabled = enabled;
         });
         this.render();
+        this.setupEventListeners();
     }
 
     private getFilteredCommands(): FrontendCommand[] {
@@ -162,7 +226,9 @@ export class PersonalCommands extends HTMLElement {
                             <div class="command-info">
                                 <div 
                                     class="command-text"
-                                    title=${command.text} id=${command.id}>
+                                    title=${command.text} 
+                                    id=${command.id}
+                                    style="cursor: pointer;">
                                     ${this.truncate(command.text)}
                                 </div>
                                 <div class="command-details">
@@ -175,14 +241,40 @@ export class PersonalCommands extends HTMLElement {
                             </div>
                             <div class="command-actions">
                                 <button 
-                                    class="command-action ${command.enabled ? 'on' : 'off'}"type="button">
+                                    class="command-action ${command.enabled ? 'on' : 'off'}"
+                                    type="button">
                                     ${command.enabled ? 'Disable' : 'Enable'}
                                 </button>
                             </div>
                         </div>
                     `)}
                 </div>
+
+                ${this.selectedCommand ? html`
+                    <div class="modal-overlay">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Command Details</h2>
+                                <button class="modal-close">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="command-prompt">
+                                    <h3>Prompt:</h3>
+                                    <p>${this.selectedCommand.text}</p>
+                                </div>
+                                <div class="command-code">
+                                    <div class="code-header">
+                                        <h3>Code:</h3>
+                                        <button class="copy-code-btn">Copy Code</button>
+                                    </div>
+                                    <pre><code>${this.selectedCommand.code || 'No code available'}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
             </div>
+
         `;
 
         render(template, this);
