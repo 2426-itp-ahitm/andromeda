@@ -104,7 +104,6 @@ export class CustomCommands extends HTMLElement {
                 <div class="command-editor">
                     <div class="command-editor-header">
                         <h2>Create Python Command</h2>
-                        <span>🐍 Python</span>
                     </div>
                     <div class="command-editor-content">
                         <div class="voice-command-input">
