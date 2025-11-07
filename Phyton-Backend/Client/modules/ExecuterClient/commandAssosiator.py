@@ -11,9 +11,9 @@ class commandAssosiator:
         
     def assosiate(self,number,params):
         command_name = str(number)
-
         if str(command_name).endswith('.py'):
             command_name = command_name[:-3]
+            
         module_path = f"ExecuterClient.commands.generatedCommands.{command_name}"
         module = importlib.import_module(module_path)
         # Get the first class defined in the module
@@ -24,6 +24,7 @@ class commandAssosiator:
                 command_class = attr
                 break
         if command_class:
+            print("EXEC" + command_class.__name__)
             executer = commandExecuter()
             executer.execute(command_class, params=params)
         else:

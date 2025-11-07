@@ -42,7 +42,7 @@ class Dashboard extends HTMLElement {
     try {
       this.statistics = await this.statisticService.getStatistics();
       if (this.statistics) {
-        this.recentCommands = this.statistics.latestCommandsExecuted || [];
+        this.recentCommands = this.statistics.latestCommandsExecuted.slice(0,4) || [];
       }
       this.render();
     } catch (error) {
@@ -103,8 +103,8 @@ class Dashboard extends HTMLElement {
             <div class="command-list">
               ${this.recentCommands.map(command => html`
                 <div class="command-item">
-                  <span class="command-text">${command}</span>
-                  <span class="command-time">just now</span>
+                  <span class="command-text">${command.name}</span>
+                  <span class="command-time">${command.timestamp}</span>
                 </div>
               `)}
             </div>

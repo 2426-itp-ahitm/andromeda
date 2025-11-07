@@ -55,7 +55,7 @@ module.exports = {
     open: true,
     proxy: [{
       context: ['/api'],
-      target: 'http://localhost:8080',
+      target: 'http://127.0.0.1:8080',
       secure: false,
       changeOrigin: true,
       pathRewrite: {
@@ -64,7 +64,7 @@ module.exports = {
     },
   {
       context: ['/download', '/setActiveModule'],
-      target: 'http://localhost:65323',
+      target: 'http://127.0.0.1::65323',
       secure: false,
       changeOrigin: true,
       pathRewrite: {

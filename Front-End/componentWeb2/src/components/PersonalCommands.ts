@@ -37,7 +37,7 @@ export class PersonalCommands extends HTMLElement {
                 id: cmd.id,
                 text: cmd.prompt,
                 code: cmd.code,
-                enabled: true,
+                enabled: cmd.enabled ?? true,
                 type: cmd.type,
                 lastUsed: cmd.lastUsed
             })),
@@ -45,7 +45,7 @@ export class PersonalCommands extends HTMLElement {
                 id: cmd.id,
                 text: cmd.prompt,
                 code: cmd.code,
-                enabled: true,
+                enabled: cmd.enabled ?? true,
                 type: cmd.type,
                 lastUsed: cmd.lastUsed
             }))

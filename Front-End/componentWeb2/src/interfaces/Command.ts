@@ -6,6 +6,7 @@ export interface Command {
     prompt: string;
     code: string;
     lastUsed?: Date;
+    enabled?: boolean;
 }
 
 // Frontend command interface

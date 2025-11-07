@@ -100,7 +100,14 @@ def get_json():
         return jsonify({"error": "File not found"}), 404
     except json.JSONDecodeError:
         return jsonify({"error": "Invalid JSON format"}), 400
-
+    
+@app.route('/enable-command', methods=['POST'])
+def enable_command():
+    print("Enable command received")
+    
+@app.route('/disable-command', methods=['POST'])
+def disable_command():
+    print("Disable command received")
 
 def run_flask():
         # Use 0.0.0.0 if you want it accessible from other devices
