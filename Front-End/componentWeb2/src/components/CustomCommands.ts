@@ -1,5 +1,6 @@
 import { html, render } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { customCommandService } from '../services/CustomCommandService';
 
 declare const hljs: any;
 
@@ -72,7 +73,7 @@ export class CustomCommands extends HTMLElement {
         }
     }
 
-    private handleSave(): void {
+    private async handleSave(): Promise<void> {
         if (!this.voiceCommand.trim()) {
             alert('Please enter a voice command');
             return;
@@ -83,10 +84,23 @@ export class CustomCommands extends HTMLElement {
             return;
         }
 
-        console.log('Saving command:', {
-            voiceCommand: this.voiceCommand,
-            pythonCode: this.currentCode
-        });
+        try {
+            const savedCommand = await customCommandService.saveCustomCommand(
+                this.voiceCommand,
+                this.currentCode
+            );
+            alert('Command saved successfully!');
+            console.log('Command saved:', savedCommand);
+            
+            // Reset form
+            this.currentCode = '';
+            this.voiceCommand = '';
+            this.fileName = '';
+            this.render();
+        } catch (error) {
+            alert(`Error saving command: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            console.error('Error saving command:', error);
+        }
     }
 
     render(): void {

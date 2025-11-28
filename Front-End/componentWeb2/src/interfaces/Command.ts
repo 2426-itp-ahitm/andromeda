@@ -18,3 +18,8 @@ export interface FrontendCommand {
     enabled: boolean;
     lastUsed?: Date;
 } 
+export interface CommandCreationPayload {
+    type: number; // 0 for default, 1 for personalized
+    prompt: string;
+    code: string;
+}
