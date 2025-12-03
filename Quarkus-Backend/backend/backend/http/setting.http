@@ -15,7 +15,6 @@ PUT http://localhost:8080/api/andromeda/setting/updateSettingOfUser
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/api/andromeda/setting/getSettingsByUser/1
-
+GET http://localhost:8080/api/andromeda/setting/getSettingsByUser/
 ###
 GET http://localhost:8080/api/andromeda/setting/getSettingByUser/1/pathToPromtList
