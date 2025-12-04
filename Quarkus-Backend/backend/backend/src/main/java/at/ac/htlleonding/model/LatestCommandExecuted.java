@@ -1,6 +1,5 @@
 package at.ac.htlleonding.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -8,48 +7,32 @@ import jakarta.persistence.*;
 public class LatestCommandExecuted {
 
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private String timestamp;
 
     @ManyToOne
     @JoinColumn(name = "statistics_id")
-    @JsonIgnoreProperties({"latestCommandsExecuted"})
+    @JsonIgnoreProperties("latestCommandsExecuted")
     private Statistics statistics;
 
     public LatestCommandExecuted() {
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    // --- FIX THIS CONSTRUCTOR ---
+    // It must accept 'Statistics', NOT 'Long'
+    public LatestCommandExecuted(String name, String timestamp, Statistics statistics) {
         this.name = name;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public Statistics getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(Statistics statistics) {
         this.statistics = statistics;
     }
+    // ----------------------------
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public String getTimestamp() { return timestamp; }
+    public Statistics getStatistics() { return statistics; }
 }

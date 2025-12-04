@@ -7,9 +7,8 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import java.util.List;
 
-@Path("/statistics")
+@Path("/api/andromeda/statistics")
 @Produces(MediaType.APPLICATION_JSON)
 public class StatisticsResource {
 
@@ -17,7 +16,8 @@ public class StatisticsResource {
     StatisticsRepository statisticsRepository;
 
     @GET
-    public List<Statistics> getStatistics() {
-        return statisticsRepository.findAll();
+    public Statistics getStatistics() {
+        // This will now return the object containing only the latest 3 commands
+        return statisticsRepository.findStats();
     }
 }

@@ -20,7 +20,7 @@ export class StatisticService {
     // GET /api/statistics
     public async getStatistics(): Promise<Statistics> {
         try {
-            const response = await fetch(this.basicURL + '/andromeda/statistics/get');
+            const response = await fetch(this.basicURL + '/andromeda/statistics');
             if (!response.ok) {
                 throw new Error('Failed to fetch statistics');
             }

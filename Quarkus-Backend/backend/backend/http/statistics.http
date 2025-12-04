@@ -1,2 +1,11 @@
 ###
-GET http://localhost:8080/statistics
+GET http://localhost:8080/api/andromeda/statistics
+###
+POST http://localhost:8080/api/andromeda/command/addLatestCommandExecuted
+Content-Type: application/json
+
+{
+  "name": "test",
+  "timestamp": "now"
+}
+

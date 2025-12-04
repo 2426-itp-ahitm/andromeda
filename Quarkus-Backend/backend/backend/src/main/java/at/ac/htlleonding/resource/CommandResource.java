@@ -1,10 +1,11 @@
 package at.ac.htlleonding.resource;
 
 import at.ac.htlleonding.model.Command;
-import at.ac.htlleonding.model.User_Command;
+import at.ac.htlleonding.model.Statistics;
 import at.ac.htlleonding.model.dto.CommandDTO;
 import at.ac.htlleonding.model.dto.LatestCommandExecutedDTO;
 import at.ac.htlleonding.repository.CommandRepository;
+import at.ac.htlleonding.repository.StatisticsRepository;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -17,6 +18,11 @@ public class CommandResource {
 
     @Inject
     CommandRepository commandRepository;
+
+    @Inject
+    StatisticsRepository statisticsRepository;
+
+    // --- EXISTING ENDPOINTS ---
 
     @GET
     @Path("/getDefaultCommands")
@@ -32,10 +38,8 @@ public class CommandResource {
     @GET
     @Path("/getCommandsByUser/{userId}")
     public Response getCommandsByUser(@PathParam("userId") Long userId) {
-        //todo: repo getCommandsByUser
-            List<Command> commands = commandRepository.getCommandsByUser(userId);
-            return Response.status(Response.Status.OK).entity(commands).build();
-
+        List<Command> commands = commandRepository.getCommandsByUser(userId);
+        return Response.status(Response.Status.OK).entity(commands).build();
     }
 
     @POST
@@ -48,11 +52,25 @@ public class CommandResource {
         }
         return Response.status(Response.Status.OK).entity(command).build();
     }
+
+    // --- NEW / MODIFIED ENDPOINTS ---
+
+    @GET
+    @Path("/statistics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStatistics() {
+        // FIXED: Method name matches StatisticsRepository
+        Statistics stats = statisticsRepository.findStats();
+        return Response.ok(stats).build();
+    }
+
     @POST
     @Path("/addLatestCommandExecuted/")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addLatestCommandExecuted(LatestCommandExecutedDTO latestCommandExecutedDTO) {
-        LatestCommandExecutedDTO command = commandRepository.latestCommandExecutedDTO(latestCommandExecutedDTO);
+        // FIXED: Method name matches StatisticsRepository
+        LatestCommandExecutedDTO command = statisticsRepository.addLatestCommand(latestCommandExecutedDTO);
+
         if(command == null) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }

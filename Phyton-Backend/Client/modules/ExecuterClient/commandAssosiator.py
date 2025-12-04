@@ -2,6 +2,9 @@ import importlib
 from helpers.commandLister import commandLister
 from helpers.commandExecuter import commandExecuter
 from helpers.config import pathToCommandList
+import requests
+from datetime import datetime
+import threading
 
 
 class commandAssosiator:
@@ -25,6 +28,12 @@ class commandAssosiator:
                 break
         if command_class:
             print("EXEC" + command_class.__name__)
+            dto = {
+                "name": command_class.__name__,
+                "timestamp": datetime.now().isoformat()
+            }
+            # Send request in a separate thread to avoid blocking
+            threading.Thread(target=lambda: requests.post("http://localhost:8080/api/andromeda/command/addLatestCommandExecuted", json=dto), daemon=True).start()
             executer = commandExecuter()
             executer.execute(command_class, params=params)
         else:
