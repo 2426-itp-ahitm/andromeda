@@ -3,6 +3,7 @@ package at.ac.htlleonding.resource;
 import at.ac.htlleonding.model.Command;
 import at.ac.htlleonding.model.User_Command;
 import at.ac.htlleonding.model.dto.CommandDTO;
+import at.ac.htlleonding.model.dto.LatestCommandExecutedDTO;
 import at.ac.htlleonding.repository.CommandRepository;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -42,6 +43,16 @@ public class CommandResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addCommandToUser(CommandDTO commandDTO) {
         Command command = commandRepository.addCommand(commandDTO);
+        if(command == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        return Response.status(Response.Status.OK).entity(command).build();
+    }
+    @POST
+    @Path("/addLatestCommandExecuted/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addLatestCommandExecuted(LatestCommandExecutedDTO latestCommandExecutedDTO) {
+        LatestCommandExecutedDTO command = commandRepository.latestCommandExecutedDTO(latestCommandExecutedDTO);
         if(command == null) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }

@@ -4,6 +4,7 @@ import at.ac.htlleonding.model.Command;
 import at.ac.htlleonding.model.User;
 import at.ac.htlleonding.model.User_Command;
 import at.ac.htlleonding.model.dto.CommandDTO;
+import at.ac.htlleonding.model.dto.LatestCommandExecutedDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -45,6 +46,15 @@ public class CommandRepository {
                 return command;
         }
         return null;
-        }
     }
+
+    public LatestCommandExecutedDTO latestCommandExecutedDTO(LatestCommandExecutedDTO latestCommandExecutedDTO){
+
+        if (latestCommandExecutedDTO != null) {
+            entityManager.persist(latestCommandExecutedDTO);
+        }
+        return latestCommandExecutedDTO;
+    }
+
+}
 
