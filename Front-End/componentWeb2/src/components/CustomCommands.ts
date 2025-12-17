@@ -22,8 +22,7 @@ export class CustomCommands extends HTMLElement {
         if (textarea && codeDisplay) {
             textarea.addEventListener('input', () => {
                 this.currentCode = textarea.value;
-                const highlighted = hljs.highlight(this.currentCode, { language: 'python' }).value;
-                codeDisplay.innerHTML = highlighted || '&nbsp;';
+                this.render();
                 this.syncScroll(textarea, codeDisplay.parentElement as HTMLElement);
             });
 
@@ -38,17 +37,17 @@ export class CustomCommands extends HTMLElement {
         codeDisplay.scrollLeft = textarea.scrollLeft;
     }
 
-    private handleCodeChange(event: Event): void {
+    private handleCodeChange = (event: Event): void => {
         const textarea = event.target as HTMLTextAreaElement;
         this.currentCode = textarea.value;
     }
 
-    private handleVoiceCommandChange(event: Event): void {
+    private handleVoiceCommandChange = (event: Event): void => {
         const input = event.target as HTMLInputElement;
         this.voiceCommand = input.value;
     }
 
-    private handleFileUpload(event: Event): void {
+    private handleFileUpload = (event: Event): void => {
         const input = event.target as HTMLInputElement;
         const file = input.files?.[0];
         
@@ -58,13 +57,7 @@ export class CustomCommands extends HTMLElement {
             reader.onload = (e) => {
                 this.currentCode = e.target?.result as string;
                 this.render();
-                // Highlight the uploaded code
-                const textarea = this.querySelector('.code-editor textarea') as HTMLTextAreaElement;
-                const codeDisplay = this.querySelector('.code-display') as HTMLElement;
-                if (textarea && codeDisplay) {
-                    const highlighted = hljs.highlight(this.currentCode, { language: 'python' }).value;
-                    codeDisplay.innerHTML = highlighted || '&nbsp;';
-                }
+                this.setupCodeHighlighting();
             };
             reader.readAsText(file);
         } else {
@@ -73,7 +66,7 @@ export class CustomCommands extends HTMLElement {
         }
     }
 
-    private async handleSave(): Promise<void> {
+    private handleSave = async (): Promise<void> => {
         if (!this.voiceCommand.trim()) {
             alert('Please enter a voice command');
             return;

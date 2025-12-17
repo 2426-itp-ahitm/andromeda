@@ -1,76 +1,7 @@
 
--- Funktion und Trigger müssen manuell in einer query console in die Datenbank eingefügt werden. Trigger und Function
--- über inport.sql erstellen funktioniert nicht.
--- todo: das Einfügen der default settins bei Anlegen eines Users muss im Code stattfinden.
-
-/*
-CREATE OR REPLACE FUNCTION insert_default_settings()
-    RETURNS TRIGGER AS $$
-BEGIN
-    INSERT INTO dbSetting(name, type, value, user_id)
-    VALUES ('pathToSysCommandList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\sysCommandList.json', NEW.id);
-
-    INSERT INTO dbSetting(name, type, value, user_id)
-    VALUES ('pathToPromtList', 'string', 'http://localhost:8080/api/andromeda/user/userId/prompts', NEW.id);
-
-    INSERT INTO dbSetting(name, type, value, user_id)
-    VALUES ('pathToErrorList', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\GPTClient\\errorList.json', NEW.id);
-
-    INSERT INTO dbSetting(name, type, value, user_id)
-    VALUES ('MODEL_ENGLISH_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-en-us-0.42-gigaspeech\\vosk-model-en-us-0.42-gigaspeech', NEW.id);
-
-    INSERT INTO dbSetting(name, type, value, user_id)
-    VALUES ('MODEL_GERMAN_PATH', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\SpeachClient\\speach-modules\\vosk-model-de-0.21\\vosk-model-de-0.21', NEW.id);
-
-    INSERT INTO dbSetting(name, type, value, user_id)
-    VALUES ('pathToScreenshotFolder', 'string', 'C:\\Users\\gabri\\Desktop\\Schule\\ITP\\4.Klasse\\andromeda\\Phyton-Backend\\Client\\modules\\ExecuterClient\\screenshots', NEW.id);
-
-    RETURN NEW;
-END
-$$ LANGUAGE plpgsql;
-
-
-CREATE TRIGGER trigger_insert_default_settings
-    AFTER INSERT ON dbUser
-    FOR EACH ROW
-EXECUTE FUNCTION insert_default_settings();
-*/
-/*
-insert into command(id, type, prompt, code) values (1, 'default', 'Verschiebe Datei (A) nach (B)', 'testCode1');
-insert into command(id, type, prompt, code) values (2, 'default', 'Schalte den Rechner aus', 'testCode2');
-insert into command(id, type, prompt, code) values (3, 'default', 'Öffne Programm (A)', 'testCode3');
-insert into command(id, type, prompt, code) values (4, 'default', 'Schließe Programm (A)', 'testCode4');
-insert into command(id, type, prompt, code) values (5, 'default', 'Führe ein git commit aus', 'testCode5');
-insert into command(id, type, prompt, code) values (6, 'default', 'Spiel die Wiedergabe', 'testCode6');
-insert into command(id, type, prompt, code) values (7, 'default', 'Pausiere die Wiedergabe', 'testCode7');
-insert into command(id, type, prompt, code) values (8, 'default', 'Komprimiere Datei (A)', 'testCode8');
-insert into command(id, type, prompt, code) values (9, 'default', 'Suche Datei (A)', 'testCode9');
-insert into command(id, type, prompt, code) values (10, 'default', 'Geh in Verzeichnis (A)', 'testCode10');
-insert into command(id, type, prompt, code) values (11, 'default', 'Schalte dich selbst aus', 'testCode11');
-insert into command(id, type, prompt, code) values (12, 'default', 'öffne das Fenster (A)', 'testCode12');
-insert into command(id, type, prompt, code) values (13, 'default', 'schließe das Fenster (A)', 'testCode13');
-insert into command(id, type, prompt, code) values (14, 'default', 'maximiere das Fenster (A)', 'testCode14');
-insert into command(id, type, prompt, code) values (15, 'default', 'minimiere das Fenster (A)', 'testCode15');
-insert into command(id, type, prompt, code) values (16, 'default', 'setze die Lautstärke auf (A)', 'testCode16');
-insert into command(id, type, prompt, code) values (17, 'default', 'stumme die Audio', 'testCod17e');
-insert into command(id, type, prompt, code) values (18, 'default', 'setze die Helligkeit auf (A)', 'testCode18');
-insert into command(id, type, prompt, code) values (19, 'default', 'Erhöhe die Helligkeit um (A)', 'testCode19');
-insert into command(id, type, prompt, code) values (20, 'default', 'Mach die Helligkeit niedriger um (A)', 'testCode20');
-insert into command(id, type, prompt, code) values (21, 'default', 'Erhöhe die Lautstärke um (A)', 'testCode21');
-insert into command(id, type, prompt, code) values (22, 'default', 'Mach die Lautstärke niedriger um (A)', 'testCode22');
-insert into command(id, type, prompt, code) values (23, 'default', 'Mache einen Screenshot von (A)', 'testCode23');
-insert into command(id, type, prompt, code) values (24, 'default', 'Nächstes Lied', 'testCode24');
-insert into command(id, type, prompt, code) values (25, 'default', 'Lied zurück', 'testCode25');
-*/
-
- */
---SELECT setval('command_id_seq', (SELECT MAX(id) FROM command));
-
-/* insert into command("codexy", "code xy ausführen", "personalized");
-
- */
 
 -- Model Inserts
+INSERT INTO dbuser (name) VALUES ('test');
 
 -- Englisch
 INSERT INTO model(name, size, language, precision, link) VALUES ('vosk-model-small-en-us-0.15', '40M', 'English', 0, 'https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip');
@@ -83,6 +14,7 @@ INSERT INTO model(name, size, language, precision, link) VALUES ('vosk-model-en-
 INSERT INTO model(name, size, language, precision, link) VALUES ('vosk-model-small-en-us-zamia-0.5', '49M', 'English', 0, 'https://alphacephei.com/vosk/models/vosk-model-small-en-us-zamia-0.5.zip');
 INSERT INTO model(name, size, language, precision, link) VALUES ('vosk-model-en-us-aspire-0.2', '1.4G', 'English', 0, 'https://alphacephei.com/vosk/models/vosk-model-en-us-aspire-0.2.zip');
 INSERT INTO model(name, size, language, precision, link) VALUES ('vosk-model-en-us-0.21', '1.6G', 'English', 0, 'https://alphacephei.com/vosk/models/vosk-model-en-us-0.21.zip');
+
 
 -- Indisches Englisch
 INSERT INTO model(name, size, language, precision, link) VALUES ('vosk-model-en-in-0.5', '1G', 'Indian English', 0, 'https://alphacephei.com/vosk/models/vosk-model-en-in-0.5.zip');

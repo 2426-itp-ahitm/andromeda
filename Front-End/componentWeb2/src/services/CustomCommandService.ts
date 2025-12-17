@@ -1,7 +1,7 @@
 import { Command, CommandCreationPayload } from '../interfaces/Command';
 
 export class CustomCommandService {
-    private baseUrl = '/api/commands';
+    private baseUrl = 'http://localhost:9001/api/api/andromeda/command';
     private personalCommandType = 1; // Personal commands have type 1
 
     async saveCustomCommand(voiceCommand: string, pythonCode: string): Promise<Command> {
@@ -14,13 +14,15 @@ export class CustomCommandService {
         }
 
         const payload: CommandCreationPayload = {
+
             type: this.personalCommandType, // Set to 1 for personal commands
             prompt: voiceCommand,
-            code: pythonCode
+            code: pythonCode,
+            userId: 1 // Assuming user ID is 1 for this example
         };
 
         try {
-            const response = await fetch(`${this.baseUrl}`, {
+            const response = await fetch(`${this.baseUrl}/addCommand`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -67,6 +69,7 @@ export class CustomCommandService {
             type: this.personalCommandType,
             prompt: voiceCommand,
             code: pythonCode
+            , userId: 1 // Assuming user ID is 1 for this example
         };
 
         try {
