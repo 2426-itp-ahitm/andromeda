@@ -4,15 +4,101 @@ import { customCommandService } from '../services/CustomCommandService';
 
 declare const hljs: any;
 
+// --- Speech API Types ---
+interface SpeechRecognitionEvent extends Event {
+    results: SpeechRecognitionResultList;
+    resultIndex: number;
+}
+
+interface SpeechRecognitionResultList {
+    length: number;
+    item(index: number): SpeechRecognitionResult;
+    [index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionResult {
+    isFinal: boolean;
+    [index: number]: SpeechRecognitionAlternative;
+}
+
+interface SpeechRecognitionAlternative {
+    transcript: string;
+    confidence: number;
+}
+// ------------------------
+
 export class CustomCommands extends HTMLElement {
     container: HTMLElement | null = null;
     private currentCode: string = '';
     private voiceCommand: string = '';
     private fileName: string = '';
 
+    // Voice recognition state
+    private isListening: boolean = false;
+    private recognition: any = null;
+
     connectedCallback(): void {
+        this.initSpeechRecognition();
         this.render();
         this.setupCodeHighlighting();
+    }
+
+    private initSpeechRecognition(): void {
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        
+        if (SpeechRecognition) {
+            this.recognition = new SpeechRecognition();
+            this.recognition.continuous = false;
+            this.recognition.interimResults = true; 
+            
+            // AUTOMATIC LANGUAGE DETECTION
+            // Uses the browser's language (e.g., 'de-DE', 'en-US', 'fr-FR')
+            this.recognition.lang = navigator.language || 'de-DE'; 
+
+            this.recognition.onresult = (event: SpeechRecognitionEvent) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+
+                this.voiceCommand = finalTranscript || interimTranscript;
+                this.render();
+            };
+
+            this.recognition.onerror = (err: any) => {
+                console.error('Speech recognition error:', err);
+                this.isListening = false;
+                this.render();
+            };
+
+            this.recognition.onend = () => {
+                this.isListening = false;
+                this.render();
+            };
+        }
+    }
+
+    private toggleListening = (): void => {
+        if (!this.recognition) {
+            alert("Speech recognition is not supported in this browser.");
+            return;
+        }
+
+        if (this.isListening) {
+            this.recognition.stop();
+        } else {
+            this.voiceCommand = ''; 
+            this.isListening = true;
+            this.recognition.start();
+            this.render();
+        }
     }
 
     private setupCodeHighlighting(): void {
@@ -85,7 +171,6 @@ export class CustomCommands extends HTMLElement {
             alert('Command saved successfully!');
             console.log('Command saved:', savedCommand);
             
-            // Reset form
             this.currentCode = '';
             this.voiceCommand = '';
             this.fileName = '';
@@ -115,12 +200,23 @@ export class CustomCommands extends HTMLElement {
                     <div class="command-editor-content">
                         <div class="voice-command-input">
                             <label>Voice Command Trigger</label>
-                            <input 
-                                type="text" 
-                                placeholder="e.g., 'open music' or 'start browser'"
-                                .value=${this.voiceCommand}
-                                @input=${this.handleVoiceCommandChange}
-                            >
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <input 
+                                    type="text" 
+                                    style="flex-grow: 1;"
+                                    placeholder="e.g., 'open music' or 'start browser'"
+                                    .value=${this.voiceCommand}
+                                    @input=${this.handleVoiceCommandChange}
+                                >
+                                <button 
+                                    class="mic-button ${this.isListening ? 'listening' : ''}" 
+                                    @click=${this.toggleListening}
+                                    type="button"
+                                    style="padding: 0 12px; cursor: pointer;"
+                                >
+                                    ${this.isListening ? '🛑 Stop' : '🎤'}
+                                </button>
+                            </div>
                         </div>
 
                         <div class="command-help">
