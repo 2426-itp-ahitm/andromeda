@@ -1,6 +1,7 @@
 package at.ac.htlleonding.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -26,6 +27,11 @@ public class Command {
 
     @Column(columnDefinition = "TEXT")
     private String code;
+
+    @OneToMany(mappedBy = "command")
+    @JsonIgnoreProperties("command")
+    private List<LatestCommandExecuted> latestCommandsExecuted;
+
 
     @OneToMany(mappedBy = "command", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

@@ -27,13 +27,14 @@ class commandAssosiator:
                 command_class = attr
                 break
         if command_class:
-            print("EXEC" + command_class.__name__)
+            print("EXEC " + command_class.__name__)
             dto = {
                 "name": command_class.__name__,
-                "timestamp": datetime.now().isoformat()
+                "timestamp": datetime.now().isoformat(),
+                "commandId": number
             }
             # Send request in a separate thread to avoid blocking
-            threading.Thread(target=lambda: requests.post("http://localhost:8080/api/andromeda/command/addLatestCommandExecuted", json=dto), daemon=True).start()
+            threading.Thread(target=lambda: requests.post("http://localhost:8080/api/andromeda/statistics/addLatestCommandExecuted", json=dto), daemon=True).start()
             executer = commandExecuter()
             executer.execute(command_class, params=params)
         else:
