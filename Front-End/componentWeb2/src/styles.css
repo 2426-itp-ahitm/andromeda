@@ -1478,6 +1478,69 @@ input[type="range"] {
 .command-editor-button:active {
     transform: translateY(0);
 }
+/* Modal Actions (for Edit button) */
+.modal-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.edit-command-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.edit-command-btn:hover {
+    background-color: #45a049;
+}
+
+.edit-command-btn:active {
+    background-color: #3d8b40;
+}
+
+/* Edit Mode Badge */
+.edit-mode-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: auto;
+}
+
+.edit-mode-badge span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Command Editor Header with Edit Mode */
+.command-editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.command-editor-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
 
 /* Syntax Highlighting */
 .hljs-comment,

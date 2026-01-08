@@ -52,6 +52,16 @@ public class CommandResource {
         }
         return Response.status(Response.Status.OK).entity(command).build();
     }
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateCommand(@PathParam("id") Long id, CommandDTO commandDTO) {
+        if (commandDTO == null || id == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        Command command = commandRepository.updateCommand(id, commandDTO);
+        return Response.status(Response.Status.OK).entity(command).build();
+    }
 
     // --- NEW / MODIFIED ENDPOINTS ---
 

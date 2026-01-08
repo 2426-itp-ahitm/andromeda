@@ -7,6 +7,9 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
+
 import java.util.List;
 
 @ApplicationScoped
@@ -43,6 +46,17 @@ public class CommandRepository {
         return null;
     }
 
+    @Transactional
+    public Command updateCommand(Long id, CommandDTO commandDTO) {
+        if(commandDTO.userId() == null || id == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }else{
+            Command command = entityManager.find(Command.class, id);
+            command.setPrompt(commandDTO.prompt());
+            command.setCode(commandDTO.code());
+            return command;
+        }
+    }
     // REMOVED: addLatestCommandExecutedDTO
     // REMOVED: getOrCreateStatistics
     // REMOVED: getGlobalStatistics

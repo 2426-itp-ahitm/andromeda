@@ -32,6 +32,8 @@ export class CustomCommands extends HTMLElement {
     private currentCode: string = '';
     private voiceCommand: string = '';
     private fileName: string = '';
+    private editingCommandId: string | null = null;
+    private isEditMode: boolean = false;
 
     // Voice recognition state
     private isListening: boolean = false;
@@ -39,8 +41,27 @@ export class CustomCommands extends HTMLElement {
 
     connectedCallback(): void {
         this.initSpeechRecognition();
+        this.checkForEditCommand();
         this.render();
         this.setupCodeHighlighting();
+    }
+
+    private checkForEditCommand(): void {
+        const editDataStr = sessionStorage.getItem('editCommand');
+        if (editDataStr) {
+            try {
+                const editData = JSON.parse(editDataStr);
+                this.editingCommandId = editData.id;
+                this.voiceCommand = editData.voiceCommand;
+                this.currentCode = editData.code;
+                this.isEditMode = true;
+                
+                // Clear the session storage
+                sessionStorage.removeItem('editCommand');
+            } catch (error) {
+                console.error('Error parsing edit command data:', error);
+            }
+        }
     }
 
     private initSpeechRecognition(): void {
@@ -164,21 +185,45 @@ export class CustomCommands extends HTMLElement {
         }
 
         try {
-            const savedCommand = await customCommandService.saveCustomCommand(
-                this.voiceCommand,
-                this.currentCode
-            );
-            alert('Command saved successfully!');
-            console.log('Command saved:', savedCommand);
+            if (this.isEditMode && this.editingCommandId) {
+                // Update existing command
+                const updatedCommand = await customCommandService.updateCustomCommand(
+                    this.editingCommandId,
+                    this.voiceCommand,
+                    this.currentCode
+                );
+                alert('Command updated successfully!');
+                console.log('Command updated:', updatedCommand);
+            } else {
+                // Create new command
+                const savedCommand = await customCommandService.saveCustomCommand(
+                    this.voiceCommand,
+                    this.currentCode
+                );
+                alert('Command saved successfully!');
+                console.log('Command saved:', savedCommand);
+            }
             
+            // Reset form
             this.currentCode = '';
             this.voiceCommand = '';
             this.fileName = '';
+            this.editingCommandId = null;
+            this.isEditMode = false;
             this.render();
         } catch (error) {
             alert(`Error saving command: ${error instanceof Error ? error.message : 'Unknown error'}`);
             console.error('Error saving command:', error);
         }
+    }
+
+    private handleCancel = (): void => {
+        this.currentCode = '';
+        this.voiceCommand = '';
+        this.fileName = '';
+        this.editingCommandId = null;
+        this.isEditMode = false;
+        this.render();
     }
 
     render(): void {
@@ -195,7 +240,12 @@ export class CustomCommands extends HTMLElement {
             <div class="custom-commands">
                 <div class="command-editor">
                     <div class="command-editor-header">
-                        <h2>Create Python Command</h2>
+                        <h2>${this.isEditMode ? 'Edit Python Command' : 'Create Python Command'}</h2>
+                        ${this.isEditMode ? html`
+                            <div class="edit-mode-badge">
+                                <span>Edit Mode</span>
+                            </div>
+                        ` : ''}
                     </div>
                     <div class="command-editor-content">
                         <div class="voice-command-input">
@@ -255,16 +305,11 @@ export class CustomCommands extends HTMLElement {
                         </div>
                     </div>
                     <div class="command-editor-actions">
-                        <button class="command-editor-button cancel" @click=${() => {
-                            this.currentCode = '';
-                            this.voiceCommand = '';
-                            this.fileName = '';
-                            this.render();
-                        }}>
-                            Clear All
+                        <button class="command-editor-button cancel" @click=${this.handleCancel}>
+                            ${this.isEditMode ? 'Cancel Edit' : 'Clear All'}
                         </button>
                         <button class="command-editor-button save" @click=${this.handleSave}>
-                            Save Command
+                            ${this.isEditMode ? 'Update Command' : 'Save Command'}
                         </button>
                     </div>
                 </div>

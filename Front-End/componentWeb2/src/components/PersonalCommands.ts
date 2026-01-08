@@ -97,6 +97,7 @@ export class PersonalCommands extends HTMLElement {
         const modal = this.querySelector('.modal-overlay');
         const closeBtn = this.querySelector('.modal-close');
         const copyBtn = this.querySelector('.copy-code-btn');
+        const editBtn = this.querySelector('.edit-command-btn');
 
         modal?.addEventListener('click', (e) => {
             if (e.target === modal) {
@@ -107,6 +108,8 @@ export class PersonalCommands extends HTMLElement {
         closeBtn?.addEventListener('click', () => this.closePopup());
         
         copyBtn?.addEventListener('click', () => this.copyCodeToClipboard());
+        
+        editBtn?.addEventListener('click', () => this.editCommand());
     }
 
     private showCommandPopup(cmdid: string): void {
@@ -141,6 +144,28 @@ export class PersonalCommands extends HTMLElement {
             } catch (err) {
                 console.error('Failed to copy code:', err);
             }
+        }
+    }
+
+    private editCommand(): void {
+        if (this.selectedCommand && this.selectedCommand.type === 1) {
+            // Store the command data to be edited
+            const editData = {
+                id: this.selectedCommand.id,
+                voiceCommand: this.selectedCommand.text,
+                code: this.selectedCommand.code || ''
+            };
+            
+            // Store in sessionStorage so CustomCommands can retrieve it
+            sessionStorage.setItem('editCommand', JSON.stringify(editData));
+            
+            // Dispatch navigation event to switch to custom-commands page
+            const event = new CustomEvent('pageChange', {
+                detail: { page: 'custom-commands' },
+                bubbles: true,
+                composed: true
+            });
+            this.dispatchEvent(event);
         }
     }
 
@@ -269,6 +294,11 @@ export class PersonalCommands extends HTMLElement {
                                     </div>
                                     <pre><code>${this.selectedCommand.code || 'No code available'}</code></pre>
                                 </div>
+                                ${this.selectedCommand.type === 1 ? html`
+                                    <div class="modal-actions">
+                                        <button class="edit-command-btn">Edit Command</button>
+                                    </div>
+                                ` : ''}
                             </div>
                         </div>
                     </div>
