@@ -1056,6 +1056,29 @@ input[type="range"] {
     transition: width 0.3s ease;
 }
 
+.download-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.progress-label {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.progress-percent {
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+
 .model-action {
     padding: 12px;
     border-radius: 8px;

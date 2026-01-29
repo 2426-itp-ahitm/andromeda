@@ -57,7 +57,4 @@ public class CommandRepository {
             return command;
         }
     }
-    // REMOVED: addLatestCommandExecutedDTO
-    // REMOVED: getOrCreateStatistics
-    // REMOVED: getGlobalStatistics
 }

@@ -74,7 +74,7 @@ export class CustomCommands extends HTMLElement {
             
             // AUTOMATIC LANGUAGE DETECTION
             // Uses the browser's language (e.g., 'de-DE', 'en-US', 'fr-FR')
-            this.recognition.lang = navigator.language || 'de-DE'; 
+            this.recognition.lang =  'de-DE'; 
 
             this.recognition.onresult = (event: SpeechRecognitionEvent) => {
                 let interimTranscript = '';

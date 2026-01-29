@@ -44,7 +44,7 @@ export class ModelService {
                 }));
             } catch (error) {
                 console.error('Network error:', error);
-                throw new Error('Network error: Could not fetch commands. Is the backend running and the URL correct?');
+                throw new Error('Network error: Could not fetch models. Is the backend running and the URL correct?');
             }
         }
 } 

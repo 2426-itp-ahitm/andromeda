@@ -8,6 +8,8 @@ class TechSettings extends HTMLElement {
     private searchQuery: string = '';
     private selectedLanguage: string = 'all';
     private models: Model[] = [];
+    private downloadingModels: Map<string, number> = new Map();
+    private downloadingModelName: Map<string, string> = new Map();
 
     private languages: string[] = ['all', ...new Set(this.models.map(m => m.language))];
 
@@ -76,20 +78,64 @@ class TechSettings extends HTMLElement {
         this.setupEventListeners();
     }
 
-    private async handleModelDownload(modelLink: string): Promise<void> {
+    private async handleModelDownload(modelLink: string, modelName: string): Promise<void> {
         console.log(`Downloading model from ${modelLink}`);
-        fetch('http://localhost:65323/download', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ url: modelLink }),
-            })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .then(async () => { await this.initialize() })
-            .catch(err => console.error(err));
+        
+        try {
+            // Set initial progress immediately
+            this.downloadingModels.set(modelLink, 0);
+            this.downloadingModelName.set(modelLink, modelName);
+            this.render();
+            this.setupEventListeners();
+
+            // Start simulating progress updates
+            const progressInterval = setInterval(() => {
+                const currentProgress = this.downloadingModels.get(modelLink) || 0;
+                if (currentProgress < 90) {
+                    this.downloadingModels.set(modelLink, currentProgress + Math.random() * 30);
+                    this.render();
+                    this.setupEventListeners();
                 }
+            }, 500);
+
+            const response = await fetch('http://localhost:65323/download', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: modelLink }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Download failed: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            
+            // Complete the download
+            clearInterval(progressInterval);
+            this.downloadingModels.set(modelLink, 100);
+            this.render();
+            this.setupEventListeners();
+
+            console.log(data);
+
+            // Wait a moment then clear the progress bar and reinitialize
+            setTimeout(async () => {
+                this.downloadingModels.delete(modelLink);
+                this.downloadingModelName.delete(modelLink);
+                await this.initialize();
+            }, 500);
+
+        } catch (err) {
+            console.error(err);
+            // Clear progress bar on error
+            this.downloadingModels.delete(modelLink);
+            this.downloadingModelName.delete(modelLink);
+            this.render();
+            this.setupEventListeners();
+        }
+    }
 
     private getFilteredModels(): Model[] {
         return this.models.filter(model => {
@@ -159,10 +205,17 @@ class TechSettings extends HTMLElement {
                     <div class="model-details">
                         <div class="model-size">Size: ${model.size}</div>
                         <div class="model-language">Language: ${model.language}</div>
-                        <div class="progress-bar">
-                        <div class="progress" style="width: ${model.status === 'active' ? '100%' : '0%'}"></div>
-                        </div>
-                    </div>
+                        ${this.downloadingModels.has(model.link) ? html`
+                            <div class="download-progress">
+                                <div class="progress-info">
+                                    <span class="progress-label">Downloading...</span>
+                                    <span class="progress-percent">${Math.round(this.downloadingModels.get(model.link) || 0)}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: ${Math.round(this.downloadingModels.get(model.link) || 0)}%"></div>
+                                </div>
+                            </div>
+                        ` : html``}
                     </div>
                     <div class="model-actions">
                     <button 
@@ -178,10 +231,10 @@ class TechSettings extends HTMLElement {
                             const btn = e.target as HTMLButtonElement;
                             btn.textContent = 'Downloading...';
                             btn.disabled = true;
-                            this.handleModelDownload(model.link);
+                            this.handleModelDownload(model.link, model.name);
                         }}
-                        style="display: ${model.status === 'not downloaded' ? 'inline-block' : 'none'}"
-    >
+                        style="display: ${model.status === 'not downloaded' && !this.downloadingModels.has(model.link) ? 'inline-block' : 'none'}"
+                    >
                         Download
                     </button>
                     </div>
