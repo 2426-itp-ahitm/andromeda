@@ -2,7 +2,7 @@ import requests
 import json
 from helpers.listBuilder import listBuilder
 from helpers.errorListBuilder import errorListBuilder
-from helpers.config import system_promt, pathToPromtList, pathToErrorList, error_promt
+from helpers.config import system_promt, pathToPromtList, pathToPersonalisedPromtList, pathToErrorList, error_promt
 from helpers.key import key,realm
 
 class responseAssosiator(): 
@@ -11,7 +11,7 @@ class responseAssosiator():
     standartPromt = None
 
     def __init__(self):
-        self.assosListBuilder = listBuilder(defURL=pathToPromtList, persURL='http://localhost:8080/api/andromeda/command/getCommandsByUser/1')
+        self.assosListBuilder = listBuilder(defURL=pathToPromtList, persURL=pathToPersonalisedPromtList)
         self.errListBuilder = errorListBuilder(pathToErrorList)
         self.standartPromt = [
             ["system", system_promt],
@@ -41,8 +41,8 @@ class responseAssosiator():
                         data = line.decode('utf-8').replace("data: ", "")
                         json_data = json.loads(data)
                         full_response += json_data["content"]
-                    except ValueError:
-                        print("Skipping invalid JSON line:", line)
+                    except:
+                        pass
             return full_response
         else:
             print("Request failed with status code:", response.status_code)
