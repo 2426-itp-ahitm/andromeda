@@ -16,6 +16,7 @@ class ClientRunner:
         self.response_associator = responseAssosiator()
         self.chat_responder = chatResponder()
         self.command_associator = commandAssosiator()
+        print(f"Selected module for speech recognition: {selected_module}")
         self.speech_recognizer = SpeechRecognizer(selected_module, keyword, self.data_queue)
 
         self.tts = ttsHandler()

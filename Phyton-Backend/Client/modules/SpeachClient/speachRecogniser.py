@@ -7,12 +7,18 @@ import sys
 from vosk import Model, KaldiRecognizer
 from helpers.txtWriter import txtWriter
 from helpers.textFormatter import TextFormatter
-from helpers.config import keyword, selected_module
+from helpers.config import keyword, selected_module, SPEACH_MODULE_PATH
 
 
 class SpeechRecognizer:
     def __init__(self, model_path, keyword, data_queue = None):
-        self.model_path = model_path
+        # If model_path is not a full path, construct it from SPEACH_MODULE_PATH
+        if not os.path.isabs(model_path):
+            full_model_path = os.path.join(SPEACH_MODULE_PATH, model_path, model_path)
+        else:
+            full_model_path = model_path
+        
+        self.model_path = full_model_path
         self.keyword = keyword
         self.audio_queue = queue.Queue()
         self.data_queue = data_queue  # Shared queue for external use
@@ -56,7 +62,7 @@ class SpeechRecognizer:
                         partial_result = self.recognizer.PartialResult()
                         partial_dict = json.loads(partial_result)
                         partial_text = partial_dict.get("partial", "").lower()
-                        print(f"Partial Text: {partial_result}")
+                        #print(f"Partial Text: {partial_result}")
                         if not self.keyword_detected and self.keyword in partial_text:
                             print(f"Keyword '{self.keyword}' detected in partial result! Now actively listening...")
                             self.keyword_detected = True

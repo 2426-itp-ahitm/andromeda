@@ -13,11 +13,12 @@ class commandAssosiator:
         self.lister = commandLister(pathToCommandList)
         
     def assosiate(self,number,params):
-        command_name = str(number)
+        command_name = str(number).strip()
         if str(command_name).endswith('.py'):
             command_name = command_name[:-3]
             
         module_path = f"ExecuterClient.commands.generatedCommands.{command_name}"
+        print(f"Importing module: {module_path}")
         module = importlib.import_module(module_path)
         # Get the first class defined in the module
         command_class = None

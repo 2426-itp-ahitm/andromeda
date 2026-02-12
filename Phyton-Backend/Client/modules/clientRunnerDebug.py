@@ -7,6 +7,8 @@ from ExecuterClient.commandAssosiator import commandAssosiator
 from helpers.config import keyword, selected_module
 from FlaskClient.flaskClient import app, run_flask
 import threading
+import subprocess
+import sys
 
 class ClientRunner:
     def __init__(self): 
@@ -20,6 +22,11 @@ class ClientRunner:
         while True:
                 speech_text = input("Enter a text for debugging: ")
                 print(f"Recognized Speech: {speech_text}")
+                if speech_text.lower() == "restart":
+                    print("Restarting program...")
+                    self.tts.say("Restarting program")
+                    subprocess.Popen([sys.executable, __file__])
+                    break
                 response = self.response_associator.generateResponse(speech_text)
                 print(f"Analyzed Response: {response}")
                 if response == 0 or response == "0":

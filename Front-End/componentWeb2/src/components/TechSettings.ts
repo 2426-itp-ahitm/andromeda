@@ -193,7 +193,7 @@ class TechSettings extends HTMLElement {
 
             <div class="model-grid">
                 ${filteredModels.map(model => html`
-                <div class="model-card">
+                <div class="model-card" style="border: 2px solid ${model.status === 'active' ? '#8b85bf' : '#ccc'};">
                     <div class="model-info">
                     <div 
                         class="model-name"
@@ -219,11 +219,11 @@ class TechSettings extends HTMLElement {
                     </div>
                     <div class="model-actions">
                     <button 
-                        class="model-action ${model.status === 'active' ? 'on' : 'off'}"
+                        class="model-action ${model.status === 'active' ? 'on' : 'on'}"
                         @click=${() => this.handleModelToggle(model.name)}
                         style="display: ${model.status === 'not downloaded' ? 'none' : 'inline-block'}"
                     >
-                        ${model.status === 'active' ? 'Active' : 'Inactive'}
+                        ${model.status === 'active' ? 'Deactivate' : 'Activate'}
                     </button>
                     <button 
                         class="model-action download"

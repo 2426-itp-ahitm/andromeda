@@ -148,5 +148,17 @@
         "type": 1,
         "prompt": "hallo",
         "code": "2"
+    },
+    {
+        "id": 26,
+        "type": 1,
+        "prompt": "5AHITM",
+        "code": "class testCommand:\n    def run(self, params):\n        import os\n        print(\"Running testCommand\")\n        print(\"Params:\", params)\n        os.system(\"dir\")\n"
+    },
+    {
+        "id": 27,
+        "type": 1,
+        "prompt": "es geht ",
+        "code": "class testCommand:\n    def run(self, params):\n        import os\n        print(\"Running testCommand\")\n        print(\"Params:\", params)\n        os.system(\"dir\")\n"
     }
 ]
