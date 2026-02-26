@@ -36,17 +36,21 @@ class responseAssosiator():
         }
 
         response = requests.post(url, headers=headers, json=payload, stream=True)
-        
+        print("Request sent to Winkk API, awaiting response...")
         if response.status_code == 200:
+            print("Response received from Winkk API, processing...")
             full_response = ""
-            for line in response.iter_lines():
-                if line:
-                    try:
-                        data = line.decode('utf-8').replace("data: ", "")
-                        json_data = json.loads(data)
-                        full_response += json_data["content"]
-                    except:
-                        pass
+            for line in response.iter_lines(decode_unicode=True):
+                # Skip empty lines and ping heartbeats
+                if not line or not line.startswith("data:"):
+                    continue
+                try:
+                    # Remove "data: " prefix and parse JSON
+                    json_data = json.loads(line[6:])  # [6:] skips "data: "
+                    full_response += json_data.get("content", "")
+                except json.JSONDecodeError:
+                    # Skip lines that aren't valid JSON
+                    continue
             return full_response
         else:
             print("Request failed with status code:", response.status_code)

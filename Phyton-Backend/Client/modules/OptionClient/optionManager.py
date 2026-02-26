@@ -38,6 +38,7 @@ class OptionManager:
             configfile.write(f'selected_module = "{self.active_speach_module}"\n')
             configfile.write(f'keyword = "{self.keyword}"\n')
             configfile.write(f'model_state_path = "{self.model_state_path}"\n')
+            configfile.write(f'pathToPersonalisedPromtList = "http://localhost:8080/api/andromeda/command/getCommandsByUser/1"\n')
             
       
     def _set_value_from_url(self, attribute, url):

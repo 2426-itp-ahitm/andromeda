@@ -142,23 +142,5 @@
         "type": 0,
         "prompt": "Mache einen Screenshot von (A)",
         "code": "import pyautogui\nimport datetime\nimport os\nimport sys\nimport pygetwindow as gw, win32gui, win32con\nimport time\nfrom helpers.config import pathToScreenshotFolder\nimport ctypes\nclass takeScreenshot:\n    def run(self, params):\n        timestamp = datetime.datetime.now().strftime(\"%Y-%m-%d_%H-%M-%S\")\n        directory = pathToScreenshotFolder\n        if not os.path.exists(directory):\n            os.makedirs(directory)\n\n        filename = os.path.join(directory, f\"screenshot_{timestamp}.png\")\n\n        if params:\n            window_name = params[0]\n            windows = gw.getWindowsWithTitle(window_name)\n            if not windows:\n                print(f\"No window found with title containing: {window_name}\")\n                return\n            window = windows[0]  # Take the first matching window\n            if window.isMinimized:\n                window.restore()\n                time.sleep(0.5)\n                window.activate()\n            hwnd = gw.getWindowsWithTitle(window.title)[0]._hWnd\n            win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)\n            win32gui.SetForegroundWindow(hwnd)\n            ctypes.windll.user32.SetForegroundWindow(window._hWnd)\n            time.sleep(0.5)  # Small delay to ensure proper focus\n            bbox = (window.left, window.top, window.width, window.height)\n            screenshot = pyautogui.screenshot(region=bbox)\n            screenshot.save(filename)\n            print(f\"Screenshot of window '{window.title}' saved as {filename}\")\n        else:\n            screenshot = pyautogui.screenshot()\n            screenshot.save(filename)\n            print(f\"Screenshot saved as {filename}\")\n\nif __name__ == \"__main__\":\n    window_name = input(\"Enter window name (leave empty for full screen): \")\n    take_screenshot = takeScreenshot()\n    take_screenshot.run([window_name] if window_name else [])"
-    },
-    {
-        "id": 25,
-        "type": 1,
-        "prompt": "hallo",
-        "code": "2"
-    },
-    {
-        "id": 26,
-        "type": 1,
-        "prompt": "5AHITM",
-        "code": "class testCommand:\n    def run(self, params):\n        import os\n        print(\"Running testCommand\")\n        print(\"Params:\", params)\n        os.system(\"dir\")\n"
-    },
-    {
-        "id": 27,
-        "type": 1,
-        "prompt": "es geht ",
-        "code": "class testCommand:\n    def run(self, params):\n        import os\n        print(\"Running testCommand\")\n        print(\"Params:\", params)\n        os.system(\"dir\")\n"
     }
 ]
