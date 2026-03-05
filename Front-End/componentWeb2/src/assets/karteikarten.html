@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>EON - The Eyes of Automation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand: #ff7700;
+            --brand-glow: rgba(255, 119, 0, 0.4);
+            --dark: #070707;
+            --light: #f4f4f4;
+            --gray: #888888;
+        }
+
+        .reveal {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            font-size: 34px; 
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        .text-brand { color: var(--brand) !important; }
+        .text-white { color: var(--light) !important; }
+        .text-gray { color: var(--gray) !important; }
+        .fw-light { font-weight: 300 !important; }
+        .fw-bold { font-weight: 600 !important; }
+
+        /* --- LOGO ANPASSUNG FIX --- */
+        .logo-main {
+            width: 100%;
+            max-width: 600px;
+            max-height: 300px; /* STRIKTE HÖHENBEGRENZUNG */
+            object-fit: contain; /* Hält das Logo im Rahmen */
+            margin: 0 auto 15px auto;
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            display: block;
+        }
+
+        /* ----- SLIDE 3: Die Lösung (Scanner-Auge) ----- */
+        .scanner-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px auto;
+            border-radius: 50%;
+            border: 2px solid #333;
+            overflow: hidden;
+            box-shadow: 0 0 30px var(--brand-glow);
+        }
+        .scanner-line {
+            width: 100%;
+            height: 5px;
+            background: var(--brand);
+            position: absolute;
+            top: 0;
+            animation: scan 2s infinite linear;
+            box-shadow: 0 5px 15px var(--brand);
+        }
+        @keyframes scan {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        /* ----- SLIDE 4: USP (Floating Tech Nodes) ----- */
+        .usp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 90%;
+            margin: 40px auto 0 auto;
+        }
+        .usp-node {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 119, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: left;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .usp-node:hover {
+            border-color: var(--brand);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .usp-bg-num {
+            position: absolute;
+            right: -10px;
+            bottom: -20px;
+            font-size: 5em;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.05);
+            line-height: 1;
+            z-index: 0;
+        }
+        .usp-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ----- SLIDE 6: Business Model (Connected Flow) ----- */
+        .biz-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 50px;
+            position: relative;
+        }
+        .biz-flow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, #333 0%, var(--brand) 50%, #333 100%);
+            z-index: 0;
+        }
+        .biz-step {
+            position: relative;
+            z-index: 1;
+            background: var(--dark);
+            padding: 20px;
+            border-radius: 50%;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 2px solid #333;
+        }
+        .biz-step.active {
+            border-color: var(--brand);
+            box-shadow: 0 0 25px var(--brand-glow);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section data-transition="fade" data-background-color="#000000">
+                <img src="logo.svg" alt="EON Logo" class="logo-main">
+                <div class="fragment fade-up" style="font-size: 1.2em; letter-spacing: 4px; font-weight: 300; color: var(--brand); text-transform: uppercase; text-align: center;">
+                    The Eyes of Automation
+                </div>
+                <aside class="notes">
+                    Kurz zu uns: Mein Name ist Gabriel Pabst und das ist mein Mitgründer Felix Kohlböck. Gemeinsam haben wir EON entwickelt und stehen absolut hinter der Idee.
+                </aside>
+            </section>
+
+            <section data-auto-animate>
+                <h2 class="fw-light" style="font-size: 2em; text-transform: none; color: var(--gray);">In einem Wimpernschlag...</h2>
+                <h1 class="text-brand fragment zoom-in" style="font-size: 3.5em; margin: 20px 0;">Millionen</h1>
+                <h3 class="text-white fragment fade-up" style="font-size: 1.5em;">Berechnungen</h3>
+                <aside class="notes">
+                    Haben Sie jemals geblinzelt? Natürlich haben Sie das. Aber in dem Bruchteil einer Sekunde, in dem Sie Ihre Augen auf und wieder zu machen, kann ein Computer Millionen von Berechnungen ausführen. Genau auf diese unfassbare Geschwindigkeit setzen wir.
+                </aside>
+            </section>
+
+            <section data-transition="slide">
+                <h2 class="text-brand text-left" style="font-size: 1.5em;">Das Problem</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+                    <div class="fragment fade-up">
+                        <h1 class="text-white" style="font-size: 2.5em;">2h</h1>
+                        <p class="text-gray fw-light">Täglicher Zeitverlust</p>
+                    </div>
+                    <div class="fragment fade-up text-brand" style="font-size: 1.5em;">+</div>
+                    <div class="fragment fade-up">
+                        <h1 class="text-white" style="font-size: 2.5em;">Keine API</h1>
+                        <p class="text-gray fw-light">Veraltete Software</p>
+                    </div>
+                    <div class="fragment fade-up text-brand" style="font-size: 1.5em;">+</div>
+                    <div class="fragment fade-up">
+                        <h1 class="text-white" style="font-size: 2.5em;">VMs</h1>
+                        <p class="text-gray fw-light">Blockieren Scripts</p>
+                    </div>
+                </div>
+                <h3 class="fragment fade-up text-brand" style="margin-top: 50px; font-size: 1.8em;">= Geldverbrennung</h3>
+                <aside class="notes">
+                    Beispiel eines großen Energieversorgers: Jeden Morgen verbringt ein Mitarbeiter 2 Stunden vor dem Rechner. Warum? Einwählen in virtuelle Maschinen, uralte Software. Keine modernen Schnittstellen. Klassische Automatisierung scheitert an der VM. Das Unternehmen verbrennt Geld für stumpfe Klicks.
+                </aside>
+            </section>
+
+            <section data-transition="zoom" data-background-color="#050505">
+                <div class="fragment fade-in">
+                    <div class="scanner-container">
+                        <div class="scanner-line"></div>
+                    </div>
+                </div>
+                <h3 class="text-brand fw-light" style="font-size: 1.2em; margin-bottom: 10px;">Die Lösung</h3>
+                <h1 class="text-white fragment fade-up" style="font-size: 2.8em; letter-spacing: -1px;">
+                    Wir <span class="text-brand">emulieren</span><br>den Menschen.
+                </h1>
+                <aside class="notes">
+                    Wie automatisiert man das? EON emuliert menschliches Verhalten. Wir sind nicht nur Code, wir sind die Augen der Automatisierung.
+                </aside>
+            </section>
+
+            <section data-transition="slide">
+                <h2 class="text-left fw-light" style="font-size: 1.6em; margin-bottom: 20px;">Vier unschlagbare <span class="text-brand fw-bold">Vorteile</span></h2>
+                
+                <div class="usp-grid">
+                    <div class="usp-node fragment fade-up">
+                        <div class="usp-bg-num">1</div>
+                        <div class="usp-content">
+                            <h3 class="text-brand" style="font-size: 1.1em; margin-bottom: 5px;">Schnittstellen-Unabhängig</h3>
+                            <p class="text-gray fw-light" style="font-size: 0.8em; margin: 0;">Überwindet verschachtelte Systeme & VMs</p>
+                        </div>
+                    </div>
+                    <div class="usp-node fragment fade-up" data-fragment-index="1">
+                        <div class="usp-bg-num">2</div>
+                        <div class="usp-content">
+                            <h3 class="text-brand" style="font-size: 1.1em; margin-bottom: 5px;">Visuell & Robust</h3>
+                            <p class="text-gray fw-light" style="font-size: 0.8em; margin: 0;">Erkennt Elemente, keine starren Koordinaten</p>
+                        </div>
+                    </div>
+                    <div class="usp-node fragment fade-up" data-fragment-index="2">
+                        <div class="usp-bg-num">3</div>
+                        <div class="usp-content">
+                            <h3 class="text-brand" style="font-size: 1.1em; margin-bottom: 5px;">No-Code Customization</h3>
+                            <p class="text-gray fw-light" style="font-size: 0.8em; margin: 0;">Intuitiver grafischer Editor für alle</p>
+                        </div>
+                    </div>
+                    <div class="usp-node fragment fade-up" data-fragment-index="3">
+                        <div class="usp-bg-num">4</div>
+                        <div class="usp-content">
+                            <h3 class="text-brand" style="font-size: 1.1em; margin-bottom: 5px;">Marketplace</h3>
+                            <p class="text-gray fw-light" style="font-size: 0.8em; margin: 0;">Globaler, geräteübergreifender Einsatz</p>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">
+                    Es durchbricht die Grenzen klassischer Automatisierung:
+                    1. Überwindet fehlende Schnittstellen.
+                    2. Nutzt intelligente Bilderkennung. EON sieht und handelt.
+                    3. Alles im grafischen No-Code Editor darstellbar.
+                    4. Workflows geräteübergreifend einsetzbar über unseren Marktplatz.
+                </aside>
+            </section>
+
+            <section data-transition="convex">
+                <h1 class="text-white" style="font-size: 3.5em; line-height: 1.2;">RECORD ONCE.</h1>
+                <h1 class="text-brand fragment fade-in" style="font-size: 3.5em; line-height: 1.2;">RUN ANYWHERE.</h1>
+                <aside class="notes">
+                    Trigger über Zeit, Hotkey oder zukünftig Sprache. Egal ob komplexes UI-Testing oder Alltagsaufgaben: Record Once, Run Anywhere.
+                </aside>
+            </section>
+
+            <section data-transition="slide">
+                <h2 class="text-brand text-left" style="font-size: 1.5em;">Business Model</h2>
+                
+                <div class="biz-flow">
+                    <div class="biz-step fragment fade-right">
+                        <h4 class="text-white" style="font-size: 1em;">B2B<br>Markt</h4>
+                    </div>
+                    <div class="biz-step fragment fade-in" style="background: rgba(255,119,0,0.1);">
+                        <h4 class="text-white" style="font-size: 0.9em;">Lizenz &<br><span class="text-brand">Setup</span></h4>
+                    </div>
+                    <div class="biz-step active fragment zoom-in">
+                        <h4 class="text-white" style="font-size: 1em; line-height: 1.2;">Sofortiger<br><span class="text-brand">ROI</span></h4>
+                    </div>
+                </div>
+                
+                <p class="fragment fade-up text-gray fw-light" style="margin-top: 40px; font-size: 0.9em;">
+                    Kunden skalieren selbstständig via <b class="text-white">No-Code</b>
+                </p>
+                <aside class="notes">
+                    Unser Fokus liegt glasklar auf B2B. Wir verkaufen Lizenzen kombiniert mit Implementierung. Wir automatisieren die ersten Prozesse vor Ort, was sofortigen ROI liefert. Danach skalieren die Kunden dank No-Code weiter.
+                </aside>
+            </section>
+
+            <section data-transition="fade">
+                <h2 class="fw-light text-gray" style="font-size: 1.2em; margin-bottom: 40px;">Bereits validiert von</h2>
+                
+                <h1 class="fragment fade-up text-brand" style="font-size: 3em; margin-bottom: 10px;">Greiner AG</h1>
+                <h3 class="fragment fade-up text-white fw-light" style="font-size: 1.2em; margin-bottom: 50px;">(10.000+ Mitarbeiter)</h3>
+                
+                <div style="display: flex; justify-content: center; gap: 40px; font-size: 1.5em; font-weight: 600;">
+                    <span class="fragment fade-right text-white">MoveIT</span>
+                    <span class="fragment fade-up text-gray" style="opacity: 0.3;">|</span>
+                    <span class="fragment fade-left text-white">IR-World</span>
+                </div>
+                <aside class="notes">
+                    Um unser Potenzial zu sichern, haben wir bereits bei unterschiedlichen Unternehmen präsentiert. Darunter MoveIT, IR-World und die Greiner AG mit über 10.000 Mitarbeitern. Sie alle sehen den massiven Nutzen.
+                </aside>
+            </section>
+
+            <section data-background-color="#ff7700" data-transition="zoom">
+                <h3 class="text-dark fw-light" style="font-size: 1.2em; margin-bottom: 20px;">Die Zukunft</h3>
+                <h1 class="text-white" style="font-size: 3.5em;">CONTEXT MODE</h1>
+                <p class="fragment fade-up text-dark fw-bold" style="font-size: 1.4em; margin-top: 20px; letter-spacing: 1px;">
+                    Powered by Generative KI
+                </p>
+                <aside class="notes">
+                    Technologisch legen wir erst los. Unser "Context Mode" wird es ermöglichen, zur Laufzeit auf komplett neue Inhalte dynamisch durch generative KI zu reagieren.
+                </aside>
+            </section>
+
+            <section data-transition="slide" data-background-color="#000000">
+                <img src="logo.svg" alt="EON Logo" class="logo-main" style="margin-bottom: 20px;">
+                <h3 class="fragment fade-up text-white fw-light" style="text-transform: none; line-height: 1.4; font-size: 1.1em;">
+                    Wir geben Maschinen die Fähigkeit zu sehen,<br>um Menschen ihre <span class="text-brand fw-bold">Zeit zurückzugeben.</span>
+                </h3>
+                <aside class="notes">
+                    Zurück zu unserem Beispiel-Unternehmen. Da EON visuell arbeitet, ist die VM keine Barriere. Einmal aufgezeichnet, erkennt EON das Icon und klickt. Wir sind keine statische Software. Wir geben Maschinen die Fähigkeit zu sehen, um Menschen ihre Zeit zurückzugeben. Wir sind EON. Die Augen der Automatisierung. Vielen Dank.
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            controls: false,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            width: 1100,
+            height: 700,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 1.5,
+            plugins: [ RevealNotes ]
+        });
+    </script>
+</body>
+</html>

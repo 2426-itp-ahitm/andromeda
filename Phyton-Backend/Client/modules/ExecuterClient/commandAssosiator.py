@@ -6,13 +6,12 @@ import requests
 from datetime import datetime
 import threading
 
-
 class commandAssosiator:
     def __init__(self):
         self.executer = commandExecuter()
         self.lister = commandLister(pathToCommandList)
         
-    def assosiate(self,number,params):
+    def assosiate(self, number, params):
         command_name = str(number).strip()
         if str(command_name).endswith('.py'):
             command_name = command_name[:-3]
@@ -20,13 +19,17 @@ class commandAssosiator:
         module_path = f"ExecuterClient.commands.generatedCommands.{command_name}"
         print(f"Importing module: {module_path}")
         module = importlib.import_module(module_path)
-        # Get the first class defined in the module
+        
+        # Get the first class defined IN the module (ignore imported classes)
         command_class = None
         for attr_name in dir(module):
             attr = getattr(module, attr_name)
-            if isinstance(attr, type):  # Check if it's a class
+            
+            # Check if it's a class AND if it was defined in this specific file
+            if isinstance(attr, type) and attr.__module__ == module.__name__: 
                 command_class = attr
                 break
+                
         if command_class:
             print("EXEC " + command_class.__name__)
             dto = {
@@ -39,4 +42,4 @@ class commandAssosiator:
             executer = commandExecuter()
             executer.execute(command_class, params=params)
         else:
-            raise ValueError(f"No class found in module {module_path}")
+            raise ValueError(f"No valid command class found in module {module_path}")

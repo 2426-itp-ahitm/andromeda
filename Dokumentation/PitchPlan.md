@@ -28,9 +28,9 @@ Willkommen bei Andromeda."
 
 **Gabriel:**
 
-"Wir erleben gerade die größte KI-Revolution der Geschichte. Aber auf dem Desktop-PC kommt davon im echten Workflow von Power-Usern kaum etwas an. Entwickler und Tech-Enthusiasten wollen maximale Automatisierung, aber bisherige Assistenten sind schwarze Kisten. Man kann sie nicht erweitern.
+"Wir erleben gerade die größte KI-Revolution der Geschichte. Aber auf dem Desktop-PC kommt davon im echten Workflow von Power-Usern kaum etwas an. Entwickler und Tech-Enthusiasten wollen maximale Automatisierung, aber bisherige Sprachassistenten kann man kaum erweitern.
 
-Wir haben Andromeda genau dafür gebaut. Es ist der erste Sprachassistent für Windows, den der Nutzer selbst programmiert und formt. Wir geben den Leuten keinen fertigen, starren Assistenten. Wir geben ihnen eine Plattform, um sich den perfekten eigenen Assistenten zu bauen."
+Wir haben Andromeda genau dafür gebaut. Es ist der erste Sprachassistent, den der Nutzer selbst programmiert und formt. Wir bieten unseren Nutzern nicht nur einen fertigen Sprachassistenten. Wir geben ihnen eine Plattform, um sich den perfekten eigenen Sprachassistenten zu bauen."
 
 ---
 
@@ -38,19 +38,18 @@ Wir haben Andromeda genau dafür gebaut. Es ist der erste Sprachassistent für W
 
 **Gabriel:**
 
-"Wie funktioniert das in der Praxis? Drei entscheidende Punkte setzen uns vom restlichen Markt ab:
+"Wie funktioniert das in der Praxis? Drei entscheidende Punkte heben uns vom restlichen Markt ab:
 
 1. **Grenzenlose Freiheit durch Python**
    
-   Bei Andromeda sind Befehle nicht fest einprogrammiert. Wir setzen auf die beliebteste Programmiersprache der Welt mit über 29% Marktanteil: Python. Nutzer können neue Befehle und Automatisierungen einfach selbst als Python-Skript schreiben und mit einem Sprachbefehl verknüpfen. Zusätzlich speichern wir Commands pro Nutzer in der Cloud, wodurch sie jederzeit, überall verfügbar sind. Andromeda wird so zum ultimativen, sprachgesteuerten Open-Ecosystem.
+   Bei Andromeda sind Befehle nicht fest einprogrammiert. Wir setzen auf die beliebteste Programmiersprache der Welt mit über 29% Marktanteil: Python. Nutzer können neue Befehle und Automatisierungen einfach selbst als Python-Skript schreiben und mit einem Sprachbefehl verknüpfen. Zusätzlich speichern wir Commands pro Nutzer in der Cloud, wodurch sie jederzeit, für jeden Nutzer, auf jedem Gerät verfügbar sind.
 
 2. **Intelligentes Verstehen statt stumpfer Befehlsempfang**
    
    Standard-Assistenten scheitern, wenn man einen Befehl leicht abwandelt. Andromeda nicht. Für die blitzschnelle Spracherkennung nutzen wir Vosk. Für das Gehirn dahinter haben wir eine starke Kooperation mit WinkkAI. Die KI versteht den Kontext. Sie erkennt verschiedene Aussprachen und die Bedeutung hinter dem Satz, selbst wenn Sie ihn jedes Mal anders formulieren.
 
-3. **Kein Vendor-Lock-in**
-   
-   Bei Andromeda ist das KI-Sprachmodell jederzeit austauschbar. Kein Vendor-Lock-in. Unsere Nutzer verwenden immer die Technologie, die aktuell am besten funktioniert."
+3. **Spracherkennung so wie du es willst:**
+   Du sprichst eine andere Sprache? Du hast zu weniger Speicher am PC? Mit Andromeda kannst du deine Sprachmodelle von Vosk dynamisch anpassen und nicht nur in verschiedenen Sprachen sondern auch in verschiedener Präzision und verschiedener Größe herunterladen. Perfekt für dich zugeschnitten.
 
 ---
 
@@ -78,7 +77,7 @@ Wir sind ein Team von Entwicklern, die genau das Produkt bauen, auf das wir selb
 
 - **Die Basislizenz** gibt dem Nutzer den Zugang zur Plattform und der lokalen Python-Umgebung.
 
-- **Ein Token-System** nutzen wir für die intelligente Sprachverarbeitung im Hintergrund.
+- **Ein Token-System** nutzen wir für die intelligente Sprachverarbeitung im Hintergrund. Jeder Nutzer erhält mit der Lizenz, pro Monat, eine feste Anzahl an Tokens. Zusätzliche können über Bundles erworben werden. 
 
 Das bedeutet für uns: Wiederkehrende Umsätze. Je intensiver Andromeda und die programmierten Python-Commands den Alltag der Nutzer erleichtern, desto höher unser Umsatz."
 
@@ -88,7 +87,7 @@ Das bedeutet für uns: Wiederkehrende Umsätze. Je intensiver Andromeda und die 
 
 **Gabriel:**
 
-"Die Architektur steht. Die Kooperation mit WinkkAI läuft. Und die Community der Python-Entwickler wartet nur auf ein Werkzeug wie dieses. Andromeda ist nicht mehr nur eine Idee, es ist das nächste Level der Mensch-Maschine-Interaktion am PC.
+"Die Architektur steht. Die Kooperation mit WinkkAI läuft. Und die Community der Python-Entwickler wartet nur auf ein Werkzeug wie dieses. Andromeda ist nicht mehr nur eine Idee, es ist der nächste Step in der Mensch-Maschine-Interaktion.
 
 Werden Sie weiterhin tippen und klicken? Oder sind Sie bereit, Ihrem Rechner endlich zu sagen, was er tun soll?
 

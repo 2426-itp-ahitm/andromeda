@@ -7,6 +7,8 @@ from ExecuterClient.commandAssosiator import commandAssosiator
 from FlaskClient.flaskClient import app, run_flask
 from helpers.config import keyword, selected_module
 import threading
+import subprocess
+import sys
 
 class ClientRunner:
     def __init__(self):
@@ -24,9 +26,14 @@ class ClientRunner:
         print("Starting ClientRunner...")
         self.tts.say("Starting ClientRunner...")
         while True:
-            if not self.data_queue.empty():
-                speech_text = self.data_queue.get()
+            try:
+                speech_text = self.data_queue.get(timeout=1)
                 print(f"Recognized Speech: {speech_text}")
+                if speech_text.lower() == "restart":
+                    print("Restarting program...")
+                    self.tts.say("Restarting program")
+                    subprocess.Popen([sys.executable, __file__])
+                    break
                 response = self.response_associator.generateResponse(speech_text)
                 print(f"Analyzed Response: {response}")
                 if response == 0 or response == "0":
@@ -40,6 +47,8 @@ class ClientRunner:
                     response_strings = response_parts[1:]
                     print(f"Executing command")
                     self.command_associator.assosiate(response_number, response_strings)
+            except:
+                continue
     
 
 if __name__ == "__main__":
